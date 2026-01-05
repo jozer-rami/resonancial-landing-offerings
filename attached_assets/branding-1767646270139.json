@@ -1,0 +1,104 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "auto",
+      "count": 51
+    },
+    {
+      "family": "YAGy51-7Yw8_0",
+      "count": 32
+    },
+    {
+      "family": "YAGy5wVZ0Ek_0",
+      "count": 11
+    },
+    {
+      "family": "-apple-system",
+      "count": 10
+    },
+    {
+      "family": "BlinkMacSystemFont",
+      "count": 10
+    },
+    {
+      "family": "Segoe UI",
+      "count": 10
+    },
+    {
+      "family": "Helvetica",
+      "count": 10
+    },
+    {
+      "family": "Arial",
+      "count": 10
+    },
+    {
+      "family": "sans-serif",
+      "count": 10
+    },
+    {
+      "family": "YACgEUFdPdA_0",
+      "count": 8
+    }
+  ],
+  "colors": {
+    "primary": "#E60000",
+    "accent": "#FF9900",
+    "background": "#000000",
+    "textPrimary": "#000000",
+    "link": "#FF9900"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Times New Roman",
+      "heading": "Times New Roman"
+    },
+    "fontStacks": {
+      "body": [
+        "Times New Roman"
+      ],
+      "heading": [
+        "Times New Roman"
+      ],
+      "paragraph": [
+        "YAGy5wVZ0Ek_0",
+        "auto"
+      ]
+    },
+    "fontSizes": {
+      "h1": "10px",
+      "h2": "24px",
+      "body": "126.898px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "8px"
+  },
+  "components": {},
+  "images": {
+    "logo": null,
+    "favicon": "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/images/2d0b56e7e51cf11036ad8734bdb67e2d.png",
+    "ogImage": null
+  },
+  "__framework_hints": [],
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "secondary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "confidence": 0
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0,
+    "overall": 0
+  }
+}
