@@ -1,0 +1,73 @@
+import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
+import logoSymbol from "@assets/logo_1767647555211.png";
+
+export function Footer() {
+  return (
+    <footer className="bg-zinc-950 border-t border-white/5 pt-20 pb-10">
+      <div className="container mx-auto px-4">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
+          {/* Brand Column */}
+          <div className="space-y-6 md:col-span-2">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full border border-primary/20 p-2">
+                <img src={logoSymbol} alt="Logo" className="w-full h-full object-contain" />
+              </div>
+              <span className="font-heading text-2xl text-white">PORTAL RESONANCIAL</span>
+            </div>
+            <p className="text-muted-foreground font-light max-w-md leading-relaxed">
+              Un espacio sagrado para la alineación energética y la transformación consciente. 
+              Sintoniza con tu verdadero potencial y habita tu nuevo ciclo.
+            </p>
+          </div>
+
+          {/* Links Column */}
+          <div className="space-y-6">
+            <h4 className="text-white font-heading text-lg">Explorar</h4>
+            <ul className="space-y-4">
+              <li>
+                <a href="#servicios" className="text-muted-foreground hover:text-primary transition-colors">Servicios</a>
+              </li>
+              <li>
+                <a href="#filosofia" className="text-muted-foreground hover:text-primary transition-colors">Filosofía</a>
+              </li>
+              <li>
+                <a href="#pack" className="text-muted-foreground hover:text-primary transition-colors">Pack Completo</a>
+              </li>
+              <li>
+                <a href="#reto" className="text-muted-foreground hover:text-primary transition-colors">Reto 21 Días</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Column */}
+          <div className="space-y-6">
+            <h4 className="text-white font-heading text-lg">Contacto</h4>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <Mail className="w-4 h-4" />
+                <a href="mailto:info@portalresonancial.com">info@portalresonancial.com</a>
+              </li>
+              <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <Instagram className="w-4 h-4" />
+                <a href="#" target="_blank" rel="noopener noreferrer">@portalresonancial</a>
+              </li>
+              <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="w-4 h-4" />
+                <a href="https://wa.me/34640919319">+34 640 919 319</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/20">
+          <p>© 2026 Portal Resonancial. Todos los derechos reservados.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacidad</a>
+            <a href="#" className="hover:text-white transition-colors">Términos</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
