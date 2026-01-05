@@ -111,9 +111,9 @@ export default function Home() {
             className="mb-8"
           >
              <img 
-               src="@assets/logo_resonancial_1767646936183.png" 
+               src="@assets/logo_resonancial_1767647021538.png" 
                alt="Terapia Resonancial - Daniela Vargas" 
-               className="w-full max-w-2xl mx-auto drop-shadow-2xl"
+               className="w-full max-w-2xl mx-auto"
              />
           </motion.div>
 
