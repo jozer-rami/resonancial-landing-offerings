@@ -138,7 +138,7 @@ export default function Home() {
       {/* --- PHILOSOPHY SECTION (Trust/About) --- */}
       <section id="filosofia" className="py-32 bg-background relative border-t border-white/5">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
               <h2 className="text-5xl md:text-6xl font-heading leading-tight mb-8">
                 El 2026 no se planea. <br/>
@@ -155,18 +155,6 @@ export default function Home() {
                   No se manifiesta desde el deseo mental. <br/>
                   <span className="text-primary border-b border-primary/30 pb-1 inline-block mt-2">Se manifiesta desde la frecuencia que habitas.</span>
                 </p>
-              </div>
-            </FadeIn>
-            
-            <FadeIn delay={0.2} className="relative">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-                 <img 
-                  src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/213731e69c550df1d9974c08f25a2b27.png" 
-                  alt="Philosophy"
-                  className="w-full h-full object-cover"
-                 />
-                 {/* Decorative Frame */}
-                 <div className="absolute inset-4 border border-white/20 rounded-xl" />
               </div>
             </FadeIn>
           </div>
