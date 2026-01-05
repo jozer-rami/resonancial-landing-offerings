@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Calendar, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoResonancial from "@assets/logo_resonancial_1767647021538.png";
 
 // --- Components ---
 
@@ -111,7 +112,7 @@ export default function Home() {
             className="mb-8"
           >
              <img 
-               src="@assets/logo_resonancial_1767647021538.png" 
+               src={logoResonancial} 
                alt="Terapia Resonancial - Daniela Vargas" 
                className="w-full max-w-2xl mx-auto"
              />
