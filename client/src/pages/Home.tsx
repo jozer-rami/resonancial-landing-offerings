@@ -95,7 +95,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mb-6 flex justify-center"
+            className="mb-12 flex justify-center"
           >
             {/* Abstract Logo Representation */}
             <div className="w-16 h-16 border border-primary/30 rounded-full flex items-center justify-center relative">
@@ -104,15 +104,18 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.h1 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-6xl md:text-8xl lg:text-9xl font-heading tracking-tighter text-white mb-6 drop-shadow-2xl"
+            className="mb-8"
           >
-            PORTAL <br />
-            <span className="text-primary italic">RESONANCIAL</span>
-          </motion.h1>
+             <img 
+               src="@assets/logo_resonancial_1767646936183.png" 
+               alt="Terapia Resonancial - Daniela Vargas" 
+               className="w-full max-w-2xl mx-auto drop-shadow-2xl"
+             />
+          </motion.div>
 
           <motion.p 
             initial={{ opacity: 0 }}
