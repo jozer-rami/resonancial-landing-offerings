@@ -57,9 +57,7 @@ export function Navbar() {
           <div className="relative w-10 h-10 overflow-hidden rounded-full border border-primary/20 bg-black/50 p-1.5 transition-transform duration-300 group-hover:scale-105">
             <img src={logoSymbol} alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="font-heading text-xl tracking-wider text-white group-hover:text-primary transition-colors">
-            PORTAL RESONANCIAL
-          </span>
+          
         </a>
 
         {/* Desktop Nav */}
