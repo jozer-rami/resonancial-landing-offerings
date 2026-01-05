@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Calendar, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoResonancial from "@assets/logo_resonancial_1767647021538.png";
+import logoSymbol from "@assets/logo_1767647555211.png";
 
 // --- Components ---
 
@@ -99,9 +100,9 @@ export default function Home() {
             className="mb-12 flex justify-center"
           >
             {/* Abstract Logo Representation */}
-            <div className="w-16 h-16 border border-primary/30 rounded-full flex items-center justify-center relative">
+            <div className="w-20 h-20 flex items-center justify-center relative">
               <div className="absolute inset-0 border border-primary/10 rounded-full animate-ping opacity-20" />
-              <Sparkles className="w-6 h-6 text-primary" />
+              <img src={logoSymbol} alt="Símbolo" className="w-full h-full object-contain p-2" />
             </div>
           </motion.div>
 
