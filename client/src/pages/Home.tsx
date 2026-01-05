@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, CheckCircle2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Newsletter } from "@/components/Newsletter";
 import logoResonancial from "@assets/logo_resonancial_1767647021538.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
 
@@ -305,6 +306,8 @@ export default function Home() {
            </FadeIn>
          </div>
       </section>
+
+      <Newsletter />
 
       <Footer />
     </div>
