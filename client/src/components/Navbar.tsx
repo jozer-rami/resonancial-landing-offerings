@@ -20,9 +20,10 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Inicio", href: "/" },
-    { name: "Filosofía", href: "#filosofia" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Pack Completo", href: "#pack" },
+    { name: "Filosofía", href: "/#filosofia" },
+    { name: "Servicios", href: "/#servicios" },
+    { name: "Pack Completo", href: "/#pack" },
+    { name: "Tarjetas Regalo", href: "/tarjetas-regalo" },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {

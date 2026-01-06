@@ -5,11 +5,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import GiftCards from "@/pages/GiftCards";
+import Redeem from "@/pages/Redeem";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/tarjetas-regalo" component={GiftCards} />
+      <Route path="/canjear" component={Redeem} />
       <Route component={NotFound} />
     </Switch>
   );
