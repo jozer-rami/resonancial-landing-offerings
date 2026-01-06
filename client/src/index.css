@@ -65,7 +65,7 @@
   --popover: 0 0% 8%;
   --popover-foreground: 40 20% 90%;
   
-  --primary: 45 40% 60%;       /* #a69b76 - Muted Gold */
+  --primary: 27 52% 44%;       /* #a96935 - Copper/Brown */
   --primary-foreground: 0 0% 10%;
   
   --secondary: 0 0% 15%;       /* Dark Grey */
@@ -74,7 +74,7 @@
   --muted: 0 0% 20%;
   --muted-foreground: 0 0% 60%;
   
-  --accent: 45 60% 50%;        /* Gold Accent */
+  --accent: 27 52% 44%;        /* #a96935 - Copper/Brown */
   --accent-foreground: 0 0% 98%;
   
   --destructive: 0 60% 30%;
@@ -82,7 +82,7 @@
 
   --border: 0 0% 20%;
   --input: 0 0% 20%;
-  --ring: 45 40% 60%;
+  --ring: 27 52% 44%;
   
   --radius: 0.5rem;
 }
