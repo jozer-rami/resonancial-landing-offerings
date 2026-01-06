@@ -8,7 +8,7 @@ import logoSymbol from "@assets/logo_1767647555211.png";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,18 +26,34 @@ export function Navbar() {
     { name: "Tarjetas Regalo", href: "/tarjetas-regalo" },
   ];
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (id === "/") {
+    setIsMobileMenuOpen(false);
+
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#");
+      const targetPath = path || "/";
+      const targetHash = `#${hash}`;
+
+      if (location === targetPath) {
+        const element = document.querySelector(targetHash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        setLocation(targetPath);
+        setTimeout(() => {
+          const element = document.querySelector(targetHash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+      }
+    } else {
+      if (location !== href) {
+        setLocation(href);
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-      return;
-    }
-    
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
     }
   };
 
