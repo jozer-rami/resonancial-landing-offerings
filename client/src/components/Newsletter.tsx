@@ -60,9 +60,7 @@ export function Newsletter() {
                 </motion.div>
               ) : (
                 <>
-                  <h2 className="text-3xl md:text-4xl font-heading text-white mb-4">
-                    Obtén 10% de descuento en tu primer curso
-                  </h2>
+                  <h2 className="text-3xl md:text-4xl font-heading text-white mb-4">Obtén 10% de descuento</h2>
                   <p className="text-muted-foreground font-light max-w-lg mx-auto mb-8 text-lg">
                     Únete a nuestra comunidad resonancial y recibe tu código de descuento directamente en tu correo.
                   </p>
