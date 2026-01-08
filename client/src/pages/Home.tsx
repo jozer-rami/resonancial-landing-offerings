@@ -164,7 +164,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-7xl">
           <FadeIn className="text-center mb-20 max-w-2xl mx-auto">
             <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
-            <h2 className="text-4xl md:text-5xl font-heading mb-6">Niveles de Alineación</h2>
+            <h2 className="text-4xl md:text-5xl font-heading mb-6">Portal Resonancial</h2>
             <p className="text-muted-foreground font-light">
               Explora nuestras sesiones diseñadas para limpiar, reconfigurar y proyectar tu energía hacia el nuevo ciclo.
             </p>
