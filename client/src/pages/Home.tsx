@@ -48,7 +48,7 @@ const CourseCard = ({ title, description, price, image, link, delay }: any) => {
           <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
             <div className="flex flex-col">
               <span className="text-xl font-heading text-white">{price}</span>
-              <span className="text-sm text-muted-foreground">50 USD</span>
+              <span className="text-sm font-heading text-muted-foreground">50 USD</span>
             </div>
             <Button asChild variant="outline" className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest">
               <a href={link} target="_blank" rel="noreferrer">
