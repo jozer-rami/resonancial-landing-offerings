@@ -115,16 +115,7 @@ export default function Home() {
               crear y habitar tu nuevo ciclo.
             </p>
 
-            {/* CTA */}
-            <div className="pt-8">
-              <Button 
-                asChild 
-                size="lg"
-                className="bg-primary text-black hover:bg-white hover:text-black rounded-full px-10 py-7 text-lg font-medium tracking-wide shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all duration-300 transform hover:scale-105"
-              >
-                <a href="#servicios">Explorar Cursos</a>
-              </Button>
-            </div>
+            
           </motion.div>
 
           {/* Scroll Indicator */}
