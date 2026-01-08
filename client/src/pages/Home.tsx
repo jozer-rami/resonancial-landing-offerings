@@ -67,7 +67,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
       <Navbar />
-      
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         {/* Parallax Background */}
@@ -135,7 +134,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
       {/* --- PHILOSOPHY SECTION (Trust/About) --- */}
       <section id="filosofia" className="py-32 bg-background relative border-t border-white/5">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -161,12 +159,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* --- COURSES SECTION (Grid Layout) --- */}
       <section id="servicios" className="py-32 bg-zinc-900/20">
         <div className="container mx-auto px-4 max-w-7xl">
           <FadeIn className="text-center mb-20 max-w-2xl mx-auto">
-            <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">Nuestros Servicios</span>
+            <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
             <h2 className="text-4xl md:text-5xl font-heading mb-6">Niveles de Alineación</h2>
             <p className="text-muted-foreground font-light">
               Explora nuestras sesiones diseñadas para limpiar, reconfigurar y proyectar tu energía hacia el nuevo ciclo.
@@ -203,7 +200,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* --- FEATURED BUNDLE (Split Layout) --- */}
       <section id="pack" className="py-32 bg-zinc-950 relative overflow-hidden">
         {/* Background Gradient */}
@@ -263,7 +259,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* --- CHALLENGE SECTION (Clean Dark) --- */}
       <section id="reto" className="py-32 relative bg-background border-t border-white/5">
          <div className="container mx-auto px-4 max-w-4xl text-center">
@@ -306,9 +301,7 @@ export default function Home() {
            </FadeIn>
          </div>
       </section>
-
       <Newsletter />
-
       <Footer />
     </div>
   );
