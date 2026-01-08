@@ -182,7 +182,7 @@ const CourseCard = ({ title, subtitle, description, price, image, courseKey, del
               className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest"
               onClick={() => onOpenModal(courseKey)}
             >
-              Reservar
+              Ver detalles
             </Button>
           </div>
         </div>
