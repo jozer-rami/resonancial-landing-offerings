@@ -1,12 +1,53 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Sparkles, CheckCircle2, Calendar } from "lucide-react";
+import React, { useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowRight, Sparkles, CheckCircle2, Calendar, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import logoResonancial from "@assets/logo_resonancial_1767647021538.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
+
+// --- Course Data ---
+const courseDetails = {
+  detox: {
+    title: "Detox Frecuencial",
+    subtitle: "Liberación",
+    tagline: "Liberación de resistencias y limpieza del campo energético",
+    purpose: "Antes de elevar tu frecuencia, es necesario vaciar el campo. Todo lo que no se libera —emociones, creencias, memorias— distorsiona la vibración desde la cual intentas crear. Detox Frecuencial es una activación profunda diseñada para soltar cargas que impiden sostener frecuencias más altas.",
+    works: ["Resistencias conscientes e inconscientes", "Cargas emocionales acumuladas", "Bloqueos energéticos y patrones repetitivos", "Fatiga vibracional y sensación de estancamiento"],
+    activates: ["Limpieza del campo energético", "Sensación de ligereza y claridad", "Mayor disponibilidad interna para el cambio", "Preparación real para la reconfiguración"],
+    experience: ["Lectura del estado frecuencial actual", "Identificación de resistencias activas", "Limpieza energética guiada", "Liberación frecuencial consciente", "Cierre e integración"],
+    quote: "No puedes vibrar alto con cargas del pasado.",
+    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20DETOX%20FRECUENCIAL",
+    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/59f810e40bddf72819eea349b624ba8a.jpg"
+  },
+  reconfiguracion: {
+    title: "Reconfiguración Frecuencial",
+    subtitle: "Estabilidad",
+    tagline: "Ajuste profundo de tu vibración base",
+    purpose: "Limpiar no es suficiente. El sistema necesita aprender a integrar una nueva frecuencia sin volver automáticamente al patrón anterior. Reconfiguración de Frecuencia permite reordenar tu vibración base, alineando mente, cuerpo y emoción en coherencia.",
+    works: ["Patrón vibracional habitual", "Desajustes entre intención y energía", "Inestabilidad emocional o mental", "Dificultad para integrar estados elevados"],
+    activates: ["Coherencia interna", "Estabilidad energética", "Mayor claridad y presencia", "Capacidad de integrar nuevas realidades"],
+    experience: ["Diagnóstico de la vibración base", "Ajuste frecuencial profundo", "Alineación mente–emoción–energía", "Anclaje de la nueva frecuencia", "Integración consciente"],
+    quote: "No se trata de subir la frecuencia, sino de integrarla y sostenerla.",
+    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20RECONFIGURACIÓN%20FRECUENCIAL",
+    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/b59ee722c5940b56afb67f16129bc193.jpg"
+  },
+  mapa: {
+    title: "Mapa Resonancial",
+    subtitle: "Visión Encarnada",
+    tagline: "Activación de la visión encarnada del 2026",
+    purpose: "No se manifiesta desde el deseo mental. Se manifiesta desde la frecuencia que habitas. Mapa Resonancial es una experiencia donde la visión del nuevo ciclo emerge desde la coherencia interna, no desde la fantasía.",
+    works: ["Claridad de dirección", "Visión alineada con la frecuencia real", "Coherencia entre lo que deseas y lo que vibras", "Encarnación de una nueva identidad energética"],
+    activates: ["Visión clara y sostenida", "Sensación de dirección y propósito", "Alineación con la energía del 2026", "Capacidad de crear sin resistencia"],
+    experience: ["Lectura del estado resonancial", "Conexión con la frecuencia del nuevo ciclo", "Construcción simbólica del Mapa Resonancial", "Anclaje de la visión en el campo energético", "Integración cuerpo–mente–espíritu"],
+    quote: "Primero vibra la realidad. Luego créala y habitala.",
+    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20MAPA%20RESONANCIAL",
+    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/3ee229cb1ae74fa5fb3a300db92832e9.jpg"
+  }
+};
 
 // --- Reusable Components ---
 
@@ -24,11 +65,97 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
   );
 };
 
-const CourseCard = ({ title, subtitle, description, price, image, link, delay }: any) => {
+const CourseModal = ({ course, open, onClose }: { course: typeof courseDetails.detox | null, open: boolean, onClose: () => void }) => {
+  if (!course) return null;
+  
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0">
+        <div className="relative">
+          <div className="h-48 md:h-64 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
+            <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+          </div>
+          
+          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+            <X className="w-5 h-5" />
+          </DialogClose>
+          
+          <div className="p-8 md:p-12 -mt-12 relative z-20">
+            <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">{course.subtitle}</span>
+            <h2 className="text-3xl md:text-4xl font-heading text-white mb-2">{course.title}</h2>
+            <p className="text-muted-foreground font-light mb-8">{course.tagline}</p>
+            
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4">Propósito</h3>
+                <p className="text-white/80 font-light leading-relaxed">{course.purpose}</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
+                  <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Qué se trabaja?</h3>
+                  <ul className="space-y-2">
+                    {course.works.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="bg-primary/5 rounded-2xl p-6 border border-primary/10">
+                  <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Qué activa?</h3>
+                  <ul className="space-y-2">
+                    {course.activates.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4">Experiencia (1 Activación)</h3>
+                <div className="flex flex-wrap gap-2">
+                  {course.experience.map((item, i) => (
+                    <span key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-white/70">
+                      {i + 1}. {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5 text-center">
+                <p className="text-xl md:text-2xl font-heading text-white italic">"{course.quote}"</p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5">
+                <div className="flex flex-col">
+                  <span className="text-3xl font-heading text-white">500 Bs</span>
+                  <span className="text-lg font-heading text-muted-foreground">50 USD</span>
+                </div>
+                <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-white rounded-full px-10 py-6 text-base font-medium">
+                  <a href={course.whatsapp} target="_blank" rel="noreferrer">
+                    Reservar Ahora
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const CourseCard = ({ title, subtitle, description, price, image, courseKey, delay, onOpenModal }: any) => {
   return (
     <FadeIn delay={delay} className="group h-full">
       <div className="h-full bg-zinc-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
-        {/* Image Area */}
         <div className="relative h-64 overflow-hidden">
           <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
           <img 
@@ -38,7 +165,6 @@ const CourseCard = ({ title, subtitle, description, price, image, link, delay }:
           />
         </div>
         
-        {/* Content Area */}
         <div className="p-8 flex flex-col flex-grow">
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2 block">{subtitle}</span>
           <h3 className="text-2xl font-heading text-primary mb-3">{title}</h3>
@@ -51,10 +177,12 @@ const CourseCard = ({ title, subtitle, description, price, image, link, delay }:
               <span className="text-xl font-heading text-white">{price}</span>
               <span className="text-sm font-heading text-muted-foreground">50 USD</span>
             </div>
-            <Button asChild variant="outline" className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest">
-              <a href={link} target="_blank" rel="noreferrer">
-                Reservar
-              </a>
+            <Button 
+              variant="outline" 
+              className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest"
+              onClick={() => onOpenModal(courseKey)}
+            >
+              Reservar
             </Button>
           </div>
         </div>
@@ -67,6 +195,15 @@ export default function Home() {
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
   const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
+  const [selectedCourse, setSelectedCourse] = useState<keyof typeof courseDetails | null>(null);
+
+  const handleOpenModal = (courseKey: keyof typeof courseDetails) => {
+    setSelectedCourse(courseKey);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCourse(null);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
@@ -172,7 +309,8 @@ export default function Home() {
               description="Liberación de resistencias y limpieza energética. Experiencia para soltar bloqueos y cargas que impiden elevar tu frecuencia. Ideal si sientes fatiga vibracional."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/59f810e40bddf72819eea349b624ba8a.jpg"
-              link="https://wa.me/34640919319?text=Hola,%20quiero%20info%20del%20DETOX%202025"
+              courseKey="detox"
+              onOpenModal={handleOpenModal}
               delay={0}
             />
             
@@ -182,7 +320,8 @@ export default function Home() {
               description="Ajuste profundo de tu vibración base. Activación diseñada para reordenar tu sistema y entrenarlo a sostener nuevas frecuencias de coherencia."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/b59ee722c5940b56afb67f16129bc193.jpg"
-              link="https://wa.me/34640919319?text=Hola,%20me%20interesa%20la%20sesi%C3%B3n%20de%20Reconfiguraci%C3%B3n%20de%20Frecuencia"
+              courseKey="reconfiguracion"
+              onOpenModal={handleOpenModal}
               delay={0.1}
             />
             
@@ -192,7 +331,8 @@ export default function Home() {
               description="Activación de la visión encarnada del 2026. Alineación profunda donde mente, cuerpo y espíritu resuenan con la realidad que deseas habitar."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/3ee229cb1ae74fa5fb3a300db92832e9.jpg"
-              link="https://wa.me/34640919319?text=Hola,%20quiero%20m%C3%A1s%20info%20sobre%20el%20Mapa%20Resonancial"
+              courseKey="mapa"
+              onOpenModal={handleOpenModal}
               delay={0.2}
             />
           </div>
@@ -301,6 +441,12 @@ export default function Home() {
       </section>
       <Newsletter />
       <Footer />
+      
+      <CourseModal 
+        course={selectedCourse ? courseDetails[selectedCourse] : null}
+        open={selectedCourse !== null}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
