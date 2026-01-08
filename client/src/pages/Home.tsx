@@ -24,7 +24,7 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
   );
 };
 
-const CourseCard = ({ title, description, price, image, link, delay }: any) => {
+const CourseCard = ({ title, subtitle, description, price, image, link, delay }: any) => {
   return (
     <FadeIn delay={delay} className="group h-full">
       <div className="h-full bg-zinc-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
@@ -40,6 +40,7 @@ const CourseCard = ({ title, description, price, image, link, delay }: any) => {
         
         {/* Content Area */}
         <div className="p-8 flex flex-col flex-grow">
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2 block">{subtitle}</span>
           <h3 className="text-2xl font-heading text-primary mb-3">{title}</h3>
           <p className="text-muted-foreground leading-relaxed mb-6 text-sm flex-grow font-light">
             {description}
@@ -167,6 +168,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <CourseCard 
               title="Detox Frecuencial"
+              subtitle="Liberación"
               description="Liberación de resistencias y limpieza energética. Experiencia para soltar bloqueos y cargas que impiden elevar tu frecuencia. Ideal si sientes fatiga vibracional."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/59f810e40bddf72819eea349b624ba8a.jpg"
@@ -176,6 +178,7 @@ export default function Home() {
             
             <CourseCard 
               title="Reconfiguración"
+              subtitle="Estabilidad"
               description="Ajuste profundo de tu vibración base. Activación diseñada para reordenar tu sistema y entrenarlo a sostener nuevas frecuencias de coherencia."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/b59ee722c5940b56afb67f16129bc193.jpg"
@@ -185,6 +188,7 @@ export default function Home() {
             
             <CourseCard 
               title="Mapa Resonancial"
+              subtitle="Visión Encarnada"
               description="Activación de la visión encarnada del 2026. Alineación profunda donde mente, cuerpo y espíritu resuenan con la realidad que deseas habitar."
               price="500 Bs"
               image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/3ee229cb1ae74fa5fb3a300db92832e9.jpg"
