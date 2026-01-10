@@ -363,24 +363,47 @@ export default function Home() {
               {/* Content Side */}
               <div className="p-10 md:p-16 flex flex-col justify-center">
                 <FadeIn>
-                  <h3 className="text-4xl font-heading mb-6 text-white">Pack Completo</h3>
-                  <p className="text-muted-foreground font-light mb-8 text-lg">
-                    Si sientes que este inicio te resonó, el pack completo te acompaña a sostener y materializar el cambio profundo.
+                  <h3 className="text-4xl font-heading mb-2 text-white">Pack Completo</h3>
+                  <p className="text-primary/80 font-light mb-8 text-base italic">
+                    La experiencia completa, con un beneficio exclusivo
                   </p>
 
-                  <ul className="space-y-4 mb-10">
+                  <ul className="space-y-4 mb-8">
                     {[
-                      "Detox Frecuencial (Sesión 1:1)",
-                      "Reconfiguración de Frecuencia (Sesión 1:1)",
-                      "Mapa Resonancial (Sesión 1:1)",
-                      "BONUS: Almanaque Ritual Resonancial"
+                      { name: "Detox Frecuencial (Sesión 1:1)", price: "500 Bs" },
+                      { name: "Reconfiguración de Frecuencia (Sesión 1:1)", price: "500 Bs" },
+                      { name: "Mapa Resonancial (Sesión 1:1)", price: "500 Bs" },
+                      { name: "BONUS: Almanaque Ritual Resonancial", price: "200 Bs", isBonus: true }
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-zinc-300">{item}</span>
+                      <li key={i} className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <CheckCircle2 className={`w-5 h-5 shrink-0 ${item.isBonus ? 'text-primary' : 'text-zinc-500'}`} />
+                          <span className={`${item.isBonus ? 'text-primary font-medium' : 'text-zinc-300'}`}>{item.name}</span>
+                        </div>
+                        <span className="text-zinc-500 text-sm font-heading whitespace-nowrap">{item.price}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <div className="border-t border-white/10 pt-6 mb-6 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-zinc-500 text-sm">Valor total individual:</span>
+                      <span className="text-zinc-500 text-lg font-heading line-through">1.700 Bs</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white text-base font-medium">Precio Pack Completo:</span>
+                      <span className="text-white text-2xl font-heading">1.200 Bs</span>
+                    </div>
+                    <div className="flex items-center justify-end">
+                      <span className="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium border border-primary/20">
+                        Ahorras 500 Bs
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="text-zinc-400 text-sm font-light mb-8 leading-relaxed">
+                    El pack es la forma recomendada de vivir el proceso completo y sostener el cambio.
+                  </p>
 
                   <Button 
                     asChild
