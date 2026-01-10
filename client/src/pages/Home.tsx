@@ -140,7 +140,7 @@ const CourseModal = ({ course, open, onClose }: { course: typeof courseDetails.d
                   <span className="text-3xl font-heading text-white">500 Bs</span>
                   <span className="text-lg font-heading text-muted-foreground">50 USD</span>
                 </div>
-                <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-white rounded-full px-10 py-6 text-base font-medium">
+                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-10 py-6 text-xs uppercase tracking-widest transition-all">
                   <a href={course.whatsapp} target="_blank" rel="noreferrer">
                     Reservar Ahora
                   </a>
