@@ -26,13 +26,13 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-24 bg-background relative border-t border-white/5">
+    <section className="py-16 md:py-20 bg-background relative">
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="max-w-3xl mx-auto"
         >
           <div className="relative bg-zinc-900/40 backdrop-blur-sm border border-white/10 rounded-[2rem] p-8 md:p-12 overflow-hidden text-center">
