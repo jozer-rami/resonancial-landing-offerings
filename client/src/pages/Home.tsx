@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
-import logoResonancial from "@assets/logo_resonancial_1767647021538.png";
+import logoResonancial from "@assets/logo_resonancial_blanco.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
 
 // --- Course Data ---
