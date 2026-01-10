@@ -1,0 +1,15 @@
+Task: Implement parallax scroll effect, gradient overlay, and fix section spacing on my landing page for Terapia Resonancial.
+
+Hero Section Effects:
+Create a parallax scroll effect on the hero section where the background image moves at a slower speed than the user's scroll, creating depth and visual interest. The background should move at approximately 50% of the scroll speed.
+Add a gradient overlay on top of the hero image that transitions from semi-transparent at the top to nearly opaque dark brown at the bottom. The gradient should use colors that match my brand palette, which is dark brown and warm earth tones similar to rgba(26, 20, 15). As the user scrolls down, the gradient should become progressively darker to create a smooth transition into the next section.
+The hero content including the logo, title "Resonancial", subtitle "Terapia", author name "Daniela Vargas", and tagline should fade in when the page loads with a subtle upward animation. As the user scrolls, this content should gradually fade out and move slightly upward before disappearing.
+Use requestAnimationFrame for smooth performance and only apply the parallax calculations when the hero section is visible in the viewport.
+
+Section Spacing Fixes:
+Reduce the vertical padding on all sections from the current large values to a consistent 50-60 pixels on top and bottom. The spacing between sections feels disconnected and too large throughout the entire page.
+Remove any excessive margins between the philosophy section and the services section. The Portal Resonancial services area with the three session cards should flow naturally from the content above with no more than 40-60 pixels of space.
+Tighten the gap between the pricing cards and the Pack Completo offer section. Currently there is too much empty dark space separating these related elements.
+Pull the Reto Sintoniza Tu 2026 challenge section closer to the content above and below it. Maintain visual breathing room but eliminate the excessive void.
+Connect the newsletter signup section more closely to the footer. The discount offer and email signup should feel integrated with the page ending rather than floating in isolation.
+On mobile devices, reduce section padding further to 40 pixels to maintain proportional spacing on smaller screens.

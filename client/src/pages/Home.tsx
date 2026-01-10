@@ -195,8 +195,10 @@ const CourseCard = ({ title, subtitle, description, price, image, courseKey, del
 
 export default function Home() {
   const { scrollY } = useScroll();
-  const yHero = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
+  const yHero = useTransform(scrollY, [0, 800], [0, 400]);
+  const opacityHero = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroContentY = useTransform(scrollY, [0, 400], [0, -60]);
+  const gradientOpacity = useTransform(scrollY, [0, 500], [0.6, 1]);
   const [selectedCourse, setSelectedCourse] = useState<keyof typeof courseDetails | null>(null);
 
   const handleOpenModal = (courseKey: keyof typeof courseDetails) => {
@@ -215,61 +217,87 @@ export default function Home() {
         {/* Parallax Background */}
         <motion.div 
           style={{ y: yHero }}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 will-change-transform"
         >
-          <div className="absolute inset-0 bg-black/60 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-20" />
           <img 
             src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/1e4636f01fb53f80b0d9d66fc6885150.jpg" 
             alt="Portal Resonancial Background" 
-            className="w-full h-full object-cover object-center"
+            className="w-full h-[120%] object-cover object-center"
           />
         </motion.div>
+        
+        {/* Static dark overlay */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+        
+        {/* Dynamic gradient overlay that darkens on scroll */}
+        <motion.div 
+          style={{ opacity: gradientOpacity }}
+          className="absolute inset-0 bg-gradient-to-b from-[rgba(26,20,15,0.3)] via-[rgba(26,20,15,0.6)] to-background z-20 will-change-opacity"
+        />
 
-        {/* Hero Content - Clean & Centered */}
-        <div className="relative z-30 container mx-auto px-4 text-center max-w-4xl">
+        {/* Hero Content - Clean & Centered with fade out */}
+        <motion.div 
+          style={{ opacity: opacityHero, y: heroContentY }}
+          className="relative z-30 container mx-auto px-4 text-center max-w-4xl will-change-transform"
+        >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center gap-8"
           >
             {/* Symbol */}
-            <div className="w-24 h-24 relative flex items-center justify-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="w-24 h-24 relative flex items-center justify-center"
+            >
               <div className="absolute inset-0 border border-primary/20 rounded-full animate-[ping_3s_ease-in-out_infinite] opacity-30" />
               <img src={logoSymbol} alt="Símbolo" className="w-full h-full object-contain p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
-            </div>
+            </motion.div>
 
             {/* Main Logo Text */}
-            <div className="w-full max-w-lg mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="w-full max-w-lg mx-auto"
+            >
                <img 
                  src={logo_resonancial_blanco} 
                  alt="Terapia Resonancial" 
                  className="w-full h-auto"
                />
-            </div>
+            </motion.div>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-white/90 font-light leading-relaxed max-w-2xl mx-auto">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-xl md:text-2xl text-white/90 font-light leading-relaxed max-w-2xl mx-auto"
+            >
               Un proceso de alineación energética para <br className="hidden md:block" />
               crear y habitar tu nuevo ciclo.
-            </p>
-
-            
+            </motion.p>
           </motion.div>
 
           {/* Scroll Indicator */}
           <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
             style={{ opacity: opacityHero }}
             className="absolute -bottom-32 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
           >
             <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">Descubre</span>
             <div className="w-px h-16 bg-gradient-to-b from-primary/0 via-primary/50 to-primary/0" />
           </motion.div>
-        </div>
+        </motion.div>
       </section>
       {/* --- PHILOSOPHY SECTION (Trust/About) --- */}
-      <section id="filosofia" className="py-32 bg-background relative border-t border-white/5">
+      <section id="filosofia" className="py-12 md:py-16 bg-background relative border-t border-white/5">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
@@ -294,9 +322,9 @@ export default function Home() {
         </div>
       </section>
       {/* --- COURSES SECTION (Grid Layout) --- */}
-      <section id="servicios" className="py-32 bg-zinc-900/20">
+      <section id="servicios" className="py-12 md:py-16 bg-zinc-900/20">
         <div className="container mx-auto px-4 max-w-7xl">
-          <FadeIn className="text-center mb-20 max-w-2xl mx-auto">
+          <FadeIn className="text-center mb-10 max-w-2xl mx-auto">
             <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
             <h2 className="text-4xl md:text-5xl font-heading mb-6">Portal Resonancial</h2>
             <p className="text-muted-foreground font-light">
@@ -341,7 +369,7 @@ export default function Home() {
         </div>
       </section>
       {/* --- FEATURED BUNDLE (Split Layout) --- */}
-      <section id="pack" className="py-32 bg-zinc-950 relative overflow-hidden">
+      <section id="pack" className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden">
         {/* Background Gradient */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -424,7 +452,7 @@ export default function Home() {
         </div>
       </section>
       {/* --- CHALLENGE SECTION (Clean Dark) --- */}
-      <section id="reto" className="py-32 relative bg-background border-t border-white/5">
+      <section id="reto" className="py-12 md:py-16 relative bg-background border-t border-white/5">
          <div className="container mx-auto px-4 max-w-4xl text-center">
            <FadeIn>
              <div className="inline-flex items-center gap-2 text-primary border border-primary/20 px-6 py-2 rounded-full text-sm mb-8 bg-primary/5">
@@ -437,12 +465,12 @@ export default function Home() {
                <span className="text-zinc-500">Tu 2026</span>
              </h2>
 
-             <p className="text-xl text-muted-foreground font-light max-w-2xl mx-auto mb-12">
+             <p className="text-xl text-muted-foreground font-light max-w-2xl mx-auto mb-8">
                Ciclo de 21 días de meditaciones en vivo + grabadas. <br/>
                Acompañamiento diario para sostener tu nueva frecuencia.
              </p>
 
-             <div className="grid sm:grid-cols-2 gap-6 max-w-xl mx-auto mb-12">
+             <div className="grid sm:grid-cols-2 gap-6 max-w-xl mx-auto mb-8">
                 <div className="bg-zinc-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
                   <div className="text-4xl font-heading text-white mb-2">250 Bs</div>
                   <div className="text-xs text-muted-foreground uppercase tracking-widest">Individual</div>
