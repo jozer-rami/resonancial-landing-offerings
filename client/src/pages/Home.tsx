@@ -9,6 +9,8 @@ import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import logoResonancial from "@assets/logo_resonancial_blanco.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
 
+import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
+
 // --- Course Data ---
 const courseDetails = {
   detox: {
@@ -241,7 +243,7 @@ export default function Home() {
             {/* Main Logo Text */}
             <div className="w-full max-w-lg mx-auto">
                <img 
-                 src={logoResonancial} 
+                 src={logo_resonancial_blanco} 
                  alt="Terapia Resonancial" 
                  className="w-full h-auto"
                />
@@ -464,7 +466,6 @@ export default function Home() {
       </section>
       <Newsletter />
       <Footer />
-      
       <CourseModal 
         course={selectedCourse ? courseDetails[selectedCourse] : null}
         open={selectedCourse !== null}
