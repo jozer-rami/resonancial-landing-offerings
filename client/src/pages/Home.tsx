@@ -56,27 +56,14 @@ const courseDetails = {
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
       className={className}
     >
       {children}
     </motion.div>
-  );
-};
-
-const SectionTransition = ({ variant = "default" }: { variant?: "default" | "dark" | "light" }) => {
-  const gradients = {
-    default: "from-transparent via-zinc-900/30 to-transparent",
-    dark: "from-background via-zinc-950 to-background",
-    light: "from-zinc-900/20 via-zinc-800/10 to-zinc-900/20"
-  };
-  return (
-    <div className={`h-16 md:h-20 bg-gradient-to-b ${gradients[variant]} relative`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/[0.02] to-transparent" />
-    </div>
   );
 };
 
@@ -281,19 +268,16 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-      
-      <SectionTransition variant="dark" />
-      
       {/* --- PHILOSOPHY SECTION (Trust/About) --- */}
-      <section id="filosofia" className="py-20 md:py-28 bg-background relative">
+      <section id="filosofia" className="py-32 bg-background relative border-t border-white/5">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
-              <h2 className="text-4xl md:text-6xl font-heading leading-tight mb-6 md:mb-8">
+              <h2 className="text-5xl md:text-6xl font-heading leading-tight mb-8">
                 El 2026 no se planea. <br/>
                 <span className="text-primary italic">Se sintoniza.</span>
               </h2>
-              <div className="space-y-5 text-base md:text-lg text-muted-foreground font-light leading-relaxed">
+              <div className="space-y-6 text-lg text-muted-foreground font-light leading-relaxed">
                 <p>
                   <strong className="text-white font-medium">No puedes vibrar alto con cargas del pasado.</strong>
                 </p>
@@ -309,13 +293,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      <SectionTransition variant="light" />
-      
       {/* --- COURSES SECTION (Grid Layout) --- */}
-      <section id="servicios" className="py-16 md:py-24 bg-zinc-900/20">
+      <section id="servicios" className="py-32 bg-zinc-900/20">
         <div className="container mx-auto px-4 max-w-7xl">
-          <FadeIn className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+          <FadeIn className="text-center mb-20 max-w-2xl mx-auto">
             <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
             <h2 className="text-4xl md:text-5xl font-heading mb-6">Portal Resonancial</h2>
             <p className="text-muted-foreground font-light">
@@ -359,11 +340,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      <SectionTransition variant="default" />
-      
       {/* --- FEATURED BUNDLE (Split Layout) --- */}
-      <section id="pack" className="py-16 md:py-24 bg-zinc-950 relative overflow-hidden">
+      <section id="pack" className="py-32 bg-zinc-950 relative overflow-hidden">
         {/* Background Gradient */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -445,11 +423,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      <SectionTransition variant="dark" />
-      
       {/* --- CHALLENGE SECTION (Clean Dark) --- */}
-      <section id="reto" className="py-16 md:py-24 relative bg-background">
+      <section id="reto" className="py-32 relative bg-background border-t border-white/5">
          <div className="container mx-auto px-4 max-w-4xl text-center">
            <FadeIn>
              <div className="inline-flex items-center gap-2 text-primary border border-primary/20 px-6 py-2 rounded-full text-sm mb-8 bg-primary/5">
@@ -490,9 +465,6 @@ export default function Home() {
            </FadeIn>
          </div>
       </section>
-      
-      <SectionTransition variant="light" />
-      
       <Newsletter />
       <Footer />
       <CourseModal 
