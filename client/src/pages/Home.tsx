@@ -61,9 +61,26 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
       className={className}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>
+  );
+};
+
+const SectionFadeIn = ({ children, className = "", id }: { children: React.ReactNode, className?: string, id?: string }) => {
+  return (
+    <motion.section
+      id={id}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+      style={{ willChange: "transform, opacity" }}
+    >
+      {children}
+    </motion.section>
   );
 };
 
@@ -297,7 +314,7 @@ export default function Home() {
         </motion.div>
       </section>
       {/* --- PHILOSOPHY SECTION (Trust/About) --- */}
-      <section id="filosofia" className="py-12 md:py-16 bg-background relative border-t border-white/5">
+      <SectionFadeIn id="filosofia" className="py-12 md:py-16 bg-background relative border-t border-white/5">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
@@ -320,9 +337,9 @@ export default function Home() {
             </FadeIn>
           </div>
         </div>
-      </section>
+      </SectionFadeIn>
       {/* --- COURSES SECTION (Grid Layout) --- */}
-      <section id="servicios" className="py-12 md:py-16 bg-zinc-900/20">
+      <SectionFadeIn id="servicios" className="py-12 md:py-16 bg-zinc-900/20">
         <div className="container mx-auto px-4 max-w-7xl">
           <FadeIn className="text-center mb-10 max-w-2xl mx-auto">
             <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
@@ -367,9 +384,9 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </SectionFadeIn>
       {/* --- FEATURED BUNDLE (Split Layout) --- */}
-      <section id="pack" className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden">
+      <SectionFadeIn id="pack" className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden">
         {/* Background Gradient */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -450,9 +467,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </SectionFadeIn>
       {/* --- CHALLENGE SECTION (Clean Dark) --- */}
-      <section id="reto" className="py-12 md:py-16 relative bg-background border-t border-white/5">
+      <SectionFadeIn id="reto" className="py-12 md:py-16 relative bg-background border-t border-white/5">
          <div className="container mx-auto px-4 max-w-4xl text-center">
            <FadeIn>
              <div className="inline-flex items-center gap-2 text-primary border border-primary/20 px-6 py-2 rounded-full text-sm mb-8 bg-primary/5">
@@ -492,7 +509,7 @@ export default function Home() {
               </Button>
            </FadeIn>
          </div>
-      </section>
+      </SectionFadeIn>
       <Newsletter />
       <Footer />
       <CourseModal 
