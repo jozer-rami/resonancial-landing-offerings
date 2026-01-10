@@ -409,8 +409,9 @@ export default function Home() {
 
                   <Button 
                     asChild
+                    variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto bg-white text-black hover:bg-primary hover:text-black rounded-full px-8 py-6 text-base font-bold tracking-wide transition-all"
+                    className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-8 py-6 text-xs uppercase tracking-widest transition-all"
                   >
                     <a href="https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL">
                       Obtener Pack Completo
