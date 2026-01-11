@@ -10,6 +10,7 @@ import logoResonancial from "@assets/logo_resonancial_blanco.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
 import detoxGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.24.34_1768095023047.gif";
+import reconfiguracionGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.26.27_1768148954010.gif";
 
 import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
 
@@ -368,7 +369,7 @@ export default function Home() {
               subtitle="Estabilidad"
               description="Ajuste profundo de tu vibración base. Activación diseñada para reordenar tu sistema y entrenarlo a sostener nuevas frecuencias de coherencia."
               price="500 Bs"
-              image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/b59ee722c5940b56afb67f16129bc193.jpg"
+              image={reconfiguracionGif}
               courseKey="reconfiguracion"
               onOpenModal={handleOpenModal}
               delay={0.1}
