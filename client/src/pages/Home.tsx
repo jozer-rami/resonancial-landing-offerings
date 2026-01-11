@@ -11,6 +11,8 @@ import logoSymbol from "@assets/logo_1767647555211.png";
 
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
 
+import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
+
 // --- Course Data ---
 const courseDetails = {
   detox: {
@@ -396,7 +398,7 @@ export default function Home() {
               {/* Image Side */}
               <div className="relative min-h-[400px] lg:h-full">
                 <img 
-                  src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/470e2c29e4d7f74594fad0f8ab86ac2d.jpg" 
+                  src={WhatsApp_GIF_2026_01_10_at_21_24_51} 
                   alt="Pack Completo" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />
