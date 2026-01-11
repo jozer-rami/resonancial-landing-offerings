@@ -12,6 +12,9 @@ import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
 import detoxGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.24.34_1768095023047.gif";
 import reconfiguracionGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.26.27_1768148954010.gif";
 import mapaGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.28.35_1768149189535.gif";
+import detoxModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_1768149598199.jpeg";
+import reconfigModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(1)_1768149609721.jpeg";
+import mapaModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(2)_1768149615012.jpeg";
 
 import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
 
@@ -27,7 +30,7 @@ const courseDetails = {
     experience: ["Lectura del estado frecuencial actual", "Identificación de resistencias activas", "Limpieza energética guiada", "Liberación frecuencial consciente", "Cierre e integración"],
     quote: "No puedes vibrar alto con cargas del pasado.",
     whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20DETOX%20FRECUENCIAL",
-    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/59f810e40bddf72819eea349b624ba8a.jpg"
+    image: detoxModalImg
   },
   reconfiguracion: {
     title: "Reconfiguración Frecuencial",
@@ -39,7 +42,7 @@ const courseDetails = {
     experience: ["Diagnóstico de la vibración base", "Ajuste frecuencial profundo", "Alineación mente–emoción–energía", "Anclaje de la nueva frecuencia", "Integración consciente"],
     quote: "No se trata de subir la frecuencia, sino de integrarla y sostenerla.",
     whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20RECONFIGURACIÓN%20FRECUENCIAL",
-    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/b59ee722c5940b56afb67f16129bc193.jpg"
+    image: reconfigModalImg
   },
   mapa: {
     title: "Mapa Resonancial",
@@ -51,7 +54,7 @@ const courseDetails = {
     experience: ["Lectura del estado resonancial", "Conexión con la frecuencia del nuevo ciclo", "Construcción simbólica del Mapa Resonancial", "Anclaje de la visión en el campo energético", "Integración cuerpo–mente–espíritu"],
     quote: "Primero vibra la realidad. Luego créala y habitala.",
     whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20MAPA%20RESONANCIAL",
-    image: "https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/3ee229cb1ae74fa5fb3a300db92832e9.jpg"
+    image: mapaModalImg
   }
 };
 
