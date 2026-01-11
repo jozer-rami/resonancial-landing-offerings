@@ -11,6 +11,7 @@ import logoSymbol from "@assets/logo_1767647555211.png";
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
 import detoxGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.24.34_1768095023047.gif";
 import reconfiguracionGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.26.27_1768148954010.gif";
+import mapaGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.28.35_1768149189535.gif";
 
 import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
 
@@ -380,7 +381,7 @@ export default function Home() {
               subtitle="Visión Encarnada"
               description="Activación de la visión encarnada del 2026. Alineación profunda donde mente, cuerpo y espíritu resuenan con la realidad que deseas habitar."
               price="500 Bs"
-              image="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/3ee229cb1ae74fa5fb3a300db92832e9.jpg"
+              image={mapaGif}
               courseKey="mapa"
               onOpenModal={handleOpenModal}
               delay={0.2}
