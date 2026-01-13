@@ -178,6 +178,207 @@ const CourseModal = ({ course, open, onClose }: { course: typeof courseDetails.d
   );
 };
 
+const AlmanaqueModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0">
+        <div className="relative">
+          <div className="h-48 md:h-64 relative overflow-hidden bg-gradient-to-br from-primary/20 via-zinc-900 to-zinc-950">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <Book className="w-16 h-16 text-primary/40 mx-auto mb-2" />
+                <span className="text-primary/60 text-sm tracking-widest uppercase">Edición 2026</span>
+              </div>
+            </div>
+          </div>
+          
+          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+            <X className="w-5 h-5" />
+          </DialogClose>
+          
+          <div className="p-8 md:p-12 -mt-12 relative z-20">
+            <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">Objeto Ritual Anual</span>
+            <h2 className="text-3xl md:text-4xl font-heading text-white mb-2">Almanaque Ritual Resonancial 2026™️</h2>
+            <p className="text-muted-foreground font-light mb-8">Rituales personalizados para habitar el tiempo desde la conciencia</p>
+            
+            <div className="space-y-8">
+              {/* ¿Qué es? */}
+              <div>
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Qué es este Almanaque?</h3>
+                <p className="text-white/80 font-light leading-relaxed">
+                  El Almanaque Ritual Resonancial 2026™️ es un objeto ritual anual diseñado para acompañarte energéticamente durante todo el año. No organiza fechas. <span className="text-primary">Organiza tu energía en el tiempo.</span>
+                </p>
+              </div>
+              
+              {/* Por qué no funcionan los planners */}
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Por qué no funcionan los planners comunes?</h3>
+                <ul className="space-y-2 mb-4">
+                  {[
+                    "Porque trabajan la mente, no el campo energético",
+                    "Porque exigen constancia en lugar de conciencia",
+                    "Porque no acompañan los momentos de quiebre"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-primary/80 italic">Este Almanaque responde a momentos internos, no a obligaciones externas.</p>
+              </div>
+              
+              {/* Qué lo hace diferente */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-primary/5 rounded-2xl p-6 border border-primary/10">
+                  <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Qué lo hace diferente?</h3>
+                  <ul className="space-y-2">
+                    {[
+                      "10 Estaciones Energéticas",
+                      "Rituales paso a paso",
+                      "Uso no lineal",
+                      "Ritual de cumpleaños personalizado",
+                      "Rituales lunares esenciales",
+                      "Portales energéticos clave 2026"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
+                  <h3 className="text-sm uppercase tracking-widest text-primary mb-4">Las 10 Estaciones</h3>
+                  <ul className="space-y-1">
+                    {[
+                      "Sintonización", "Enraizamiento", "Activación del Deseo",
+                      "Expansión", "Cosecha", "Integración",
+                      "Transmutación", "Renovación", "Manifestación", "Cierre y Sellado"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-xs text-white/60">
+                        <span className="text-primary/50">{String(i + 1).padStart(2, '0')}</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Ritual de Cumpleaños */}
+              <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-2xl p-6 border border-primary/20 relative overflow-hidden">
+                <Star className="absolute top-4 right-4 w-6 h-6 text-primary/30" />
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+                  <Star className="w-4 h-4" />
+                  Ritual de Cumpleaños Personalizado
+                </h3>
+                <p className="text-white/70 font-light leading-relaxed text-sm">
+                  Tu cumpleaños es el portal energético más importante del año. Recibirás un ritual diseñado según tu signo solar, alineado a tu elemento y energía natal. <span className="text-primary">Este ritual es único y no se repite.</span>
+                </p>
+              </div>
+              
+              {/* Rituales Lunares */}
+              <div>
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+                  <Moon className="w-4 h-4" />
+                  Rituales Lunares
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { phase: "Luna Nueva", action: "siembra" },
+                    { phase: "Luna Llena", action: "revelación" },
+                    { phase: "Luna Menguante", action: "liberación" }
+                  ].map((item, i) => (
+                    <span key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-white/70">
+                      {item.phase} — <span className="text-primary/70">{item.action}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              {/* ¿Qué incluye? */}
+              <div>
+                <h3 className="text-sm uppercase tracking-widest text-primary mb-4">¿Qué incluye exactamente?</h3>
+                <div className="grid sm:grid-cols-2 gap-2">
+                  {[
+                    "Almanaque Ritual Resonancial 2026™️",
+                    "Guía de uso",
+                    "10 Estaciones Energéticas",
+                    "Rituales escritos",
+                    "Rituales lunares",
+                    "Ritual de cumpleaños personalizado",
+                    "Portales energéticos 2026"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm text-white/70">
+                      <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Para quién es / No es */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white/5 rounded-2xl p-5 border border-white/5">
+                  <h3 className="text-xs uppercase tracking-widest text-primary mb-3 flex items-center gap-2">
+                    <Users className="w-3 h-3" />
+                    Para quién es
+                  </h3>
+                  <ul className="space-y-1">
+                    {["Personas conscientes", "Quienes ya hicieron trabajo personal", "Buscan sostén energético real"].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-xs text-white/60">
+                        <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-white/5 rounded-2xl p-5 border border-white/5">
+                  <h3 className="text-xs uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2">
+                    <XCircle className="w-3 h-3" />
+                    No es para
+                  </h3>
+                  <ul className="space-y-1">
+                    {["Quienes buscan predicciones", "Consumo pasivo sin acción"].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-xs text-white/40">
+                        <X className="w-3 h-3 text-zinc-600 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Quote */}
+              <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5 text-center">
+                <p className="text-xl md:text-2xl font-heading text-white italic">"El tiempo va a pasar igual.<br/><span className="text-primary">La diferencia es desde qué frecuencia lo atraviesas."</span></p>
+              </div>
+              
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5">
+                <div className="flex flex-col text-center sm:text-left">
+                  <span className="text-xs text-muted-foreground mb-1">Formato Digital · Personalización incluida</span>
+                  <div className="flex items-baseline gap-2 justify-center sm:justify-start">
+                    <span className="text-3xl font-heading text-white">200 Bs</span>
+                    <span className="text-lg font-heading text-muted-foreground">20 USD</span>
+                  </div>
+                </div>
+                <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all">
+                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026" target="_blank" rel="noreferrer">
+                    Quiero Mi Almanaque
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const CourseCard = ({ title, subtitle, description, price, image, courseKey, delay, onOpenModal }: any) => {
   return (
     <FadeIn delay={delay} className="group h-full">
@@ -224,6 +425,7 @@ export default function Home() {
   const heroContentY = useTransform(scrollY, [0, 400], [0, -60]);
   const gradientOpacity = useTransform(scrollY, [0, 500], [0.6, 1]);
   const [selectedCourse, setSelectedCourse] = useState<keyof typeof courseDetails | null>(null);
+  const [almanaqueModalOpen, setAlmanaqueModalOpen] = useState(false);
 
   const handleOpenModal = (courseKey: keyof typeof courseDetails) => {
     setSelectedCourse(courseKey);
@@ -525,232 +727,13 @@ export default function Home() {
                 </Button>
                 <span className="text-xs text-muted-foreground">Edición limitada · Producto anual · No es suscripción</span>
                 
-                <button 
-                  onClick={() => document.getElementById('almanaque-details')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="flex items-center gap-2 text-sm text-primary/80 hover:text-primary transition-colors mt-4"
+                <Button 
+                  variant="outline"
+                  onClick={() => setAlmanaqueModalOpen(true)}
+                  className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest mt-4"
                 >
                   Quiero saber más
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-              </div>
-            </FadeIn>
-          </div>
-
-          {/* Expanded Content */}
-          <div id="almanaque-details" className="space-y-6 pt-8">
-            {/* ¿Qué es este almanaque? */}
-            <FadeIn delay={0.1}>
-              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
-                <h3 className="text-lg font-heading text-primary mb-4">¿Qué es este Almanaque?</h3>
-                <p className="text-white/70 font-light leading-relaxed">
-                  El Almanaque Ritual Resonancial 2026™️ es un objeto ritual anual diseñado para acompañarte energéticamente durante todo el año. No organiza fechas. <span className="text-primary">Organiza tu energía en el tiempo.</span>
-                </p>
-              </div>
-            </FadeIn>
-
-            {/* ¿Por qué no funcionan los planners? */}
-            <FadeIn delay={0.15}>
-              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
-                <h3 className="text-lg font-heading text-primary mb-4">¿Por qué no funcionan los planners comunes?</h3>
-                <ul className="space-y-3 mb-4">
-                  {[
-                    "Porque trabajan la mente, no el campo energético",
-                    "Porque exigen constancia en lugar de conciencia",
-                    "Porque no acompañan los momentos de quiebre"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-white/70 text-sm">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-primary/80 italic">Este Almanaque responde a momentos internos, no a obligaciones externas.</p>
-              </div>
-            </FadeIn>
-
-            {/* ¿Qué lo hace diferente? */}
-            <FadeIn delay={0.2}>
-              <div className="bg-primary/5 rounded-2xl p-6 md:p-8 border border-primary/10">
-                <h3 className="text-lg font-heading text-primary mb-4">¿Qué lo hace diferente?</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {[
-                    "10 Estaciones Energéticas",
-                    "Rituales paso a paso",
-                    "Uso no lineal",
-                    "Ritual de cumpleaños personalizado por signo",
-                    "Rituales lunares esenciales",
-                    "Portales energéticos clave del 2026"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-sm text-white/80">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Las 10 Estaciones */}
-            <FadeIn delay={0.25}>
-              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
-                <h3 className="text-lg font-heading text-primary mb-4">Las 10 Estaciones Energéticas</h3>
-                <div className="grid sm:grid-cols-2 gap-2">
-                  {[
-                    "Estación de Sintonización",
-                    "Estación de Enraizamiento",
-                    "Estación de Activación del Deseo",
-                    "Estación de Expansión",
-                    "Estación de Cosecha",
-                    "Estación de Integración",
-                    "Estación de Transmutación",
-                    "Estación de Renovación",
-                    "Estación de Manifestación",
-                    "Estación de Cierre y Sellado"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-white/60">
-                      <span className="text-primary/60 text-xs">{String(i + 1).padStart(2, '0')}</span>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Ritual de Cumpleaños */}
-            <FadeIn delay={0.3}>
-              <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-2xl p-6 md:p-8 border border-primary/20 relative overflow-hidden">
-                <div className="absolute top-4 right-4">
-                  <Star className="w-6 h-6 text-primary/40" />
-                </div>
-                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
-                  <Star className="w-5 h-5" />
-                  Ritual de Cumpleaños Personalizado
-                </h3>
-                <p className="text-white/70 font-light leading-relaxed">
-                  Tu cumpleaños es el portal energético más importante del año. Recibirás un ritual diseñado según tu signo solar, alineado a tu elemento y energía natal. <span className="text-primary">Este ritual es único y no se repite.</span>
-                </p>
-              </div>
-            </FadeIn>
-
-            {/* Rituales Lunares */}
-            <FadeIn delay={0.35}>
-              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
-                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
-                  <Moon className="w-5 h-5" />
-                  Rituales Lunares
-                </h3>
-                <div className="grid sm:grid-cols-3 gap-4">
-                  {[
-                    { phase: "Luna Nueva", action: "siembra" },
-                    { phase: "Luna Llena", action: "revelación" },
-                    { phase: "Luna Menguante", action: "liberación" }
-                  ].map((item, i) => (
-                    <div key={i} className="text-center p-4 bg-white/5 rounded-xl">
-                      <div className="text-sm text-white/80 mb-1">{item.phase}</div>
-                      <div className="text-xs text-primary/70">{item.action}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* ¿Qué incluye? */}
-            <FadeIn delay={0.4}>
-              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
-                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
-                  <Book className="w-5 h-5" />
-                  ¿Qué incluye exactamente?
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {[
-                    { icon: "📘", text: "Almanaque Ritual Resonancial 2026™️" },
-                    { icon: "🔹", text: "Guía de uso" },
-                    { icon: "🔹", text: "10 Estaciones Energéticas" },
-                    { icon: "🔹", text: "Rituales escritos" },
-                    { icon: "🔹", text: "Rituales lunares" },
-                    { icon: "🔹", text: "Ritual de cumpleaños personalizado" },
-                    { icon: "🔹", text: "Portales energéticos 2026" }
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-sm text-white/70">
-                      <span>{item.icon}</span>
-                      {item.text}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Para quién es / No es */}
-            <FadeIn delay={0.45}>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-zinc-900/30 rounded-2xl p-6 border border-white/5">
-                  <h3 className="text-base font-heading text-primary mb-4 flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Para quién es
-                  </h3>
-                  <ul className="space-y-2">
-                    {[
-                      "Personas conscientes",
-                      "Quienes ya hicieron trabajo personal",
-                      "Buscan sostén energético real"
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-zinc-900/30 rounded-2xl p-6 border border-white/5">
-                  <h3 className="text-base font-heading text-zinc-400 mb-4 flex items-center gap-2">
-                    <XCircle className="w-4 h-4" />
-                    No es para
-                  </h3>
-                  <ul className="space-y-2">
-                    {[
-                      "Quienes buscan predicciones",
-                      "Consumo pasivo sin acción"
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-white/50">
-                        <X className="w-4 h-4 text-zinc-500 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Inversión */}
-            <FadeIn delay={0.5}>
-              <div className="bg-zinc-900/50 rounded-2xl p-8 border border-primary/20 text-center">
-                <h3 className="text-lg font-heading text-primary mb-2">Formato · Inversión · Entrega</h3>
-                <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-white/60">
-                  <span>Formato: Digital</span>
-                  <span className="text-primary/40">·</span>
-                  <span>Personalización incluida</span>
-                </div>
-                <div className="text-4xl font-heading text-white mb-2">200 Bs</div>
-                <div className="text-lg font-heading text-muted-foreground mb-6">20 USD</div>
-                <Button 
-                  asChild
-                  size="lg"
-                  className="bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
-                >
-                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026">
-                    Quiero Mi Almanaque Personalizado
-                  </a>
                 </Button>
-              </div>
-            </FadeIn>
-
-            {/* Cierre Emocional */}
-            <FadeIn delay={0.55}>
-              <div className="text-center py-8">
-                <p className="text-xl md:text-2xl font-heading text-white/80 italic leading-relaxed">
-                  "El tiempo va a pasar igual.<br/>
-                  <span className="text-primary">La diferencia es desde qué frecuencia lo atraviesas."</span>
-                </p>
               </div>
             </FadeIn>
           </div>
@@ -762,6 +745,10 @@ export default function Home() {
         course={selectedCourse ? courseDetails[selectedCourse] : null}
         open={selectedCourse !== null}
         onClose={handleCloseModal}
+      />
+      <AlmanaqueModal 
+        open={almanaqueModalOpen}
+        onClose={() => setAlmanaqueModalOpen(false)}
       />
     </div>
   );
