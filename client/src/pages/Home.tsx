@@ -24,7 +24,7 @@ const courseDetails = {
     title: "Detox Frecuencial",
     subtitle: "Liberación",
     tagline: "Liberación de resistencias y limpieza del campo energético",
-    purpose: "Antes de elevar tu frecuencia, es necesario vaciar el campo. Todo lo que no se libera —emociones, creencias, memorias— distorsiona la vibración desde la cual intentas crear. Detox Frecuencial es una activación profunda diseñada para soltar cargas que impiden sostener frecuencias más altas.",
+    purpose: "Antes de elevar tu frecuencia, es necesario vaciar el campo. Todo lo que no se libera (emociones, creencias, memorias) distorsiona la vibración desde la cual intentas crear. Detox Frecuencial es una activación profunda diseñada para soltar cargas que impiden sostener frecuencias más altas.",
     works: ["Resistencias conscientes e inconscientes", "Cargas emocionales acumuladas", "Bloqueos energéticos y patrones repetitivos", "Fatiga vibracional y sensación de estancamiento"],
     activates: ["Limpieza del campo energético", "Sensación de ligereza y claridad", "Mayor disponibilidad interna para el cambio", "Preparación real para la reconfiguración"],
     experience: ["Lectura del estado frecuencial actual", "Identificación de resistencias activas", "Limpieza energética guiada", "Liberación frecuencial consciente", "Cierre e integración"],
