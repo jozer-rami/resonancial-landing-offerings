@@ -675,7 +675,7 @@ export default function Home() {
       </SectionFadeIn>
       {/* --- ALMANAQUE RITUAL RESONANCIAL SECTION --- */}
       <SectionFadeIn id="almanaque" className="py-16 md:py-24 relative bg-background border-t border-white/5">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image Side */}
             <FadeIn className="order-2 lg:order-1">
