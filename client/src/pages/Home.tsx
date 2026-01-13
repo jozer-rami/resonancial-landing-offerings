@@ -17,6 +17,7 @@ import reconfigModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(1)_
 import mapaModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(2)_1768149615012.jpeg";
 
 import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
+import almanaqueImg from "@assets/POST_ALMANAQUE_1768269403742.png";
 
 // --- Course Data ---
 const courseDetails = {
@@ -183,14 +184,9 @@ const AlmanaqueModal = ({ open, onClose }: { open: boolean, onClose: () => void 
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0">
         <div className="relative">
-          <div className="h-48 md:h-64 relative overflow-hidden bg-gradient-to-br from-primary/20 via-zinc-900 to-zinc-950">
+          <div className="h-64 md:h-80 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <Book className="w-16 h-16 text-primary/40 mx-auto mb-2" />
-                <span className="text-primary/60 text-sm tracking-widest uppercase">Edición 2026</span>
-              </div>
-            </div>
+            <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" className="w-full h-full object-cover object-top" />
           </div>
           
           <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
@@ -679,63 +675,77 @@ export default function Home() {
       </SectionFadeIn>
       {/* --- ALMANAQUE RITUAL RESONANCIAL SECTION --- */}
       <SectionFadeIn id="almanaque" className="py-16 md:py-24 relative bg-background border-t border-white/5">
-        <div className="container mx-auto px-4 max-w-4xl">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
-            <FadeIn>
-              <span className="text-primary text-xs tracking-[0.3em] uppercase font-bold mb-6 block">Edición 2026</span>
-              <h2 className="text-4xl md:text-6xl font-heading mb-4 leading-tight">
-                Almanaque Ritual<br/>
-                <span className="text-primary">Resonancial 2026™️</span>
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mx-auto mb-8">
-                Rituales personalizados para habitar el tiempo desde la conciencia
-              </p>
-              
-              <div className="max-w-xl mx-auto mb-10 space-y-2">
-                <p className="text-xl md:text-2xl font-heading text-white/90 italic">
-                  "El tiempo no se gestiona.
-                </p>
-                <p className="text-xl md:text-2xl font-heading text-primary italic">
-                  Se ritualiza, se habita y se sostiene."
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto mb-10 text-left">
-                {[
-                  "10 Estaciones Energéticas del 2026",
-                  "Rituales claros para sostener tu frecuencia",
-                  "Ritual de cumpleaños personalizado según tu signo",
-                  "Uso flexible durante todo el año"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm text-white/80">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col items-center gap-4">
-                <Button 
-                  asChild
-                  size="lg"
-                  className="bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
-                >
-                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
-                    Quiero Mi Almanaque 2026
-                  </a>
-                </Button>
-                <span className="text-xs text-muted-foreground">Edición limitada · Producto anual · No es suscripción</span>
-                
-                <Button 
-                  variant="outline"
-                  onClick={() => setAlmanaqueModalOpen(true)}
-                  className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest mt-4"
-                >
-                  Quiero saber más
-                </Button>
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image Side */}
+            <FadeIn className="order-2 lg:order-1">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
+                <img 
+                  src={almanaqueImg} 
+                  alt="Almanaque Ritual Resonancial 2026" 
+                  className="relative w-full rounded-2xl shadow-2xl shadow-black/50 border border-white/10"
+                />
               </div>
             </FadeIn>
+
+            {/* Content Side */}
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <FadeIn>
+                <span className="text-primary text-xs tracking-[0.3em] uppercase font-bold mb-4 block">Edición 2026</span>
+                <h2 className="text-4xl md:text-5xl font-heading mb-4 leading-tight">
+                  Almanaque Ritual<br/>
+                  <span className="text-primary">Resonancial 2026™️</span>
+                </h2>
+                <p className="text-lg text-muted-foreground font-light max-w-xl mb-6">
+                  Rituales personalizados para habitar el tiempo desde la conciencia
+                </p>
+                
+                <div className="max-w-xl mb-8 space-y-1">
+                  <p className="text-lg md:text-xl font-heading text-white/90 italic">
+                    "El tiempo no se gestiona.
+                  </p>
+                  <p className="text-lg md:text-xl font-heading text-primary italic">
+                    Se ritualiza, se habita y se sostiene."
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3 max-w-lg mx-auto lg:mx-0 mb-8 text-left">
+                  {[
+                    "10 Estaciones Energéticas del 2026",
+                    "Rituales claros para sostener tu frecuencia",
+                    "Ritual de cumpleaños personalizado según tu signo",
+                    "Uso flexible durante todo el año"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm text-white/80">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+                  <Button 
+                    asChild
+                    size="lg"
+                    className="bg-primary text-black hover:bg-primary/90 rounded-full px-8 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
+                  >
+                    <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
+                      Quiero Mi Almanaque
+                    </a>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={() => setAlmanaqueModalOpen(true)}
+                    className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest"
+                  >
+                    Ver detalles
+                  </Button>
+                </div>
+                <span className="text-xs text-muted-foreground mt-4 block">Edición limitada · Producto anual · No es suscripción</span>
+              </FadeIn>
+            </div>
           </div>
         </div>
       </SectionFadeIn>
