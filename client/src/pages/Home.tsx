@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Sparkles, CheckCircle2, Calendar, X } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, Calendar, X, ChevronDown, Book, Moon, Star, Users, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -475,47 +475,286 @@ export default function Home() {
           </div>
         </div>
       </SectionFadeIn>
-      {/* --- CHALLENGE SECTION (Clean Dark) --- */}
-      <SectionFadeIn id="reto" className="py-12 md:py-16 relative bg-background border-t border-white/5">
-         <div className="container mx-auto px-4 max-w-4xl text-center">
-           <FadeIn>
-             <div className="inline-flex items-center gap-2 text-primary border border-primary/20 px-6 py-2 rounded-full text-sm mb-8 bg-primary/5">
-                <Calendar className="w-4 h-4" />
-                <span>Inicio: 10 de Enero</span>
-             </div>
+      {/* --- ALMANAQUE RITUAL RESONANCIAL SECTION --- */}
+      <SectionFadeIn id="almanaque" className="py-16 md:py-24 relative bg-background border-t border-white/5">
+        <div className="container mx-auto px-4 max-w-4xl">
+          {/* Hero Section */}
+          <div className="text-center mb-12">
+            <FadeIn>
+              <span className="text-primary text-xs tracking-[0.3em] uppercase font-bold mb-6 block">Edición 2026</span>
+              <h2 className="text-4xl md:text-6xl font-heading mb-4 leading-tight">
+                Almanaque Ritual<br/>
+                <span className="text-primary">Resonancial 2026™️</span>
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mx-auto mb-8">
+                Rituales personalizados para habitar el tiempo desde la conciencia
+              </p>
+              
+              <div className="max-w-xl mx-auto mb-10 space-y-2">
+                <p className="text-xl md:text-2xl font-heading text-white/90 italic">
+                  "El tiempo no se gestiona.
+                </p>
+                <p className="text-xl md:text-2xl font-heading text-primary italic">
+                  Se ritualiza, se habita y se sostiene."
+                </p>
+              </div>
 
-             <h2 className="text-5xl md:text-7xl font-heading mb-6">
-               Reto Sintoniza <br/>
-               <span className="text-zinc-500">Tu 2026</span>
-             </h2>
+              <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto mb-10 text-left">
+                {[
+                  "10 Estaciones Energéticas del 2026",
+                  "Rituales claros para sostener tu frecuencia",
+                  "Ritual de cumpleaños personalizado según tu signo",
+                  "Uso flexible durante todo el año"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-sm text-white/80">{item}</span>
+                  </div>
+                ))}
+              </div>
 
-             <p className="text-xl text-muted-foreground font-light max-w-2xl mx-auto mb-8">
-               Ciclo de 21 días de meditaciones en vivo + grabadas. <br/>
-               Acompañamiento diario para sostener tu nueva frecuencia.
-             </p>
+              <div className="flex flex-col items-center gap-4">
+                <Button 
+                  asChild
+                  size="lg"
+                  className="bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
+                >
+                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
+                    Quiero Mi Almanaque 2026
+                  </a>
+                </Button>
+                <span className="text-xs text-muted-foreground">Edición limitada · Producto anual · No es suscripción</span>
+                
+                <button 
+                  onClick={() => document.getElementById('almanaque-details')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="flex items-center gap-2 text-sm text-primary/80 hover:text-primary transition-colors mt-4"
+                >
+                  Quiero saber más
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
+            </FadeIn>
+          </div>
 
-             <div className="grid sm:grid-cols-2 gap-6 max-w-xl mx-auto mb-8">
-                <div className="bg-zinc-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
-                  <div className="text-4xl font-heading text-white mb-2">250 Bs</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-widest">Individual</div>
+          {/* Expanded Content */}
+          <div id="almanaque-details" className="space-y-6 pt-8">
+            {/* ¿Qué es este almanaque? */}
+            <FadeIn delay={0.1}>
+              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
+                <h3 className="text-lg font-heading text-primary mb-4">¿Qué es este Almanaque?</h3>
+                <p className="text-white/70 font-light leading-relaxed">
+                  El Almanaque Ritual Resonancial 2026™️ es un objeto ritual anual diseñado para acompañarte energéticamente durante todo el año. No organiza fechas. <span className="text-primary">Organiza tu energía en el tiempo.</span>
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* ¿Por qué no funcionan los planners? */}
+            <FadeIn delay={0.15}>
+              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
+                <h3 className="text-lg font-heading text-primary mb-4">¿Por qué no funcionan los planners comunes?</h3>
+                <ul className="space-y-3 mb-4">
+                  {[
+                    "Porque trabajan la mente, no el campo energético",
+                    "Porque exigen constancia en lugar de conciencia",
+                    "Porque no acompañan los momentos de quiebre"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-white/70 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-primary/80 italic">Este Almanaque responde a momentos internos, no a obligaciones externas.</p>
+              </div>
+            </FadeIn>
+
+            {/* ¿Qué lo hace diferente? */}
+            <FadeIn delay={0.2}>
+              <div className="bg-primary/5 rounded-2xl p-6 md:p-8 border border-primary/10">
+                <h3 className="text-lg font-heading text-primary mb-4">¿Qué lo hace diferente?</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    "10 Estaciones Energéticas",
+                    "Rituales paso a paso",
+                    "Uso no lineal",
+                    "Ritual de cumpleaños personalizado por signo",
+                    "Rituales lunares esenciales",
+                    "Portales energéticos clave del 2026"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm text-white/80">{item}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="bg-zinc-900/50 p-8 rounded-2xl border border-primary/30 relative overflow-hidden">
-                  <div className="absolute -right-6 -top-6 w-20 h-20 bg-primary/20 blur-2xl" />
-                  <div className="text-4xl font-heading text-primary mb-2">400 Bs</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-widest">Dúo (2 pax)</div>
-                </div>
-             </div>
+              </div>
+            </FadeIn>
 
-             <Button 
-                asChild
-                className="bg-transparent border border-white/20 text-white hover:bg-white hover:text-black rounded-full px-10 py-6 text-lg transition-all"
-              >
-                <a href="https://wa.me/34640919319?text=Hola,%20quiero%20unirme%20al%20reto%20Sintoniza%20tu%202026">
-                  Unirme al Reto
-                </a>
-              </Button>
-           </FadeIn>
-         </div>
+            {/* Las 10 Estaciones */}
+            <FadeIn delay={0.25}>
+              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
+                <h3 className="text-lg font-heading text-primary mb-4">Las 10 Estaciones Energéticas</h3>
+                <div className="grid sm:grid-cols-2 gap-2">
+                  {[
+                    "Estación de Sintonización",
+                    "Estación de Enraizamiento",
+                    "Estación de Activación del Deseo",
+                    "Estación de Expansión",
+                    "Estación de Cosecha",
+                    "Estación de Integración",
+                    "Estación de Transmutación",
+                    "Estación de Renovación",
+                    "Estación de Manifestación",
+                    "Estación de Cierre y Sellado"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm text-white/60">
+                      <span className="text-primary/60 text-xs">{String(i + 1).padStart(2, '0')}</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Ritual de Cumpleaños */}
+            <FadeIn delay={0.3}>
+              <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-2xl p-6 md:p-8 border border-primary/20 relative overflow-hidden">
+                <div className="absolute top-4 right-4">
+                  <Star className="w-6 h-6 text-primary/40" />
+                </div>
+                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
+                  <Star className="w-5 h-5" />
+                  Ritual de Cumpleaños Personalizado
+                </h3>
+                <p className="text-white/70 font-light leading-relaxed">
+                  Tu cumpleaños es el portal energético más importante del año. Recibirás un ritual diseñado según tu signo solar, alineado a tu elemento y energía natal. <span className="text-primary">Este ritual es único y no se repite.</span>
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* Rituales Lunares */}
+            <FadeIn delay={0.35}>
+              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
+                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
+                  <Moon className="w-5 h-5" />
+                  Rituales Lunares
+                </h3>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {[
+                    { phase: "Luna Nueva", action: "siembra" },
+                    { phase: "Luna Llena", action: "revelación" },
+                    { phase: "Luna Menguante", action: "liberación" }
+                  ].map((item, i) => (
+                    <div key={i} className="text-center p-4 bg-white/5 rounded-xl">
+                      <div className="text-sm text-white/80 mb-1">{item.phase}</div>
+                      <div className="text-xs text-primary/70">{item.action}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* ¿Qué incluye? */}
+            <FadeIn delay={0.4}>
+              <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-white/5">
+                <h3 className="text-lg font-heading text-primary mb-4 flex items-center gap-2">
+                  <Book className="w-5 h-5" />
+                  ¿Qué incluye exactamente?
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { icon: "📘", text: "Almanaque Ritual Resonancial 2026™️" },
+                    { icon: "🔹", text: "Guía de uso" },
+                    { icon: "🔹", text: "10 Estaciones Energéticas" },
+                    { icon: "🔹", text: "Rituales escritos" },
+                    { icon: "🔹", text: "Rituales lunares" },
+                    { icon: "🔹", text: "Ritual de cumpleaños personalizado" },
+                    { icon: "🔹", text: "Portales energéticos 2026" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 text-sm text-white/70">
+                      <span>{item.icon}</span>
+                      {item.text}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Para quién es / No es */}
+            <FadeIn delay={0.45}>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-zinc-900/30 rounded-2xl p-6 border border-white/5">
+                  <h3 className="text-base font-heading text-primary mb-4 flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    Para quién es
+                  </h3>
+                  <ul className="space-y-2">
+                    {[
+                      "Personas conscientes",
+                      "Quienes ya hicieron trabajo personal",
+                      "Buscan sostén energético real"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-white/70">
+                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-zinc-900/30 rounded-2xl p-6 border border-white/5">
+                  <h3 className="text-base font-heading text-zinc-400 mb-4 flex items-center gap-2">
+                    <XCircle className="w-4 h-4" />
+                    No es para
+                  </h3>
+                  <ul className="space-y-2">
+                    {[
+                      "Quienes buscan predicciones",
+                      "Consumo pasivo sin acción"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-white/50">
+                        <X className="w-4 h-4 text-zinc-500 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Inversión */}
+            <FadeIn delay={0.5}>
+              <div className="bg-zinc-900/50 rounded-2xl p-8 border border-primary/20 text-center">
+                <h3 className="text-lg font-heading text-primary mb-2">Formato · Inversión · Entrega</h3>
+                <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-white/60">
+                  <span>Formato: Digital</span>
+                  <span className="text-primary/40">·</span>
+                  <span>Personalización incluida</span>
+                </div>
+                <div className="text-4xl font-heading text-white mb-2">200 Bs</div>
+                <div className="text-lg font-heading text-muted-foreground mb-6">20 USD</div>
+                <Button 
+                  asChild
+                  size="lg"
+                  className="bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
+                >
+                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026">
+                    Quiero Mi Almanaque Personalizado
+                  </a>
+                </Button>
+              </div>
+            </FadeIn>
+
+            {/* Cierre Emocional */}
+            <FadeIn delay={0.55}>
+              <div className="text-center py-8">
+                <p className="text-xl md:text-2xl font-heading text-white/80 italic leading-relaxed">
+                  "El tiempo va a pasar igual.<br/>
+                  <span className="text-primary">La diferencia es desde qué frecuencia lo atraviesas."</span>
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
       </SectionFadeIn>
       <Newsletter />
       <Footer />

@@ -1,0 +1,156 @@
+TASK:
+Replace the existing “Reto Sintoniza Tu 2026” section with a new product section called:
+
+“ALMANAQUE RITUAL RESONANCIAL 2026™️”
+
+GOAL:
+Create a high-conversion, mobile-first product section that keeps the current visual identity, tone, spacing, typography and ritual feeling of the Resonancial landing page.
+
+DO NOT redesign the page.
+DO NOT change fonts, colors or general layout language.
+This section must feel like it always belonged to the site.
+
+––––––––––––––––
+STRUCTURE REQUIRED
+––––––––––––––––
+
+SECTION 1 — HERO (Max 1 viewport height)
+
+• Centered layout
+• Calm, elegant, ritual aesthetic
+• CTA visible without scroll (especially mobile)
+
+CONTENT:
+
+H1:
+ALMANAQUE RITUAL RESONANCIAL 2026™️
+
+H2:
+Rituales personalizados para habitar el tiempo desde la conciencia
+
+Power phrase (2 lines, elegant spacing):
+“El tiempo no se gestiona.
+Se ritualiza, se habita y se sostiene.”
+
+Benefit bullets (max 4, with subtle icons or checkmarks):
+✔️ 10 Estaciones Energéticas del 2026  
+✔️ Rituales claros para sostener tu frecuencia  
+✔️ Ritual de cumpleaños personalizado según tu signo  
+✔️ Uso flexible durante todo el año  
+
+Primary CTA (solid button, gold/copper accent):
+“QUIERO MI ALMANAQUE 2026”
+
+Micro-trust text under CTA (small, low contrast):
+Edición limitada · Producto anual · No es suscripción
+
+Secondary CTA / anchor (text button or subtle arrow):
+“QUIERO SABER MÁS ↓”
+
+––––––––––––––––
+SECTION 2 — EXPANDED CONTENT (Progressive disclosure)
+––––––––––––––––
+
+This section appears below and/or expands when clicking “Quiero saber más”.
+
+Use:
+• Accordion OR soft cards
+• Collapsible sections
+• Mobile-first spacing
+• No long text blocks
+
+BLOCKS (in this order):
+
+1. ¿QUÉ ES ESTE ALMANAQUE?
+Text:
+“El Almanaque Ritual Resonancial 2026™️ es un objeto ritual anual diseñado para acompañarte energéticamente durante todo el año.
+No organiza fechas.
+Organiza tu energía en el tiempo.”
+
+2. ¿POR QUÉ NO FUNCIONAN LOS PLANNERS COMUNES?
+Bullets:
+• Porque trabajan la mente, no el campo energético  
+• Porque exigen constancia en lugar de conciencia  
+• Porque no acompañan los momentos de quiebre  
+
+Closing line:
+Este Almanaque responde a momentos internos, no a obligaciones externas.
+
+3. ¿QUÉ LO HACE DIFERENTE?
+Checklist style:
+✔️ 10 Estaciones Energéticas  
+✔️ Rituales paso a paso  
+✔️ Uso no lineal  
+✔️ Ritual de cumpleaños personalizado por signo  
+✔️ Rituales lunares esenciales  
+✔️ Portales energéticos clave del 2026  
+
+4. LAS 10 ESTACIONES ENERGÉTICAS
+Short list (no descriptions, no overload):
+• Estación de Sintonización  
+• Estación de Enraizamiento  
+• Estación de Activación del Deseo  
+• …  
+• Estación de Cierre y Sellado  
+
+Optional subtle button:
+“Ver estaciones completas”
+
+5. RITUAL DE CUMPLEAÑOS PERSONALIZADO ⭐
+Text:
+“Tu cumpleaños es el portal energético más importante del año.
+Recibirás un ritual diseñado según tu signo solar, alineado a tu elemento y energía natal.
+Este ritual es único y no se repite.”
+
+6. RITUALES LUNARES
+Simple list:
+• Luna Nueva — siembra  
+• Luna Llena — revelación  
+• Luna Menguante — liberación  
+
+7. ¿QUÉ INCLUYE EXACTAMENTE?
+Icon list:
+📘 Almanaque Ritual Resonancial 2026™️  
+🔹 Guía de uso  
+🔹 10 Estaciones Energéticas  
+🔹 Rituales escritos  
+🔹 Rituales lunares  
+🔹 Ritual de cumpleaños personalizado  
+🔹 Portales energéticos 2026  
+
+8. ¿PARA QUIÉN ES / NO ES?
+Two-column layout (or stacked on mobile):
+
+PARA QUIÉN ES:
+✔️ Personas conscientes  
+✔️ Quienes ya hicieron trabajo personal  
+✔️ Buscan sostén real  
+
+NO ES:
+✖️ Para predicciones  
+✖️ Para consumo pasivo  
+
+9. FORMATO · INVERSIÓN · ENTREGA
+Placeholders:
+Formato: Digital / Físico / Ambos  
+Personalización incluida  
+Precio: [placeholder]
+
+CTA (same style as primary):
+“QUIERO MI ALMANAQUE PERSONALIZADO”
+
+10. CIERRE EMOCIONAL FINAL
+Centered text, serif:
+“El tiempo va a pasar igual.
+La diferencia es desde qué frecuencia lo atraviesas.”
+
+––––––––––––––––
+TECH & UX NOTES
+––––––––––––––––
+• Must be fully responsive
+• Mobile-first spacing
+• No animations that break calm feeling
+• Soft transitions only
+• Respect existing color tokens
+• Reuse button styles already in the site
+• Accessibility: readable contrast, tap-friendly buttons
