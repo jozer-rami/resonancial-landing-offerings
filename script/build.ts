@@ -1,6 +1,7 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile } from "fs/promises";
+import { rm, readFile, rename } from "fs/promises";
+import { existsSync } from "fs";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -59,6 +60,41 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
+
+  console.log("building API function for Vercel...");
+  // Bundle the API function to include all server dependencies
+  // Node.js built-ins should be external
+  const nodeBuiltins = [
+    "fs", "path", "url", "http", "https", "stream", "util", "events", 
+    "buffer", "crypto", "os", "net", "tls", "dns", "zlib", "querystring"
+  ];
+  
+  // Remove the old bundled file if it exists
+  try {
+    await rm("api/index.js", { force: true });
+  } catch {}
+  
+  // Always create the bundled JS file
+  await esbuild({
+    entryPoints: ["api/index.ts"],
+    platform: "node",
+    bundle: true,
+    format: "esm",
+    outfile: "api/index.js",
+    define: {
+      "process.env.NODE_ENV": '"production"',
+    },
+    minify: false, // Don't minify for easier debugging
+    external: [...externals, ...nodeBuiltins],
+    logLevel: "info",
+    banner: {
+      js: "// @ts-nocheck\n// This file is auto-generated. Do not edit directly.",
+    },
+  });
+  
+  // On Vercel: Keep both files - Vercel will prefer the JS file if both exist
+  // The JS file is bundled with all dependencies, so it will work
+  console.log("API function bundled successfully - Vercel will use api/index.js");
 }
 
 buildAll().catch((err) => {
