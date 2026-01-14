@@ -7,24 +7,27 @@ import {
   type NewsletterSubscriber,
   type InsertNewsletterSubscriber,
 } from "@shared/schema";
+import { config } from "./config";
 
 // Initialize database connection with error handling
 let pool: pkg.Pool | null = null;
 let db: ReturnType<typeof drizzle> | null = null;
 
 function getDatabase() {
-  if (!process.env.DATABASE_URL) {
+  if (!config.database.url) {
     throw new Error("DATABASE_URL environment variable is not set");
   }
 
   if (!pool || !db) {
-    console.log("Initializing database connection...");
+    console.log(`Initializing database connection (pool size: ${config.database.poolSize})...`);
     pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      // Serverless-friendly pool configuration
-      max: 1, // Limit connections for serverless
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 10000,
+      connectionString: config.database.url,
+      // Pool size configurable via DB_POOL_SIZE env var
+      // - Serverless (Vercel): Use DB_POOL_SIZE=1
+      // - Persistent (Railway/Render): Use DB_POOL_SIZE=10 (default)
+      max: config.database.poolSize,
+      idleTimeoutMillis: config.database.idleTimeoutMillis,
+      connectionTimeoutMillis: config.database.connectionTimeoutMillis,
     });
 
     // Handle pool errors

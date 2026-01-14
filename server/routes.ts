@@ -3,11 +3,22 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertNewsletterSubscriberSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { config } from "./config";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  // Health check endpoint - used by Railway/Render for health monitoring
+  app.get("/api/health", (_req, res) => {
+    res.json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      environment: config.nodeEnv,
+      version: process.env.npm_package_version || "1.0.0",
+    });
+  });
+
   // Register route with /api prefix
   app.post("/api/newsletter/subscribe", async (req, res) => {
     try {

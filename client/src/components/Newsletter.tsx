@@ -4,6 +4,7 @@ import { Mail, Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { api, ApiError } from "@/lib/api";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
@@ -17,24 +18,16 @@ export function Newsletter() {
     }
 
     setStatus("loading");
-    
+
     try {
-      const response = await fetch("/api/newsletter/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to subscribe");
-      }
-
+      await api.newsletter.subscribe(email);
       setStatus("success");
       setEmail("");
     } catch (error) {
       console.error("Newsletter subscription error:", error);
+      if (error instanceof ApiError) {
+        console.error(`API Error ${error.status}:`, error.data);
+      }
       setStatus("error");
     }
   };
