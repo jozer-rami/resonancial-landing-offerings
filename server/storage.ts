@@ -1,38 +1,40 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { eq } from "drizzle-orm";
+import pkg from "pg";
+const { Pool } = pkg;
+import * as schema from "@shared/schema";
+import {
+  type NewsletterSubscriber,
+  type InsertNewsletterSubscriber,
+} from "@shared/schema";
 
-// modify the interface with any CRUD methods
-// you might need
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const db = drizzle(pool, { schema });
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  subscribeToNewsletter(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
+  getSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DbStorage implements IStorage {
+  async subscribeToNewsletter(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
+    const [newSubscriber] = await db
+      .insert(schema.newsletterSubscribers)
+      .values(subscriber)
+      .returning();
+    return newSubscriber;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
+    const [subscriber] = await db
+      .select()
+      .from(schema.newsletterSubscribers)
+      .where(eq(schema.newsletterSubscribers.email, email));
+    return subscriber;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DbStorage();

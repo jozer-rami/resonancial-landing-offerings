@@ -9,7 +9,7 @@ export function Newsletter() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setStatus("error");
@@ -18,11 +18,25 @@ export function Newsletter() {
 
     setStatus("loading");
     
-    // Mock API call
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to subscribe");
+      }
+
       setStatus("success");
       setEmail("");
-    }, 1500);
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      setStatus("error");
+    }
   };
 
   return (
