@@ -79,7 +79,7 @@ Nuestros servicios:
 • Mapa Resonancial (90 min) - €95 → €85.50
 
 Reserva ahora:
-https://portalresonancial.com
+https://terapiaresonancial.com
 
 💫 Namaste`;
 }

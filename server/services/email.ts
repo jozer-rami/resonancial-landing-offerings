@@ -25,7 +25,7 @@ function getResendConfig(): ResendConfig | null {
   // Use Resend's test email in development, or custom domain in production
   // Note: For production, verify your domain at https://resend.com/domains
   const defaultFromEmail = process.env.NODE_ENV === "production"
-    ? "Portal Resonancial <noreply@portalresonancial.com>"
+    ? "Portal Resonancial <noreply@terapiaresonancial.com>"
     : "Portal Resonancial <onboarding@resend.dev>";
   const fromEmail = process.env.RESEND_FROM_EMAIL || defaultFromEmail;
 
@@ -132,7 +132,7 @@ export function generateDiscountEmailHtml(
               <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td align="center">
-                    <a href="https://portalresonancial.com"
+                    <a href="https://terapiaresonancial.com"
                        style="display: inline-block; background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%); color: #000000; text-decoration: none; padding: 16px 40px; border-radius: 30px; font-size: 16px; font-weight: 600; letter-spacing: 1px;">
                       Reservar mi sesión ahora
                     </a>
@@ -196,7 +196,7 @@ Nuestros servicios:
 • Reconfiguración Frecuencial (60 min) - €70 → €63
 • Mapa Resonancial (90 min) - €95 → €85.50
 
-Reserva ahora: https://portalresonancial.com
+Reserva ahora: https://terapiaresonancial.com
 
 💫 Namaste
 El equipo de Portal Resonancial

@@ -45,11 +45,11 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
-                <a href="mailto:info@portalresonancial.com">info@portalresonancial.com</a>
+                <a href="mailto:info@terapiaresonancial.com">info@terapiaresonancial.com</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="w-4 h-4" />
-                <a href="#" target="_blank" rel="noopener noreferrer">@portalresonancial</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">@terapiaresonancial</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" />

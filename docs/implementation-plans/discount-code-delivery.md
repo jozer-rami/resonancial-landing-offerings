@@ -379,7 +379,7 @@ _10% en tu primera sesión_
 ⏰ Válido hasta: 15 Feb 2026
 
 Reserva ahora:
-https://portalresonancial.com/reservar?code=DISC-X8Y9-Z2W3
+https://terapiaresonancial.com/reservar?code=DISC-X8Y9-Z2W3
 
 💫 Namaste
 ```
@@ -499,7 +499,7 @@ WASENDER_API_KEY=your_wasender_api_key
 
 # Email (Resend) ✅ IMPLEMENTED
 RESEND_API_KEY=re_xxxxx
-RESEND_FROM_EMAIL=noreply@portalresonancial.com  # Optional, requires verified domain
+RESEND_FROM_EMAIL=noreply@terapiaresonancial.com  # Optional, requires verified domain
 ```
 
 ---
