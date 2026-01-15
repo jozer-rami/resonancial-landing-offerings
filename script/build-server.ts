@@ -23,6 +23,7 @@ const bundledDeps = [
   "passport",
   "passport-local",
   "pg",
+  "twilio",
   "zod",
   "zod-validation-error",
 ];

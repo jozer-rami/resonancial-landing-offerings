@@ -383,40 +383,42 @@ https://portalresonancial.com/reservar?code=DISC-X8Y9-Z2W3
 
 ## Implementation Phases
 
-### Phase 1: Email Delivery (MVP) - Week 1
+### Phase 1: WhatsApp Delivery (MVP) - Week 1
 
 **Tasks:**
-1. [ ] Set up Resend account and API key
-2. [ ] Create discount_codes database table
+1. [ ] Create discount_codes database table
+2. [ ] Add phone field to newsletter_subscribers schema
 3. [ ] Implement code generation service
-4. [ ] Create email template with React Email
-5. [ ] Update newsletter subscription endpoint
-6. [ ] Trigger email on successful subscription
-7. [ ] Update Newsletter component success state to show code
-8. [ ] Add code validation endpoint
-9. [ ] Write unit tests
+4. [ ] Set up Twilio WhatsApp Business account
+5. [ ] Update Newsletter component with channel selection (WhatsApp default)
+6. [ ] Add phone input with country code picker
+7. [ ] Implement WhatsApp sending service
+8. [ ] Update newsletter subscription endpoint
+9. [ ] Add consent checkbox and tracking
+10. [ ] Add code validation endpoint
+11. [ ] Update Newsletter component success state to show code
 
 **Deliverables:**
 - Discount codes generated and stored
-- Emails sent via Resend
-- Codes displayed in success state
-
-### Phase 2: WhatsApp Delivery - Week 2
-
-**Tasks:**
-1. [ ] Set up Twilio WhatsApp Business account
-2. [ ] Create WhatsApp message template (requires approval)
-3. [ ] Add phone field to newsletter_subscribers schema
-4. [ ] Update Newsletter component with channel selection
-5. [ ] Add phone input with country code picker
-6. [ ] Implement WhatsApp sending service
-7. [ ] Add consent checkbox and tracking
-8. [ ] Write integration tests
-
-**Deliverables:**
-- WhatsApp option in subscription form
+- WhatsApp option in subscription form (default)
 - Phone number validation
 - WhatsApp messages sent via Twilio
+- Codes displayed in success state
+
+### Phase 2: Email Delivery - Week 2
+
+**Tasks:**
+1. [ ] Set up Resend account and API key
+2. [ ] Create email template with React Email
+3. [ ] Implement email sending service
+4. [ ] Add email as alternative delivery option
+5. [ ] Auto-fallback to email if WhatsApp fails
+6. [ ] Write integration tests
+
+**Deliverables:**
+- Email delivery as alternative channel
+- Automatic fallback mechanism
+- Email templates
 
 ### Phase 3: Redemption & Analytics - Week 3
 
@@ -427,12 +429,14 @@ https://portalresonancial.com/reservar?code=DISC-X8Y9-Z2W3
 4. [ ] Build admin dashboard for code management
 5. [ ] Add code expiration job (cron)
 6. [ ] Implement resend functionality
-7. [ ] Write E2E tests
+7. [ ] Generate codes for existing subscribers (migration)
+8. [ ] Write E2E tests
 
 **Deliverables:**
 - Working code redemption at checkout
 - Analytics tracking
 - Admin visibility
+- Existing subscribers migrated
 
 ---
 
@@ -473,13 +477,15 @@ TWILIO_WHATSAPP_NUMBER=+14155238886
 
 ---
 
-## Open Questions
+## Decisions (Resolved)
 
-1. **Discount Value:** Should all codes be 10%, or variable based on campaign?
-2. **Code Expiration:** 30 days is proposed - confirm with business
-3. **Code Reuse:** One-time use only, or allow multiple uses per code?
-4. **WhatsApp Fallback:** What if WhatsApp fails? Auto-fallback to email?
-5. **Existing Subscribers:** Should we generate codes for users who already subscribed?
+| Question | Decision |
+|----------|----------|
+| **Discount Value** | Fixed 10% for all codes |
+| **Code Expiration** | 30 days from generation |
+| **Code Reuse** | One-time use only |
+| **WhatsApp Fallback** | Yes, auto-fallback to email if WhatsApp fails |
+| **Existing Subscribers** | Yes, generate unique codes for all existing subscribers |
 
 ---
 

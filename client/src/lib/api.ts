@@ -87,12 +87,49 @@ export async function apiClient<T>(
 export interface NewsletterSubscriber {
   id: string;
   email: string;
+  phone?: string;
+  phoneCountryCode?: string;
+  contactPreference: 'email' | 'whatsapp';
   subscribedAt: string;
+}
+
+export interface DiscountCode {
+  code: string;
+  value: string;
+  expiresAt: string;
+  deliveryChannel: 'email' | 'whatsapp';
+  deliveryStatus: 'pending' | 'sent' | 'failed';
+  redeemed?: boolean;
+}
+
+export interface NewsletterSubscribeRequest {
+  email: string;
+  contactPreference?: 'email' | 'whatsapp';
+  phone?: string;
+  phoneCountryCode?: string;
+  consentWhatsapp?: boolean;
+  consentEmail?: boolean;
 }
 
 export interface NewsletterSubscribeResponse {
   message: string;
   subscriber?: NewsletterSubscriber;
+  discountCode?: DiscountCode;
+}
+
+export interface DiscountCodeValidateResponse {
+  valid: boolean;
+  code?: string;
+  type?: string;
+  value?: number;
+  expiresAt?: string;
+  error?: string;
+}
+
+export interface DiscountCodeRedeemResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
 }
 
 export interface HealthResponse {
@@ -111,12 +148,35 @@ export const api = {
    */
   newsletter: {
     /**
-     * Subscribe an email to the newsletter
+     * Subscribe to the newsletter with optional contact preference
      */
-    subscribe: (email: string): Promise<NewsletterSubscribeResponse> =>
+    subscribe: (data: NewsletterSubscribeRequest): Promise<NewsletterSubscribeResponse> =>
       apiClient<NewsletterSubscribeResponse>('/api/newsletter/subscribe', {
         method: 'POST',
-        body: { email },
+        body: data,
+      }),
+  },
+
+  /**
+   * Discount code endpoints
+   */
+  discountCodes: {
+    /**
+     * Validate a discount code
+     */
+    validate: (code: string): Promise<DiscountCodeValidateResponse> =>
+      apiClient<DiscountCodeValidateResponse>('/api/discount-codes/validate', {
+        method: 'POST',
+        body: { code },
+      }),
+
+    /**
+     * Redeem a discount code
+     */
+    redeem: (code: string, orderId: string): Promise<DiscountCodeRedeemResponse> =>
+      apiClient<DiscountCodeRedeemResponse>('/api/discount-codes/redeem', {
+        method: 'POST',
+        body: { code, orderId },
       }),
   },
 
