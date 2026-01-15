@@ -5,6 +5,15 @@ import { serveStatic } from "./static";
 import { createServer } from "http";
 import { config, validateConfig } from "./config";
 
+// Handle uncaught errors to prevent silent crashes
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
 // Validate configuration at startup
 validateConfig();
 
@@ -108,8 +117,9 @@ app.use((req, res, next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
+    log(`Error: ${message} (${status})`);
+    console.error(err);
     res.status(status).json({ message });
-    throw err;
   });
 
   // Setup static file serving or Vite dev server
