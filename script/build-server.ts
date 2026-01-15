@@ -87,7 +87,7 @@ async function buildServer() {
   });
 
   console.log("\n✅ Server built successfully: dist/server.cjs");
-  console.log("   Run with: npm run start:server");
+  console.log("   Run with: npm run start");
 }
 
 buildServer().catch((err) => {
