@@ -17,6 +17,7 @@ import {
   updateDeliveryStatus,
 } from "./services/discount-code";
 import { sendDiscountCodeViaWhatsApp } from "./services/whatsapp";
+import { sendDiscountCodeViaEmail } from "./services/email";
 
 // Initialize database connection with error handling
 let pool: pkg.Pool | null = null;
@@ -143,15 +144,38 @@ export class DbStorage implements IStorage {
         await updateDeliveryStatus(discountCode.id, "sent");
       } else {
         console.error("Failed to send WhatsApp:", result.error);
-        // TODO: Fallback to email in Phase 2
-        await updateDeliveryStatus(discountCode.id, "failed");
+        // Auto-fallback to email
+        console.log("[Fallback] Attempting email delivery for:", subscriber.email);
+        const emailResult = await sendDiscountCodeViaEmail(
+          subscriber.email,
+          discountCode.code,
+          discountCode.expiresAt
+        );
+        if (emailResult.success) {
+          deliveryStatus = "sent";
+          await updateDeliveryStatus(discountCode.id, "sent");
+          console.log("[Fallback] Email sent successfully");
+        } else {
+          console.error("Failed to send email fallback:", emailResult.error);
+          await updateDeliveryStatus(discountCode.id, "failed");
+        }
       }
     } else if (subscriber.contactPreference === "email") {
-      // TODO: Implement email delivery in Phase 2
-      console.log("[Email] Would send discount code to:", subscriber.email);
-      // For now, mark as sent (mock)
-      deliveryStatus = "sent";
-      await updateDeliveryStatus(discountCode.id, "sent");
+      // Send discount code via email using Resend
+      const emailResult = await sendDiscountCodeViaEmail(
+        subscriber.email,
+        discountCode.code,
+        discountCode.expiresAt
+      );
+
+      if (emailResult.success) {
+        deliveryStatus = "sent";
+        await updateDeliveryStatus(discountCode.id, "sent");
+        console.log("[Email] Discount code sent to:", subscriber.email);
+      } else {
+        console.error("Failed to send email:", emailResult.error);
+        await updateDeliveryStatus(discountCode.id, "failed");
+      }
     }
 
     return {
