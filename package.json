@@ -13,7 +13,8 @@
     "build": "tsx script/build-server.ts",
     "build:full": "tsx script/build.ts",
     "build:client": "vite build",
-    "start": "NODE_ENV=production node dist/server.cjs",
+    "start": "NODE_ENV=production node --env-file=.env dist/server.cjs",
+    "start:prod": "NODE_ENV=production node dist/server.cjs",
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
