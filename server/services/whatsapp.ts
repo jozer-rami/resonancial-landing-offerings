@@ -1,16 +1,14 @@
 /**
  * WhatsApp Service
  *
- * Sends messages via Twilio WhatsApp API.
- * Fallback to console logging in development if Twilio is not configured.
+ * Sends messages via WaSender API.
+ * Fallback to console logging in development if WaSender is not configured.
  */
 
 import { config } from "../config";
 
-interface WhatsAppConfig {
-  accountSid: string;
-  authToken: string;
-  fromNumber: string;
+interface WaSenderConfig {
+  apiKey: string;
 }
 
 interface SendMessageResult {
@@ -19,38 +17,37 @@ interface SendMessageResult {
   error?: string;
 }
 
-// Twilio configuration from environment
-function getTwilioConfig(): WhatsAppConfig | null {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const fromNumber = process.env.TWILIO_WHATSAPP_NUMBER;
+// WaSender configuration from environment
+function getWaSenderConfig(): WaSenderConfig | null {
+  const apiKey = process.env.WASENDER_API_KEY;
 
-  if (!accountSid || !authToken || !fromNumber) {
+  if (!apiKey) {
     return null;
   }
 
-  return { accountSid, authToken, fromNumber };
+  return { apiKey };
 }
 
 /**
- * Format phone number for WhatsApp (E.164 format)
+ * Format phone number for WhatsApp (E.164 format without +)
+ * WaSender expects the phone number without the + prefix
  */
 export function formatPhoneForWhatsApp(phone: string, countryCode: string): string {
   // Remove all non-digit characters
   const cleanPhone = phone.replace(/\D/g, "");
   const cleanCountryCode = countryCode.replace(/\D/g, "");
 
-  // Combine country code and phone
-  return `+${cleanCountryCode}${cleanPhone}`;
+  // Combine country code and phone (without + for WaSender)
+  return `${cleanCountryCode}${cleanPhone}`;
 }
 
 /**
  * Validate phone number format
  */
 export function validatePhoneNumber(phone: string): boolean {
-  // Basic E.164 validation: + followed by 10-15 digits
-  const e164Pattern = /^\+[1-9]\d{9,14}$/;
-  return e164Pattern.test(phone);
+  // Validate: 10-15 digits (without + prefix for WaSender)
+  const pattern = /^[1-9]\d{9,14}$/;
+  return pattern.test(phone);
 }
 
 /**
@@ -88,16 +85,16 @@ https://portalresonancial.com
 }
 
 /**
- * Send WhatsApp message via Twilio
+ * Send WhatsApp message via WaSender API
  */
 export async function sendWhatsAppMessage(
   to: string,
   message: string
 ): Promise<SendMessageResult> {
-  const twilioConfig = getTwilioConfig();
+  const wasenderConfig = getWaSenderConfig();
 
-  // If Twilio is not configured, log to console in development
-  if (!twilioConfig) {
+  // If WaSender is not configured, log to console in development
+  if (!wasenderConfig) {
     if (config.isDevelopment) {
       console.log("\n📱 [WhatsApp Mock] Message would be sent to:", to);
       console.log("Message:", message);
@@ -110,26 +107,42 @@ export async function sendWhatsAppMessage(
 
     return {
       success: false,
-      error: "WhatsApp service not configured (missing Twilio credentials)",
+      error: "WhatsApp service not configured (missing WASENDER_API_KEY)",
     };
   }
 
   try {
-    // Dynamically import Twilio to avoid issues if not installed
-    const twilio = await import("twilio");
-    const client = twilio.default(twilioConfig.accountSid, twilioConfig.authToken);
+    // WaSender API expects 'to' in E.164 format with + prefix
+    const phoneWithPrefix = to.startsWith("+") ? to : `+${to}`;
 
-    const response = await client.messages.create({
-      from: `whatsapp:${twilioConfig.fromNumber}`,
-      to: `whatsapp:${to}`,
-      body: message,
+    const response = await fetch("https://www.wasenderapi.com/api/send-message", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${wasenderConfig.apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: phoneWithPrefix,
+        text: message,
+      }),
     });
 
-    console.log(`[WhatsApp] Message sent successfully. SID: ${response.sid}`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      const errorMessage = data.message || data.error || `HTTP ${response.status}`;
+      console.error("[WhatsApp] WaSender API error:", errorMessage);
+      return {
+        success: false,
+        error: errorMessage,
+      };
+    }
+
+    console.log(`[WhatsApp] Message sent successfully via WaSender:`, data);
 
     return {
       success: true,
-      messageId: response.sid,
+      messageId: data.messageId || data.id || `wasender-${Date.now()}`,
     };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
