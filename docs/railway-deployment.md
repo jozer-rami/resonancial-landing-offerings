@@ -25,6 +25,7 @@ Set these in the Railway dashboard under **Variables**:
 | `API_ONLY` | `true` | Skips static file serving (frontend served by Vercel) |
 | `DATABASE_URL` | `postgresql://postgres.xxx:xxx@aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=no-verify` | Supabase Pooler connection string |
 | `PORT` | `8080` | Port the server listens on (auto-assigned by Railway) |
+| `WASENDER_API_KEY` | `your_api_key` | WaSender API key for WhatsApp delivery |
 
 > **Important**: Use Supabase's **Pooler URL** (not direct connection) to avoid IPv6 connectivity issues.
 
@@ -74,7 +75,9 @@ The server build script (`script/build-server.ts`) creates a bundled server at `
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/health` | GET | Health check (used by Railway) |
-| `/api/newsletter/subscribe` | POST | Newsletter subscription |
+| `/api/newsletter/subscribe` | POST | Newsletter subscription with discount code delivery |
+| `/api/discount-codes/validate` | POST | Validate a discount code |
+| `/api/discount-codes/redeem` | POST | Redeem a discount code |
 
 ### Health Check Response
 
