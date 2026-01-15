@@ -52,6 +52,11 @@ export const config = {
     // Base path for all API routes
     basePath: '/api',
   },
+
+  // Deployment mode
+  // Set API_ONLY=true when running backend separately (Railway/Render)
+  // Frontend is served by Vercel in this case
+  apiOnly: process.env.API_ONLY === 'true',
 } as const;
 
 /**

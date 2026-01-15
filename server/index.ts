@@ -112,10 +112,11 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (config.isProduction) {
+  // Setup static file serving or Vite dev server
+  // Skip if API_ONLY mode (frontend served by Vercel)
+  if (config.apiOnly) {
+    log("Running in API-only mode (frontend served separately)");
+  } else if (config.isProduction) {
     serveStatic(app);
   } else {
     const { setupVite } = await import("./vite");
