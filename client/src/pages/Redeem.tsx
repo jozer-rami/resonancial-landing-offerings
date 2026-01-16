@@ -62,8 +62,12 @@ export default function Redeem() {
 
                <form onSubmit={handleRedeem} className="space-y-4">
                  <div className="space-y-2 text-left">
-                   <Input 
-                     placeholder="Ej. GIFT-2026-X8Y9" 
+                   <label htmlFor="gift-code" className="sr-only">Código de regalo</label>
+                   <Input
+                     id="gift-code"
+                     placeholder="Ej. GIFT-2026-X8Y9…"
+                     autoComplete="off"
+                     spellCheck={false}
                      value={code}
                      onChange={(e) => {
                        setCode(e.target.value.toUpperCase());

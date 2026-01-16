@@ -1,23 +1,43 @@
-import React, { useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Sparkles, CheckCircle2, Calendar, X, ChevronDown, Book, Moon, Star, Users, XCircle } from "lucide-react";
+import React, { useState, memo } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { CheckCircle2, X, Moon, Star, Users, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
-import logoResonancial from "@assets/logo_resonancial_blanco.png";
 import logoSymbol from "@assets/logo_1767647555211.png";
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
-import detoxGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.24.34_1768095023047.gif";
-import reconfiguracionGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.26.27_1768148954010.gif";
-import mapaGif from "@assets/WhatsApp_GIF_2026-01-10_at_21.28.35_1768149189535.gif";
 import detoxModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_1768149598199.jpeg";
 import reconfigModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(1)_1768149609721.jpeg";
 import mapaModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(2)_1768149615012.jpeg";
-
-import WhatsApp_GIF_2026_01_10_at_21_24_51 from "@assets/WhatsApp GIF 2026-01-10 at 21.24.51.gif";
 import almanaqueImg from "@assets/POST_ALMANAQUE_1768269403742.png";
+
+// Video assets (converted from GIFs - 92% size reduction)
+const videoAssets = {
+  detox: { webm: "/videos/detox.webm", mp4: "/videos/detox.mp4" },
+  reconfiguracion: { webm: "/videos/reconfiguracion.webm", mp4: "/videos/reconfiguracion.mp4" },
+  mapa: { webm: "/videos/mapa.webm", mp4: "/videos/mapa.mp4" },
+  heroAnimation: { webm: "/videos/hero-animation.webm", mp4: "/videos/hero-animation.mp4" },
+};
+
+// Optimized video component for course cards
+const VideoBackground = memo(({ videoKey, className = "" }: { videoKey: keyof typeof videoAssets, className?: string }) => {
+  const video = videoAssets[videoKey];
+  return (
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      className={className}
+    >
+      <source src={video.webm} type="video/webm" />
+      <source src={video.mp4} type="video/mp4" />
+    </video>
+  );
+});
+VideoBackground.displayName = "VideoBackground";
 
 // --- Course Data ---
 const courseDetails = {
@@ -59,59 +79,65 @@ const courseDetails = {
   }
 };
 
-// --- Reusable Components ---
+// --- Reusable Components with Memoization & Reduced Motion Support ---
 
-const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
+const FadeIn = memo(({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay, ease: "easeOut" }}
       className={className}
-      style={{ willChange: "transform, opacity" }}
+      style={{ willChange: shouldReduceMotion ? "auto" : "transform, opacity" }}
     >
       {children}
     </motion.div>
   );
-};
+});
+FadeIn.displayName = "FadeIn";
 
-const SectionFadeIn = ({ children, className = "", id }: { children: React.ReactNode, className?: string, id?: string }) => {
+const SectionFadeIn = memo(({ children, className = "", id }: { children: React.ReactNode, className?: string, id?: string }) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 30 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={className}
-      style={{ willChange: "transform, opacity" }}
+      style={{ willChange: shouldReduceMotion ? "auto" : "transform, opacity" }}
     >
       {children}
     </motion.section>
   );
-};
+});
+SectionFadeIn.displayName = "SectionFadeIn";
 
-const CourseModal = ({ course, open, onClose }: { course: typeof courseDetails.detox | null, open: boolean, onClose: () => void }) => {
+const CourseModal = memo(({ course, open, onClose }: { course: typeof courseDetails.detox | null, open: boolean, onClose: () => void }) => {
   if (!course) return null;
-  
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="course-modal-description">
         <div className="relative">
           <div className="h-48 md:h-64 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+            <img src={course.image} alt={course.title} width={768} height={256} loading="lazy" className="w-full h-full object-cover" />
           </div>
           
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
             <X className="w-5 h-5" />
           </DialogClose>
-          
+
           <div className="p-8 md:p-12 -mt-12 relative z-20">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">{course.subtitle}</span>
             <h2 className="text-3xl md:text-4xl font-heading text-white mb-2">{course.title}</h2>
-            <p className="text-muted-foreground font-light mb-8">{course.tagline}</p>
+            <p id="course-modal-description" className="text-muted-foreground font-light mb-8">{course.tagline}</p>
             
             <div className="space-y-8">
               <div>
@@ -177,26 +203,27 @@ const CourseModal = ({ course, open, onClose }: { course: typeof courseDetails.d
       </DialogContent>
     </Dialog>
   );
-};
+});
+CourseModal.displayName = "CourseModal";
 
-const AlmanaqueModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
+const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => void }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="almanaque-modal-description">
         <div className="relative">
           <div className="h-64 md:h-80 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" className="w-full h-full object-cover object-top" />
+            <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" width={768} height={320} loading="lazy" className="w-full h-full object-cover object-top" />
           </div>
-          
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+
+          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
             <X className="w-5 h-5" />
           </DialogClose>
-          
+
           <div className="p-8 md:p-12 -mt-12 relative z-20">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">Objeto Ritual Anual</span>
             <h2 className="text-3xl md:text-4xl font-heading text-white mb-2">Almanaque Ritual Resonancial 2026™️</h2>
-            <p className="text-muted-foreground font-light mb-8">Rituales personalizados para habitar el tiempo desde la conciencia</p>
+            <p id="almanaque-modal-description" className="text-muted-foreground font-light mb-8">Rituales personalizados para habitar el tiempo desde la conciencia</p>
             
             <div className="space-y-8">
               {/* ¿Qué es? */}
@@ -373,17 +400,26 @@ const AlmanaqueModal = ({ open, onClose }: { open: boolean, onClose: () => void 
       </DialogContent>
     </Dialog>
   );
-};
+});
+AlmanaqueModal.displayName = "AlmanaqueModal";
 
-const CourseCard = ({ title, subtitle, description, price, image, courseKey, delay, onOpenModal }: any) => {
+const CourseCard = memo(({ title, subtitle, description, price, videoKey, courseKey, delay, onOpenModal }: {
+  title: string;
+  subtitle: string;
+  description: string;
+  price: string;
+  videoKey: keyof typeof videoAssets;
+  courseKey: keyof typeof courseDetails;
+  delay: number;
+  onOpenModal: (key: keyof typeof courseDetails) => void;
+}) => {
   return (
     <FadeIn delay={delay} className="group h-full">
       <div className="h-full bg-zinc-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
         <div className="relative h-64 overflow-hidden">
           <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-          <img 
-            src={image} 
-            alt={title} 
+          <VideoBackground
+            videoKey={videoKey}
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
           />
         </div>
@@ -412,7 +448,8 @@ const CourseCard = ({ title, subtitle, description, price, image, courseKey, del
       </div>
     </FadeIn>
   );
-};
+});
+CourseCard.displayName = "CourseCard";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -432,18 +469,21 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
+    <div id="main-content" className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
       <Navbar />
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         {/* Parallax Background */}
-        <motion.div 
+        <motion.div
           style={{ y: yHero }}
           className="absolute inset-0 z-0 will-change-transform"
         >
-          <img 
-            src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/1e4636f01fb53f80b0d9d66fc6885150.jpg" 
-            alt="Portal Resonancial Background" 
+          <img
+            src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/1e4636f01fb53f80b0d9d66fc6885150.jpg"
+            alt="Portal Resonancial Background"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
             className="w-full h-[120%] object-cover object-center"
           />
         </motion.div>
@@ -469,14 +509,14 @@ export default function Home() {
             className="flex flex-col items-center gap-8"
           >
             {/* Symbol */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="w-24 h-24 relative flex items-center justify-center"
             >
-              <div className="absolute inset-0 border border-primary/20 rounded-full animate-[ping_3s_ease-in-out_infinite] opacity-30" />
-              <img src={logoSymbol} alt="Símbolo" className="w-full h-full object-contain p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
+              <div className="absolute inset-0 border border-primary/20 rounded-full opacity-30 motion-safe:animate-[ping_3s_ease-in-out_infinite]" />
+              <img src={logoSymbol} alt="Portal Resonancial" width={96} height={96} className="w-full h-full object-contain p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
             </motion.div>
 
             {/* Main Logo Text */}
@@ -486,9 +526,11 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="w-full max-w-lg mx-auto"
             >
-               <img 
-                 src={logo_resonancial_blanco} 
-                 alt="Terapia Resonancial" 
+               <img
+                 src={logo_resonancial_blanco}
+                 alt="Terapia Resonancial"
+                 width={512}
+                 height={128}
                  className="w-full h-auto"
                />
             </motion.div>
@@ -555,34 +597,34 @@ export default function Home() {
           </FadeIn>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <CourseCard 
+            <CourseCard
               title="Detox Frecuencial"
               subtitle="Liberación"
               description="Liberación de resistencias y limpieza energética. Experiencia para soltar bloqueos y cargas que impiden elevar tu frecuencia. Ideal si sientes fatiga vibracional."
               price="500 Bs"
-              image={detoxGif}
+              videoKey="detox"
               courseKey="detox"
               onOpenModal={handleOpenModal}
               delay={0}
             />
-            
-            <CourseCard 
+
+            <CourseCard
               title="Reconfiguración"
               subtitle="Estabilidad"
               description="Ajuste profundo de tu vibración base. Activación diseñada para reordenar tu sistema y entrenarlo a sostener nuevas frecuencias de coherencia."
               price="500 Bs"
-              image={reconfiguracionGif}
+              videoKey="reconfiguracion"
               courseKey="reconfiguracion"
               onOpenModal={handleOpenModal}
               delay={0.1}
             />
-            
-            <CourseCard 
+
+            <CourseCard
               title="Mapa Resonancial"
               subtitle="Visión Encarnada"
               description="Activación de la visión encarnada del 2026. Alineación profunda donde mente, cuerpo y espíritu resuenan con la realidad que deseas habitar."
               price="500 Bs"
-              image={mapaGif}
+              videoKey="mapa"
               courseKey="mapa"
               onOpenModal={handleOpenModal}
               delay={0.2}
@@ -598,11 +640,10 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="bg-zinc-900/40 border border-white/5 rounded-3xl overflow-hidden backdrop-blur-sm">
             <div className="grid lg:grid-cols-2">
-              {/* Image Side */}
+              {/* Video Side */}
               <div className="relative min-h-[400px] lg:h-full">
-                <img 
-                  src={WhatsApp_GIF_2026_01_10_at_21_24_51} 
-                  alt="Pack Completo" 
+                <VideoBackground
+                  videoKey="heroAnimation"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute top-6 left-6">
@@ -681,9 +722,12 @@ export default function Home() {
             <FadeIn className="order-2 lg:order-1">
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
-                <img 
-                  src={almanaqueImg} 
-                  alt="Almanaque Ritual Resonancial 2026" 
+                <img
+                  src={almanaqueImg}
+                  alt="Almanaque Ritual Resonancial 2026"
+                  width={600}
+                  height={800}
+                  loading="lazy"
                   className="relative w-full rounded-2xl shadow-2xl shadow-black/50 border border-white/10"
                 />
               </div>
