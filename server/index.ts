@@ -1,10 +1,61 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import { config, validateConfig } from "./config";
+
+// Handle uncaught errors to prevent silent crashes
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+// Validate configuration at startup
+validateConfig();
 
 const app = express();
 const httpServer = createServer(app);
+
+// CORS Configuration - Allow cross-origin requests from frontend deployments
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, Postman, etc.)
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      // Allow explicitly configured origins
+      if (config.cors.origins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow dev origins in development mode
+      if (config.isDevelopment && config.cors.devOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow deployment platform patterns (*.vercel.app, *.replit.dev, etc.)
+      const isAllowedPattern = config.cors.allowedPatterns.some((pattern) =>
+        pattern.test(origin)
+      );
+      if (isAllowedPattern) {
+        return callback(null, true);
+      }
+
+      // Reject other origins
+      console.warn(`CORS blocked origin: ${origin}`);
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 declare module "http" {
   interface IncomingMessage {
@@ -66,33 +117,30 @@ app.use((req, res, next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
+    log(`Error: ${message} (${status})`);
+    console.error(err);
     res.status(status).json({ message });
-    throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (process.env.NODE_ENV === "production") {
+  // Setup static file serving or Vite dev server
+  // Skip if API_ONLY mode (frontend served by Vercel)
+  if (config.apiOnly) {
+    log("Running in API-only mode (frontend served separately)");
+  } else if (config.isProduction) {
     serveStatic(app);
   } else {
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || "5000", 10);
+  // Start server on configured port
   httpServer.listen(
     {
-      port,
+      port: config.port,
       host: "0.0.0.0",
-      reusePort: true,
     },
     () => {
-      log(`serving on port ${port}`);
+      log(`Server running on port ${config.port} (${config.nodeEnv})`);
     },
   );
 })();

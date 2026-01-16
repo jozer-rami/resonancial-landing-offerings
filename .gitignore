@@ -4,3 +4,15 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+.vercel
+
+# Environment files (keep .env.example)
+.env
+.env.local
+.env.*.local
+client/.env
+client/.env.local
+client/.env.*.local
+
+# Legacy Vercel serverless function (no longer needed with split architecture)
+api/index.js

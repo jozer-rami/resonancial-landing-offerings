@@ -1,5 +1,5 @@
-modules = ["nodejs-20", "web", "postgresql-16"]
-run = "npm run dev"
+modules = ["nodejs-20", "web"]
+run = "npm run dev:client"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
@@ -9,22 +9,16 @@ channel = "stable-24_05"
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 5001
-externalPort = 3001
-
-[[ports]]
-localPort = 5002
-externalPort = 3000
-
 [env]
 PORT = "5000"
+# Point to staging backend for frontend-only development
+# Update this URL after deploying backend to Railway
+VITE_API_URL = "https://resonancial-api-staging.up.railway.app"
 
 [deployment]
-deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
+deploymentTarget = "static"
+build = ["npm", "run", "build:client"]
 publicDir = "dist/public"
-run = ["node", "./dist/index.cjs"]
 
 [workflows]
 runButton = "Project"
@@ -36,16 +30,16 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Start application"
+args = "Start Frontend"
 
 [[workflows.workflow]]
-name = "Start application"
+name = "Start Frontend"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run dev:client"
 waitForPort = 5000
 
 [agent]
-mockupState = "FULLSTACK"
+mockupState = "FRONTEND"
