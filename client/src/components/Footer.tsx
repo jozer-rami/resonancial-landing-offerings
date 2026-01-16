@@ -34,7 +34,7 @@ export function Footer() {
                 <a href="#pack" className="text-muted-foreground hover:text-primary transition-colors">Pack Completo</a>
               </li>
               <li>
-                <a href="#reto" className="text-muted-foreground hover:text-primary transition-colors">Reto 21 Días</a>
+                <a href="#almanaque" className="text-muted-foreground hover:text-primary transition-colors">Almanaque Ritual</a>
               </li>
             </ul>
           </div>
@@ -49,11 +49,11 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="w-4 h-4" aria-hidden="true" />
-                <a href="#" target="_blank" rel="noopener noreferrer">@terapiaresonancial</a>
+                <a href="https://www.instagram.com/terapiaresonancial/" target="_blank" rel="noopener noreferrer">@terapiaresonancial</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" aria-hidden="true" />
-                <a href="https://wa.me/34640919319">+34 640 919 319</a>
+                <a href="https://wa.me/59169703379">+591 69703379</a>
               </li>
             </ul>
           </div>

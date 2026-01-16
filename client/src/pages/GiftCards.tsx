@@ -36,7 +36,7 @@ Para: ${formData.toName}
 Mensaje: ${formData.message}`;
 
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/34640919319?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/59169703379?text=${encodedText}`, '_blank');
   };
 
   return (

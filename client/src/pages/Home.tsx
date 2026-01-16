@@ -50,7 +50,7 @@ const courseDetails = {
     activates: ["Limpieza del campo energético", "Sensación de ligereza y claridad", "Mayor disponibilidad interna para el cambio", "Preparación real para la reconfiguración"],
     experience: ["Lectura del estado frecuencial actual", "Identificación de resistencias activas", "Limpieza energética guiada", "Liberación frecuencial consciente", "Cierre e integración"],
     quote: "No puedes vibrar alto con cargas del pasado.",
-    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20DETOX%20FRECUENCIAL",
+    whatsapp: "https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20DETOX%20FRECUENCIAL",
     image: detoxModalImg
   },
   reconfiguracion: {
@@ -62,7 +62,7 @@ const courseDetails = {
     activates: ["Coherencia interna", "Estabilidad energética", "Mayor claridad y presencia", "Capacidad de integrar nuevas realidades"],
     experience: ["Diagnóstico de la vibración base", "Ajuste frecuencial profundo", "Alineación mente–emoción–energía", "Anclaje de la nueva frecuencia", "Integración consciente"],
     quote: "No se trata de subir la frecuencia, sino de integrarla y sostenerla.",
-    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20RECONFIGURACIÓN%20FRECUENCIAL",
+    whatsapp: "https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20RECONFIGURACIÓN%20FRECUENCIAL",
     image: reconfigModalImg
   },
   mapa: {
@@ -74,7 +74,7 @@ const courseDetails = {
     activates: ["Visión clara y sostenida", "Sensación de dirección y propósito", "Alineación con la energía del 2026", "Capacidad de crear sin resistencia"],
     experience: ["Lectura del estado resonancial", "Conexión con la frecuencia del nuevo ciclo", "Construcción simbólica del Mapa Resonancial", "Anclaje de la visión en el campo energético", "Integración cuerpo–mente–espíritu"],
     quote: "Primero vibra la realidad. Luego créala y habitala.",
-    whatsapp: "https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20MAPA%20RESONANCIAL",
+    whatsapp: "https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20MAPA%20RESONANCIAL",
     image: mapaModalImg
   }
 };
@@ -389,7 +389,7 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
                   </div>
                 </div>
                 <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all">
-                  <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026" target="_blank" rel="noreferrer">
+                  <a href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026" target="_blank" rel="noreferrer">
                     Quiero Mi Almanaque
                   </a>
                 </Button>
@@ -698,13 +698,13 @@ export default function Home() {
                     El pack es la forma recomendada de vivir el proceso completo y sostener el cambio.
                   </p>
 
-                  <Button 
+                  <Button
                     asChild
                     variant="outline"
                     size="lg"
                     className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-8 py-6 text-xs uppercase tracking-widest transition-all"
                   >
-                    <a href="https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL">
+                    <a href="https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL">
                       Obtener Pack Completo
                     </a>
                   </Button>
@@ -769,12 +769,12 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
-                  <Button 
+                  <Button
                     asChild
                     size="lg"
                     className="bg-primary text-black hover:bg-primary/90 rounded-full px-8 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
                   >
-                    <a href="https://wa.me/34640919319?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
+                    <a href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
                       Quiero Mi Almanaque
                     </a>
                   </Button>

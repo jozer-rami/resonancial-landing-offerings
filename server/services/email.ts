@@ -115,15 +115,15 @@ export function generateDiscountEmailHtml(
                 <table role="presentation" style="width: 100%; border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px 0; color: #b0b0b0; font-size: 14px;">• Detox Frecuencial (45 min)</td>
-                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">€55 → €49.50</td>
+                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">500 Bs → 450 Bs</td>
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #b0b0b0; font-size: 14px;">• Reconfiguración Frecuencial (60 min)</td>
-                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">€70 → €63</td>
+                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">500 Bs → 450 Bs</td>
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #b0b0b0; font-size: 14px;">• Mapa Resonancial (90 min)</td>
-                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">€95 → €85.50</td>
+                    <td style="padding: 8px 0; color: #d4af37; font-size: 14px; text-align: right;">500 Bs → 450 Bs</td>
                   </tr>
                 </table>
               </div>
@@ -192,9 +192,9 @@ ${code}
 Válido hasta: ${formattedDate}
 
 Nuestros servicios:
-• Detox Frecuencial (45 min) - €55 → €49.50
-• Reconfiguración Frecuencial (60 min) - €70 → €63
-• Mapa Resonancial (90 min) - €95 → €85.50
+• Detox Frecuencial (45 min) - 500 Bs → 450 Bs
+• Reconfiguración Frecuencial (60 min) - 500 Bs → 450 Bs
+• Mapa Resonancial (90 min) - 500 Bs → 450 Bs
 
 Reserva ahora: https://terapiaresonancial.com
 

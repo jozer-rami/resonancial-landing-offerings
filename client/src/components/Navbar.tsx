@@ -97,7 +97,7 @@ export function Navbar() {
             </a>
           ))}
           <Button asChild className="rounded-full bg-primary text-black hover:bg-primary/90 font-medium px-6">
-            <a href="https://wa.me/34640919319" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59169703379" target="_blank" rel="noopener noreferrer">
               Contacto
             </a>
           </Button>
@@ -128,7 +128,7 @@ export function Navbar() {
             </a>
           ))}
            <Button asChild className="w-full rounded-full bg-primary text-black hover:bg-primary/90">
-            <a href="https://wa.me/34640919319" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59169703379" target="_blank" rel="noopener noreferrer">
               Contacto
             </a>
           </Button>

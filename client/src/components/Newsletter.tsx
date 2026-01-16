@@ -21,6 +21,7 @@ interface SubscriptionResult {
 
 // Country codes for Spain and Latin America
 const countryCodes = [
+  { code: "591", country: "Bolivia", flag: "🇧🇴" },
   { code: "34", country: "España", flag: "🇪🇸" },
   { code: "52", country: "México", flag: "🇲🇽" },
   { code: "54", country: "Argentina", flag: "🇦🇷" },
@@ -28,14 +29,13 @@ const countryCodes = [
   { code: "56", country: "Chile", flag: "🇨🇱" },
   { code: "51", country: "Perú", flag: "🇵🇪" },
   { code: "593", country: "Ecuador", flag: "🇪🇨" },
-  { code: "591", country: "Bolivia", flag: "🇧🇴" },
   { code: "1", country: "USA", flag: "🇺🇸" },
 ];
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [countryCode, setCountryCode] = useState("34");
+  const [countryCode, setCountryCode] = useState("591");
   const [contactPreference, setContactPreference] = useState<ContactPreference>("whatsapp");
   const [consentWhatsapp, setConsentWhatsapp] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -167,7 +167,7 @@ export function Newsletter() {
 
                   <Button
                     className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
-                    onClick={() => window.open("https://wa.me/34640919319?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank")}
+                    onClick={() => window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank")}
                   >
                     Reservar ahora con descuento
                   </Button>
@@ -260,7 +260,7 @@ export function Newsletter() {
                           <Input
                             id="phone-number"
                             type="tel"
-                            placeholder="640 919 319…"
+                            placeholder="69703379…"
                             autoComplete="tel"
                             inputMode="numeric"
                             value={phone}
