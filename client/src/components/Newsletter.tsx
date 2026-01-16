@@ -182,9 +182,13 @@ export function Newsletter() {
                   <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-6">
                     {/* Email Input */}
                     <div>
+                      <label htmlFor="newsletter-email" className="sr-only">Correo electrónico</label>
                       <Input
+                        id="newsletter-email"
                         type="email"
-                        placeholder="tu@email.com"
+                        placeholder="tu@email.com…"
+                        autoComplete="email"
+                        spellCheck={false}
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -199,7 +203,7 @@ export function Newsletter() {
 
                     {/* Contact Preference Selection */}
                     <div className="space-y-3">
-                      <p className="text-white/60 text-sm text-left">¿Cómo prefieres recibir tu código?</p>
+                      <p className="text-white/60 text-sm text-left">¿Cómo prefieres recibir tu código de descuento?</p>
                       <div className="flex gap-3">
                         <button
                           type="button"
@@ -239,7 +243,9 @@ export function Newsletter() {
                         className="space-y-4"
                       >
                         <div className="flex gap-2">
+                          <label htmlFor="country-code" className="sr-only">Código de país</label>
                           <select
+                            id="country-code"
                             value={countryCode}
                             onChange={(e) => setCountryCode(e.target.value)}
                             className="bg-black/20 border border-white/10 text-white h-12 rounded-xl px-3 focus:ring-primary/50 focus:border-primary/50"
@@ -250,14 +256,16 @@ export function Newsletter() {
                               </option>
                             ))}
                           </select>
+                          <label htmlFor="phone-number" className="sr-only">Número de teléfono</label>
                           <Input
+                            id="phone-number"
                             type="tel"
-                            placeholder="640 919 319"
+                            placeholder="640 919 319…"
+                            autoComplete="tel"
+                            inputMode="numeric"
                             value={phone}
                             onChange={(e) => {
-                              // Only allow numbers
-                              const value = e.target.value.replace(/\D/g, "");
-                              setPhone(value);
+                              setPhone(e.target.value);
                               if (status === "error") setStatus("idle");
                             }}
                             className={cn(

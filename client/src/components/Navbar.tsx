@@ -11,10 +11,17 @@ export function Navbar() {
   const [location, setLocation] = useLocation();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -72,7 +79,7 @@ export function Navbar() {
           className="flex items-center gap-3 group"
         >
           <div className="relative w-10 h-10 overflow-hidden rounded-full border border-primary/20 bg-black/50 p-1.5 transition-transform duration-300 group-hover:scale-105">
-            <img src={logoSymbol} alt="Logo" className="w-full h-full object-contain" />
+            <img src={logoSymbol} alt="Portal Resonancial" width={40} height={40} className="w-full h-full object-contain" />
           </div>
           
         </a>
@@ -100,8 +107,10 @@ export function Navbar() {
         <button
           className="md:hidden text-white p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
 

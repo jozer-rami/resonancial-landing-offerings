@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-6 md:col-span-2">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full border border-primary/20 p-2">
-                <img src={logoSymbol} alt="Logo" className="w-full h-full object-contain" />
+                <img src={logoSymbol} alt="Portal Resonancial" width={40} height={40} className="w-full h-full object-contain" />
               </div>
               <span className="font-heading text-2xl text-white">PORTAL RESONANCIAL</span>
             </div>
@@ -44,15 +44,15 @@ export function Footer() {
             <h4 className="text-white font-heading text-lg">Contacto</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4" aria-hidden="true" />
                 <a href="mailto:info@terapiaresonancial.com">info@terapiaresonancial.com</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-4 h-4" aria-hidden="true" />
                 <a href="#" target="_blank" rel="noopener noreferrer">@terapiaresonancial</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4" aria-hidden="true" />
                 <a href="https://wa.me/34640919319">+34 640 919 319</a>
               </li>
             </ul>

@@ -6,6 +6,13 @@
 /* Smooth scroll behavior for navigation */
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+/* Touch optimization for interactive elements */
+button, a, [role="button"], input, select, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Reduce motion for users who prefer it */

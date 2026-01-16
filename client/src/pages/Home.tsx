@@ -123,11 +123,11 @@ const CourseModal = memo(({ course, open, onClose }: { course: typeof courseDeta
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0" aria-describedby="course-modal-description">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="course-modal-description">
         <div className="relative">
           <div className="h-48 md:h-64 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <img src={course.image} alt={course.title} loading="lazy" className="w-full h-full object-cover" />
+            <img src={course.image} alt={course.title} width={768} height={256} loading="lazy" className="w-full h-full object-cover" />
           </div>
           
           <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
@@ -209,11 +209,11 @@ CourseModal.displayName = "CourseModal";
 const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => void }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-zinc-950 border-white/10 p-0" aria-describedby="almanaque-modal-description">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="almanaque-modal-description">
         <div className="relative">
           <div className="h-64 md:h-80 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" loading="lazy" className="w-full h-full object-cover object-top" />
+            <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" width={768} height={320} loading="lazy" className="w-full h-full object-cover object-top" />
           </div>
 
           <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
@@ -481,6 +481,8 @@ export default function Home() {
           <img
             src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/1e4636f01fb53f80b0d9d66fc6885150.jpg"
             alt="Portal Resonancial Background"
+            width={1920}
+            height={1080}
             fetchPriority="high"
             className="w-full h-[120%] object-cover object-center"
           />
@@ -507,14 +509,14 @@ export default function Home() {
             className="flex flex-col items-center gap-8"
           >
             {/* Symbol */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="w-24 h-24 relative flex items-center justify-center"
             >
-              <div className="absolute inset-0 border border-primary/20 rounded-full animate-[ping_3s_ease-in-out_infinite] opacity-30" />
-              <img src={logoSymbol} alt="Símbolo" className="w-full h-full object-contain p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
+              <div className="absolute inset-0 border border-primary/20 rounded-full opacity-30 motion-safe:animate-[ping_3s_ease-in-out_infinite]" />
+              <img src={logoSymbol} alt="Portal Resonancial" width={96} height={96} className="w-full h-full object-contain p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
             </motion.div>
 
             {/* Main Logo Text */}
@@ -524,9 +526,11 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="w-full max-w-lg mx-auto"
             >
-               <img 
-                 src={logo_resonancial_blanco} 
-                 alt="Terapia Resonancial" 
+               <img
+                 src={logo_resonancial_blanco}
+                 alt="Terapia Resonancial"
+                 width={512}
+                 height={128}
                  className="w-full h-auto"
                />
             </motion.div>
@@ -721,6 +725,8 @@ export default function Home() {
                 <img
                   src={almanaqueImg}
                   alt="Almanaque Ritual Resonancial 2026"
+                  width={600}
+                  height={800}
                   loading="lazy"
                   className="relative w-full rounded-2xl shadow-2xl shadow-black/50 border border-white/10"
                 />
