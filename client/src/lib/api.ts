@@ -4,6 +4,11 @@
  * Centralized HTTP client for communicating with the backend API.
  * Supports configurable API URL via VITE_API_URL environment variable.
  *
+ * Features:
+ *   - Timeout handling (10s default)
+ *   - Automatic retry with exponential backoff (3 retries)
+ *   - Environment-aware configuration
+ *
  * Usage:
  *   - Local dev (full-stack): VITE_API_URL=http://localhost:5000
  *   - Local dev (frontend only): VITE_API_URL=https://api-staging.railway.app
@@ -12,12 +17,22 @@
  */
 
 const API_URL = import.meta.env.VITE_API_URL || '';
+const DEFAULT_TIMEOUT = 10000; // 10 seconds
+const MAX_RETRIES = 3;
+const RETRY_DELAY_BASE = 1000; // 1 second base delay
+
+// Warn in development if API_URL is not configured
+if (!API_URL && import.meta.env.DEV) {
+  console.warn('[API] VITE_API_URL not configured. API calls may fail.');
+}
 
 export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
-    public data?: unknown
+    public data?: unknown,
+    public isTimeout?: boolean,
+    public isNetworkError?: boolean
   ) {
     super(message);
     this.name = 'ApiError';
@@ -27,16 +42,55 @@ export class ApiError extends Error {
 interface RequestOptions extends Omit<RequestInit, 'body'> {
   params?: Record<string, string>;
   body?: unknown;
+  timeout?: number;
+  retries?: number;
+}
+
+/**
+ * Sleep utility for retry delays
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Fetch with timeout support
+ */
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit,
+  timeout: number
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    return response;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 /**
  * Generic API client function for making HTTP requests
+ * with timeout handling and automatic retry
  */
 export async function apiClient<T>(
   endpoint: string,
   options: RequestOptions = {}
 ): Promise<T> {
-  const { params, body, headers: customHeaders, ...fetchOptions } = options;
+  const {
+    params,
+    body,
+    headers: customHeaders,
+    timeout = DEFAULT_TIMEOUT,
+    retries = MAX_RETRIES,
+    ...fetchOptions
+  } = options;
 
   // Build URL with optional query params
   let url = `${API_URL}${endpoint}`;
@@ -51,33 +105,82 @@ export async function apiClient<T>(
     ...customHeaders,
   };
 
-  // Make request
-  const response = await fetch(url, {
-    ...fetchOptions,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  let lastError: Error | null = null;
 
-  // Parse response
-  let data: unknown;
-  const contentType = response.headers.get('content-type');
-  if (contentType?.includes('application/json')) {
-    data = await response.json();
-  } else {
-    data = await response.text();
+  // Retry loop
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      // Make request with timeout
+      const response = await fetchWithTimeout(
+        url,
+        {
+          ...fetchOptions,
+          headers,
+          body: body ? JSON.stringify(body) : undefined,
+        },
+        timeout
+      );
+
+      // Parse response
+      let data: unknown;
+      const contentType = response.headers.get('content-type');
+      if (contentType?.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+
+      // Handle errors
+      if (!response.ok) {
+        const message =
+          typeof data === 'object' && data !== null && 'message' in data
+            ? String((data as Record<string, unknown>).message)
+            : `API Error: ${response.status}`;
+
+        throw new ApiError(message, response.status, data);
+      }
+
+      return data as T;
+    } catch (error) {
+      lastError = error as Error;
+
+      // Don't retry on client errors (4xx) - only server errors (5xx) and network errors
+      if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
+        throw error;
+      }
+
+      // Handle timeout errors
+      if (error instanceof Error && error.name === 'AbortError') {
+        lastError = new ApiError(
+          'Request timeout - please try again',
+          0,
+          undefined,
+          true
+        );
+      }
+
+      // Handle network errors
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        lastError = new ApiError(
+          'Network error - please check your connection',
+          0,
+          undefined,
+          false,
+          true
+        );
+      }
+
+      // If we have retries left, wait and try again
+      if (attempt < retries) {
+        const delay = RETRY_DELAY_BASE * Math.pow(2, attempt);
+        await sleep(delay);
+        continue;
+      }
+    }
   }
 
-  // Handle errors
-  if (!response.ok) {
-    const message =
-      typeof data === 'object' && data !== null && 'message' in data
-        ? String((data as Record<string, unknown>).message)
-        : `API Error: ${response.status}`;
-
-    throw new ApiError(message, response.status, data);
-  }
-
-  return data as T;
+  // All retries exhausted
+  throw lastError || new ApiError('Unknown error', 0);
 }
 
 // ============================================================================
