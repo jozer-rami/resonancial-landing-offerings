@@ -1,0 +1,140 @@
+{
+  "testimonios": [
+    {
+      "id": "lorena-bremen",
+      "nombre": "Lorena",
+      "ubicacion": "Bremen, Alemania",
+      "pais": "DE",
+      "curso": "Coaching Holístico",
+      "cursoSlug": "coaching-holistico",
+      "texto": "Mi experiencia en coaching holístico fue extra-ordinaria. Digo extraordinaria porque las herramientas que uno aprende y las muchas enseñanzas transmitidas por las coaches te obligan a salir de lo ordinario, de la vida común. Dar un pie más cercano a la vida que deseabas. La única manera es mirar dentro, y el equipo de profesionales junto a los compañeros que uno conoce en el taller hacen de esta experiencia una memoria inolvidable, valiosa y enfocada en el crecimiento y el amor. Muy agradecida con todos los que me acompañaron en este viaje y nada más que recomendarlo.",
+      "textoCorto": "Las herramientas que uno aprende te obligan a salir de lo ordinario, de la vida común.",
+      "destacado": true,
+      "fecha": "2025"
+    },
+    {
+      "id": "karin-lapaz",
+      "nombre": "Karin",
+      "ubicacion": "La Paz, Bolivia",
+      "pais": "BO",
+      "curso": "Coaching Holístico",
+      "cursoSlug": "coaching-holistico",
+      "texto": "La terapia resonancial, me permitió fortalecer un camino amoroso hacia lo más profundo de mi alma, abrazando con amor mi luz y mi sombra, abrazando con amor las diferencias, reconociéndome en todo y en todos y reconociendo a todo y todos en mí.",
+      "textoCorto": "Me permitió fortalecer un camino amoroso hacia lo más profundo de mi alma.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "ilse-lapaz",
+      "nombre": "Ilse",
+      "ubicacion": "La Paz, Bolivia",
+      "pais": "BO",
+      "curso": "Coaching Holístico",
+      "cursoSlug": "coaching-holistico",
+      "texto": "Realizar el curso de Coaching Holístico no sólo es una gran oportunidad para crecer profesionalmente sino y sobre todo como ser humano reconociendo el poder interno en una combinación perfecta con el todo basada en el amor hacia uno mismo y los otros.",
+      "textoCorto": "Una gran oportunidad para crecer profesionalmente y como ser humano.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "alvaro-houston",
+      "nombre": "Alvaro",
+      "ubicacion": "Houston, USA",
+      "pais": "US",
+      "curso": "Coaching Holístico",
+      "cursoSlug": "coaching-holistico",
+      "texto": "Una experiencia maravillosa, fue una expedición hacia nuestro interior y aprender a conectar con nuestro Centro Corazón, de donde podemos cambiar nuestra vida y ayudar a cambiar la vida de otros. Gracias por el acompañamiento y por ayudarme a descubrir la capacidad de ser un encendedor de luz.",
+      "textoCorto": "Una expedición hacia nuestro interior para conectar con nuestro Centro Corazón.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "silvia-cochabamba",
+      "nombre": "Silvia",
+      "ubicacion": "Cochabamba, Bolivia",
+      "pais": "BO",
+      "curso": "Transgeneracional Profundo y Psicogenealogía",
+      "cursoSlug": "transgeneracional",
+      "texto": "Me encantaron las experiencias compartidas tanto de la docente como de las compañer@s",
+      "textoCorto": "Me encantaron las experiencias compartidas de la docente y compañeros.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "patricia-cochabamba",
+      "nombre": "Patricia",
+      "ubicacion": "Cochabamba, Bolivia",
+      "pais": "BO",
+      "curso": "Transgeneracional Profundo y Psicogenealogía",
+      "cursoSlug": "transgeneracional",
+      "texto": "El poder estar consciente de mi fuerza interior y tener el poder de curarme y curar a mi familia mediante el perdón y agradecimiento a mis ancestros",
+      "textoCorto": "Tener el poder de curarme y curar a mi familia mediante el perdón.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "paola-cochabamba",
+      "nombre": "Paola",
+      "ubicacion": "Cochabamba, Bolivia",
+      "pais": "BO",
+      "curso": "Transgeneracional Profundo y Psicogenealogía",
+      "cursoSlug": "transgeneracional",
+      "texto": "Lo que más me gustó de este curso fue el poder encontrar el principio de mi raíz familiar, muchas cosas que no sabía, ahora miro con otros ojos a mi familia. Y descubrí que tengo mucho que trabajar.",
+      "textoCorto": "Poder encontrar el principio de mi raíz familiar y mirar con otros ojos.",
+      "destacado": false,
+      "fecha": "2025"
+    },
+    {
+      "id": "cristina-bolivia",
+      "nombre": "Cristina",
+      "ubicacion": "Bolivia",
+      "pais": "BO",
+      "curso": "Terapia Resonancial",
+      "cursoSlug": "terapia-resonancial",
+      "texto": "Vivir el proceso con Daniela fue profundamente transformador para mí. Sus clases y acompañamientos fueron dinámicos, claros y muy conscientes, invitándome a mirarme con honestidad y a integrar aprendizajes reales en mi vida. Daniela enseña desde la experiencia y la coherencia, lo que no solo impactó mi crecimiento personal y espiritual, sino también la forma en que hoy acompaño a otros en sus propios procesos. Su guía deja huella porque genera transformaciones auténticas y sostenibles.",
+      "textoCorto": "Su guía deja huella porque genera transformaciones auténticas y sostenibles.",
+      "destacado": false,
+      "fecha": "2026"
+    },
+    {
+      "id": "luisa-bolivia",
+      "nombre": "Luisa",
+      "ubicacion": "Bolivia",
+      "pais": "BO",
+      "curso": "Terapia Resonancial",
+      "cursoSlug": "terapia-resonancial",
+      "texto": "Es uno de mis lugares seguros, que te brinda las herramientas necesarias para sanarte a ti misma. Te acompaña en este camino interno tan profundo de sanación de una forma amorosa y segura a tu ritmo.",
+      "textoCorto": "Te brinda las herramientas necesarias para sanarte a ti misma.",
+      "destacado": false,
+      "fecha": "2026"
+    },
+    {
+      "id": "anneth-bolivia",
+      "nombre": "Anneth",
+      "ubicacion": "Bolivia",
+      "pais": "BO",
+      "curso": "Terapia Resonancial",
+      "cursoSlug": "terapia-resonancial",
+      "texto": "Participar de los cursos fundamentales orientados al desarrollo espiritual y consciente, ha significado una experiencia profundamente transformadora tanto a nivel personal como profesional. Este camino me permitió fortalecer la autoconciencia, el equilibrio emocional y la coherencia entre pensamiento, acción y propósito de vida. Me brindó herramientas prácticas para gestionar emociones, potenciar habilidades internas y tomar decisiones más alineadas con valores éticos y humanos con una visión más amplia y empática de la realidad, fomentando el liderazgo consciente, la comunicación asertiva y la responsabilidad personal desde una mirada más humana y equilibrada.",
+      "textoCorto": "Me brindó herramientas prácticas para gestionar emociones y tomar decisiones alineadas.",
+      "destacado": false,
+      "fecha": "2026"
+    }
+  ],
+  "stats": {
+    "totalPersonas": 10,
+    "paises": ["Bolivia", "Alemania", "USA"],
+    "cursos": [
+      {
+        "nombre": "Coaching Holístico",
+        "slug": "coaching-holistico",
+        "count": 4
+      },
+      {
+        "nombre": "Transgeneracional Profundo y Psicogenealogía",
+        "slug": "transgeneracional",
+        "count": 3
+      }
+    ]
+  }
+}

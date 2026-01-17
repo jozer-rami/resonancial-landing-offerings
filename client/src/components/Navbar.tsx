@@ -27,9 +27,10 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Inicio", href: "/" },
-    { name: "Filosofía", href: "/#filosofia" },
+    { name: "Tu Guía", href: "/#guia" },
     { name: "Servicios", href: "/#servicios" },
-    { name: "Pack Completo", href: "/#pack" },
+    { name: "Testimonios", href: "/#testimonios" },
+    { name: "FAQ", href: "/#faq" },
     { name: "Tarjetas Regalo", href: "/tarjetas-regalo" },
   ];
 
