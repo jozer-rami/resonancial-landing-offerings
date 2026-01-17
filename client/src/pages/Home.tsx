@@ -1,10 +1,15 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useEffect } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { CheckCircle2, X, Moon, Star, Users, XCircle } from "lucide-react";
+import { trackWhatsAppClick, trackModalOpen, trackModalClose, trackCTAClick } from "@/lib/analytics";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
+import { Testimonials } from "@/components/Testimonials";
+import { Founder, FounderModal } from "@/components/Founder";
+import { FAQ } from "@/components/FAQ";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import logoSymbol from "@assets/logo_1767647555211.png";
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
@@ -12,6 +17,12 @@ import detoxModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_1768149
 import reconfigModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(1)_1768149609721.jpeg";
 import mapaModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(2)_1768149615012.jpeg";
 import almanaqueImg from "@assets/POST_ALMANAQUE_1768269403742.png";
+
+// Roman numeral converter for station labels
+const toRomanNumeral = (num: number): string => {
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  return romanNumerals[num - 1] || String(num);
+};
 
 // Video assets (converted from GIFs - 92% size reduction)
 const videoAssets = {
@@ -192,7 +203,12 @@ const CourseModal = memo(({ course, open, onClose }: { course: typeof courseDeta
                   <span className="text-lg font-heading text-muted-foreground">50 USD</span>
                 </div>
                 <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-10 py-6 text-xs uppercase tracking-widest transition-all">
-                  <a href={course.whatsapp} target="_blank" rel="noreferrer">
+                  <a
+                    href={course.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackWhatsAppClick(course.title.toLowerCase().replace(/\s+/g, '_'), 'course_modal', 50)}
+                  >
                     Reservar Ahora
                   </a>
                 </Button>
@@ -277,12 +293,12 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
                   <h3 className="text-sm uppercase tracking-widest text-primary mb-4">Las 10 Estaciones</h3>
                   <ul className="space-y-1">
                     {[
-                      "Sintonización", "Enraizamiento", "Activación del Deseo",
-                      "Expansión", "Cosecha", "Integración",
-                      "Transmutación", "Renovación", "Manifestación", "Cierre y Sellado"
+                      "El Umbral Silencioso", "El Latido Intencional", "La Emergencia Sutil",
+                      "El Anclaje Consciente", "La Expansión Auténtica", "La Fricción Sagrada",
+                      "La Integración del Ser", "El Refinamiento del Ser", "El Vacío Metamórfico", "El Renacimiento Frecuencial"
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-2 text-xs text-white/60">
-                        <span className="text-primary/50">{String(i + 1).padStart(2, '0')}</span>
+                        <span className="text-primary/50">{toRomanNumeral(i + 1)}</span>
                         {item}
                       </li>
                     ))}
@@ -389,7 +405,12 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
                   </div>
                 </div>
                 <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all">
-                  <a href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_modal', 20)}
+                  >
                     Quiero Mi Almanaque
                   </a>
                 </Button>
@@ -459,13 +480,41 @@ export default function Home() {
   const gradientOpacity = useTransform(scrollY, [0, 500], [0.6, 1]);
   const [selectedCourse, setSelectedCourse] = useState<keyof typeof courseDetails | null>(null);
   const [almanaqueModalOpen, setAlmanaqueModalOpen] = useState(false);
+  const [founderModalOpen, setFounderModalOpen] = useState(false);
+
+  // Track scroll depth milestones (25%, 50%, 75%, 100%)
+  useScrollTracking();
 
   const handleOpenModal = (courseKey: keyof typeof courseDetails) => {
     setSelectedCourse(courseKey);
+    trackModalOpen(courseKey, 'services_section');
   };
 
   const handleCloseModal = () => {
+    if (selectedCourse) {
+      trackModalClose(selectedCourse);
+    }
     setSelectedCourse(null);
+  };
+
+  const handleAlmanaqueModalOpen = () => {
+    setAlmanaqueModalOpen(true);
+    trackModalOpen('almanaque_ritual', 'almanaque_section');
+  };
+
+  const handleAlmanaqueModalClose = () => {
+    trackModalClose('almanaque_ritual');
+    setAlmanaqueModalOpen(false);
+  };
+
+  const handleFounderModalOpen = () => {
+    setFounderModalOpen(true);
+    trackModalOpen('founder_bio', 'founder_section');
+  };
+
+  const handleFounderModalClose = () => {
+    trackModalClose('founder_bio');
+    setFounderModalOpen(false);
   };
 
   return (
@@ -585,6 +634,8 @@ export default function Home() {
           </div>
         </div>
       </SectionFadeIn>
+      {/* --- FOUNDER SECTION --- */}
+      <Founder onOpenModal={handleFounderModalOpen} />
       {/* --- COURSES SECTION (Grid Layout) --- */}
       <SectionFadeIn id="servicios" className="py-12 md:py-16 bg-zinc-900/20">
         <div className="container mx-auto px-4 max-w-7xl">
@@ -632,6 +683,8 @@ export default function Home() {
           </div>
         </div>
       </SectionFadeIn>
+      {/* --- TESTIMONIALS SECTION --- */}
+      <Testimonials />
       {/* --- FEATURED BUNDLE (Split Layout) --- */}
       <SectionFadeIn id="pack" className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden">
         {/* Background Gradient */}
@@ -704,7 +757,10 @@ export default function Home() {
                     size="lg"
                     className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-8 py-6 text-xs uppercase tracking-widest transition-all"
                   >
-                    <a href="https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL">
+                    <a
+                      href="https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL"
+                      onClick={() => trackWhatsAppClick('pack_completo', 'pack_section', 120)}
+                    >
                       Obtener Pack Completo
                     </a>
                   </Button>
@@ -771,17 +827,21 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
                   <Button
                     asChild
+                    variant="outline"
                     size="lg"
-                    className="bg-primary text-black hover:bg-primary/90 rounded-full px-8 py-6 text-xs uppercase tracking-widest font-bold transition-all shadow-lg shadow-primary/20"
+                    className="border-primary/20 hover:bg-primary hover:text-black rounded-full px-8 py-6 text-xs uppercase tracking-widest transition-all"
                   >
-                    <a href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026">
+                    <a
+                      href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026"
+                      onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_section', 20)}
+                    >
                       Quiero Mi Almanaque
                     </a>
                   </Button>
-                  
-                  <Button 
+
+                  <Button
                     variant="outline"
-                    onClick={() => setAlmanaqueModalOpen(true)}
+                    onClick={handleAlmanaqueModalOpen}
                     className="border-primary/20 hover:bg-primary hover:text-black rounded-full text-xs uppercase tracking-widest"
                   >
                     Ver detalles
@@ -793,6 +853,8 @@ export default function Home() {
           </div>
         </div>
       </SectionFadeIn>
+      {/* --- FAQ SECTION --- */}
+      <FAQ />
       <Newsletter />
       <Footer />
       <CourseModal 
@@ -800,9 +862,13 @@ export default function Home() {
         open={selectedCourse !== null}
         onClose={handleCloseModal}
       />
-      <AlmanaqueModal 
+      <AlmanaqueModal
         open={almanaqueModalOpen}
-        onClose={() => setAlmanaqueModalOpen(false)}
+        onClose={handleAlmanaqueModalClose}
+      />
+      <FounderModal
+        open={founderModalOpen}
+        onClose={handleFounderModalClose}
       />
     </div>
   );

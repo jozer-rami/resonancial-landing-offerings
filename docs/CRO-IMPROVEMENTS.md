@@ -63,32 +63,103 @@ Potential 3x improvement in conversion rate
 
 **Solution**: Add testimonials section between Services and Pack sections.
 
-```
-Recommended Structure:
+**Available Content**: 7 testimonials in `docs/testimonios.json`:
+- 4 from Coaching Holístico (Lorena/Germany, Karin/Bolivia, Ilse/Bolivia, Alvaro/USA)
+- 3 from Transgeneracional (Silvia/Bolivia, Patricia/Bolivia, Paola/Bolivia)
 
-┌─────────────────────────────────────────────────────┐
-│  "Lo que dicen quienes ya cruzaron el portal"       │
-│                                                     │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐            │
-│  │ Photo   │  │ Photo   │  │ Photo   │            │
-│  │ Name    │  │ Name    │  │ Name    │            │
-│  │ Quote   │  │ Quote   │  │ Quote   │            │
-│  │ Service │  │ Service │  │ Service │            │
-│  └─────────┘  └─────────┘  └─────────┘            │
-│                                                     │
-│  "87 personas han completado el proceso en 2025"    │
-└─────────────────────────────────────────────────────┘
+#### Recommended Structure: Featured + Carousel Hybrid
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│  "Lo que dicen quienes ya cruzaron el portal"                        │
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │  ★ DESTACADO                                                    │ │
+│  │                                                                  │ │
+│  │  "Mi experiencia en coaching holístico fue extra-ordinaria.     │ │
+│  │   Las herramientas que uno aprende te obligan a salir de lo     │ │
+│  │   ordinario, de la vida común..."                                │ │
+│  │                                                                  │ │
+│  │  🇩🇪 Lorena · Bremen, Alemania · Coaching Holístico             │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
+│  │ "El Coaching │  │ "Una        │  │ "El poder    │              │
+│  │  Holístico me│  │  experiencia│  │  encontrar   │              │
+│  │  permitió..."│  │  maravillosa│  │  mi raíz..." │              │
+│  │              │  │  ..."       │  │              │              │
+│  │ 🇧🇴 Karin    │  │ 🇺🇸 Alvaro  │  │ 🇧🇴 Paola    │              │
+│  │ La Paz      │  │ Houston     │  │ Cochabamba   │              │
+│  └──────────────┘  └──────────────┘  └──────────────┘              │
+│                                                                      │
+│            ←  ●  ○  ○  →     (carousel for remaining 3)             │
+│                                                                      │
+│  ───────────────────────────────────────────────────────────────    │
+│  ✓ 7+ personas han compartido su experiencia                        │
+│  ✓ Participantes de Bolivia, Alemania y USA                         │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-**Content Needed**:
-- 3-5 client testimonials with photos
-- Permission to use names/photos
-- Specific results mentioned
-- Variety of services represented
-- Client count (if available)
+#### Updated Data Schema (`docs/testimonios.json`)
+
+```json
+{
+  "testimonios": [
+    {
+      "id": "lorena-bremen",
+      "nombre": "Lorena",
+      "ubicacion": "Bremen, Alemania",
+      "pais": "DE",
+      "curso": "Coaching Holístico",
+      "cursoSlug": "coaching-holistico",
+      "texto": "Full testimonial text...",
+      "textoCorto": "Truncated version for cards (50-80 chars)",
+      "destacado": true,
+      "fecha": "2025"
+    }
+  ],
+  "stats": {
+    "totalPersonas": 7,
+    "paises": ["Bolivia", "Alemania", "USA"]
+  }
+}
+```
+
+#### Design Decisions
+
+| Aspect | Decision | Rationale |
+|--------|----------|-----------|
+| **Featured testimonial** | Lorena (Germany) | Longest, most detailed, international credibility |
+| **Card layout** | 3 visible + carousel | Shows variety without overwhelming |
+| **Country flags** | Emoji flags (🇧🇴 🇩🇪 🇺🇸) | Visual trust signal, international reach |
+| **Short quotes** | 50-80 character excerpts | Scannable, entices click for full text |
+| **Stats bar** | Bottom of section | Aggregate social proof |
+
+#### Component Implementation
+
+```tsx
+// client/src/components/Testimonials.tsx
+interface Testimonial {
+  id: string;
+  nombre: string;
+  ubicacion: string;
+  pais: string;
+  curso: string;
+  cursoSlug: string;
+  texto: string;
+  textoCorto: string;
+  destacado: boolean;
+  fecha: string;
+}
+```
+
+**Content Needed** (for future enhancement):
+- Profile photos (with permission)
+- More testimonials from current Portal Resonancial services
+- Video testimonials (highest trust)
 
 **Impact**: +25-30% conversion lift
-**Effort**: Medium (content gathering)
+**Effort**: Medium (component creation, data restructuring)
 
 ---
 
@@ -96,77 +167,495 @@ Recommended Structure:
 
 **Problem**: Users don't know who will be conducting sessions.
 
-**Solution**: Add "Conoce a tu guía" section after Philosophy.
+**Solution**: Add "Conoce a tu guía" section after Philosophy, with a modal for detailed bio.
+
+#### Design Philosophy (Apple-Inspired)
+
+The founder section should feel like discovering a trusted guide, not reading a resume. We lead with connection, not credentials. The design follows three principles:
+
+1. **Human First**: The photo creates immediate emotional connection
+2. **Progressive Disclosure**: Short bio visible, detailed bio in modal (reduces overwhelm)
+3. **Trust Through Transparency**: Credentials visible but not dominant
+
+#### Recommended Structure: Card with Modal
 
 ```
-Recommended Structure:
-
-┌─────────────────────────────────────────────────────┐
-│  CONOCE A TU GUÍA                                   │
-│                                                     │
-│  ┌──────────┐                                       │
-│  │          │  [Name]                               │
-│  │  Photo   │  [Title/Credentials]                  │
-│  │          │                                       │
-│  └──────────┘  [1-2 paragraph bio]                  │
-│                                                     │
-│  • [Certification 1]                                │
-│  • [Certification 2]                                │
-│  • [Years of experience]                            │
-│  • [Number of clients served]                       │
-│                                                     │
-│  "Quote about mission/purpose"                      │
-└─────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                         CONOCE A TU GUÍA                                   │
+│                                                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐  │
+│  │                                                                       │  │
+│  │   ┌─────────────────┐                                                │  │
+│  │   │                 │                                                │  │
+│  │   │                 │    DANIELA VARGAS                              │  │
+│  │   │     [Photo]     │    ─────────────────                           │  │
+│  │   │                 │    Terapeuta & Creadora de                     │  │
+│  │   │                 │    Terapia Resonancial®️                        │  │
+│  │   │                 │                                                │  │
+│  │   └─────────────────┘                                                │  │
+│  │                                                                       │  │
+│  │   "Creo profundamente que cuando una persona se ordena por dentro,   │  │
+│  │    su energía, sus decisiones y su realidad comienzan a              │  │
+│  │    reacomodarse de manera natural."                                  │  │
+│  │                                                                       │  │
+│  │   ───────────────────────────────────────────────────────────────    │  │
+│  │                                                                       │  │
+│  │   Soy Daniela Vargas, terapeuta y creadora de Terapia                │  │
+│  │   Resonancial®️. Mi formación es holística e integrativa, con más    │  │
+│  │   de diez años de estudio y experiencia en disciplinas de            │  │
+│  │   conciencia, energía y desarrollo personal.                         │  │
+│  │                                                                       │  │
+│  │   ┌──────────────────────────────────────────────────────────────┐   │  │
+│  │   │  ✓ 10+ años de experiencia    ✓ Método propio registrado     │   │  │
+│  │   │  ✓ 3 Maestrías               ✓ Docente universitaria        │   │  │
+│  │   └──────────────────────────────────────────────────────────────┘   │  │
+│  │                                                                       │  │
+│  │   [  Conocer más  ]         [  Agendar sesión gratuita  ]           │  │
+│  │     (opens modal)              (WhatsApp CTA)                        │  │
+│  │                                                                       │  │
+│  └─────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Impact**: +10-15% trust increase
-**Effort**: Low (content creation)
+#### Modal Structure: Detailed Bio
+
+```
+┌────────────────────────────────────────────────────────────────────────────┐
+│                                                              [X]           │
+│   ┌────────────────────────────────────────────────────────────────────┐  │
+│   │                         [Header Image]                              │  │
+│   │                    (Same photo, zoomed or cropped)                  │  │
+│   └────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+│   DANIELA VARGAS                                                           │
+│   Terapeuta & Creadora de Terapia Resonancial®️                            │
+│   ────────────────────────────────────────────────────────────             │
+│                                                                            │
+│   MI HISTORIA                                                              │
+│   ────────────                                                             │
+│   Soy Daniela Vargas, terapeuta y creadora del método Terapia              │
+│   Resonancial®️. Mi trabajo integra formación académica, desarrollo        │
+│   humano y conciencia espiritual aplicada, acompañando procesos de         │
+│   transformación profunda desde una mirada holística y estructurada.       │
+│                                                                            │
+│   [Full bio text continues...]                                             │
+│                                                                            │
+│   ┌────────────────────────────────────────────────────────────────────┐  │
+│   │  FORMACIÓN ACADÉMICA                                                │  │
+│   │  ─────────────────────                                              │  │
+│   │  • Comunicación Corporativa (Base profesional)                      │  │
+│   │  • Maestría en Coaching y Liderazgo                                 │  │
+│   │  • Maestría en Inteligencia Emocional                               │  │
+│   │  • Maestría en Marketing con Inteligencia Artificial                │  │
+│   │  • Docente en universidades de Bolivia                              │  │
+│   └────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+│   ┌────────────────────────────────────────────────────────────────────┐  │
+│   │  FORMACIÓN HOLÍSTICA (10+ años)                                     │  │
+│   │  ───────────────────────────────                                    │  │
+│   │  • Coaching y Coaching Holístico                                    │  │
+│   │  • Constelaciones Familiares                                        │  │
+│   │  • Enfoque Transgeneracional y Psicogenealogía                      │  │
+│   │  • Meditación y Mindfulness                                         │  │
+│   │  • ThetaHealing                                                     │  │
+│   │  • Biodescodificación (con Christian Flèche)                        │  │
+│   │  • Proyecto Sentido (con Jean Guillaume)                            │  │
+│   │  • Bioneuroemoción (con Enric Corbera)                              │  │
+│   │  • Sintonización de Biocampo                                        │  │
+│   │  • Tarot Evolutivo                                                  │  │
+│   │  • Diseño Humano                                                    │  │
+│   └────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+│   ┌────────────────────────────────────────────────────────────────────┐  │
+│   │  "No se trata de convertirse en alguien distinto, sino de          │  │
+│   │   recordar quién eres y aprender a vivir desde ese lugar,          │  │
+│   │   con mayor claridad, presencia y propósito."                      │  │
+│   └────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+│   ────────────────────────────────────────────────────────────             │
+│   [  Agendar sesión de 15 min sin costo  ]                                │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Content Data Structure
+
+```json
+// docs/founder.json (or inline in component)
+{
+  "founder": {
+    "nombre": "Daniela Vargas",
+    "titulo": "Terapeuta & Creadora de Terapia Resonancial®️",
+    "imagen": "/attached_assets/daniela-vargas.jpg",
+    "quote": "Creo profundamente que cuando una persona se ordena por dentro, su energía, sus decisiones y su realidad comienzan a reacomodarse de manera natural.",
+    "bioCorta": "Soy Daniela Vargas, terapeuta y creadora de Terapia Resonancial®️. Mi formación es holística e integrativa, con más de diez años de estudio y experiencia en disciplinas de conciencia, energía y desarrollo personal.",
+    "bioExtendida": "Soy Daniela Vargas, terapeuta y creadora del método Terapia Resonancial®️. Mi trabajo integra formación académica, desarrollo humano y conciencia espiritual aplicada, acompañando procesos de transformación profunda desde una mirada holística y estructurada.\n\nMi base profesional se construyó en el ámbito de la Comunicación Corporativa, complementada con una Maestría en Coaching y Liderazgo, una Maestría en Inteligencia Emocional y una Maestría en Marketing con Inteligencia Artificial. Esta formación me permitió comprender con claridad cómo las personas piensan, sienten, se vinculan y toman decisiones, tanto en contextos personales como profesionales.\n\nDurante varios años me desempeñé como docente universitaria en prestigiosas universidades de Bolivia, experiencia que fortaleció mi capacidad de análisis, síntesis y transmisión de conocimiento, así como el diseño de procesos formativos claros, éticos y aplicables a la vida real.\n\nParalelamente a mi recorrido académico y profesional, inicié un camino profundo de búsqueda interior, con el propósito de integrar la espiritualidad a mi desarrollo mental, emocional y profesional. Este proceso comenzó desde la experiencia personal, transitando primero el rol de paciente, luego el de aprendiz y finalmente el de facilitadora de las herramientas que generaron transformación real en mi propia vida.\n\nA lo largo de más de diez años de estudio y práctica continua, me he formado en coaching y coaching holístico, constelaciones familiares, enfoque transgeneracional y psicogenealogía, meditación y mindfulness, thetahealing, biodescodificación (con Christian Flèche), proyecto sentido (con Jean Guillaume), bioneuroemoción (con Enric Corbera), sintonización de biocampo, tarot evolutivo y diseño humano.\n\nEste recorrido me permitió comprender que la transformación verdadera no ocurre desde la exigencia ni la repetición de patrones, sino desde la alineación interna, la conciencia y la coherencia entre pensamiento, emoción, energía y acción.\n\nComo síntesis de esta experiencia nace Terapia Resonancial®️, un método propio orientado a la limpieza, reconfiguración y alineación del sistema interno, que acompaña a las personas a reconectar con su frecuencia original, fortalecer su autoliderazgo consciente y sostener cambios reales en su vida personal y profesional.",
+    "quoteModal": "No se trata de convertirse en alguien distinto, sino de recordar quién eres y aprender a vivir desde ese lugar, con mayor claridad, presencia y propósito.",
+    "credenciales": {
+      "experiencia": "10+ años",
+      "maestrias": 3,
+      "metodoPropio": true,
+      "docenteUniversitaria": true
+    },
+    "formacionAcademica": [
+      "Comunicación Corporativa (Base profesional)",
+      "Maestría en Coaching y Liderazgo",
+      "Maestría en Inteligencia Emocional",
+      "Maestría en Marketing con Inteligencia Artificial",
+      "Docente en universidades de Bolivia"
+    ],
+    "formacionHolistica": [
+      "Coaching y Coaching Holístico",
+      "Constelaciones Familiares",
+      "Enfoque Transgeneracional y Psicogenealogía",
+      "Meditación y Mindfulness",
+      "ThetaHealing",
+      "Biodescodificación (con Christian Flèche)",
+      "Proyecto Sentido (con Jean Guillaume)",
+      "Bioneuroemoción (con Enric Corbera)",
+      "Sintonización de Biocampo",
+      "Tarot Evolutivo",
+      "Diseño Humano"
+    ],
+    "whatsapp": "https://wa.me/59169703379?text=Hola%20Daniela,%20me%20gustaría%20agendar%20una%20sesión%20de%20introducción"
+  }
+}
+```
+
+#### Component Implementation
+
+```tsx
+// client/src/components/Founder.tsx
+
+interface FounderProps {
+  onOpenModal: () => void;
+}
+
+// Card section component
+const Founder = ({ onOpenModal }: FounderProps) => {
+  return (
+    <SectionFadeIn id="guia" className="py-16 md:py-24 bg-zinc-900/20">
+      {/* Section header + card content */}
+      {/* "Conocer más" button triggers onOpenModal */}
+    </SectionFadeIn>
+  );
+};
+
+// Modal component (similar to CourseModal pattern)
+const FounderModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent>
+        {/* Header image */}
+        {/* Full bio */}
+        {/* Credential cards */}
+        {/* Quote */}
+        {/* CTA */}
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+#### Design Decisions
+
+| Aspect | Decision | Rationale |
+|--------|----------|-----------|
+| **Photo placement** | Left side, prominent | Creates immediate human connection |
+| **Quote first** | Before bio text | Emotional hook before credentials |
+| **Credentials bar** | Compact horizontal chips | Scannable trust signals without overwhelming |
+| **Two CTAs** | "Conocer más" + "Agendar sesión" | Different intents: curious vs. ready |
+| **Modal depth** | Full bio + organized credentials | Progressive disclosure for interested users |
+| **Session CTA** | Free 15-min intro session | Low-risk entry point (addresses objections) |
+
+#### Placement in Page Flow
+
+```
+Hero
+  ↓
+Philosophy ("El 2026 no se planea. Se sintoniza.")
+  ↓
+★ Founder Section (NEW) ← "Who is guiding me?"
+  ↓
+Services (Courses)
+  ↓
+Testimonials
+  ↓
+Pack Completo
+  ↓
+Almanaque
+  ↓
+Newsletter
+  ↓
+Footer
+```
+
+**Rationale**: Place after Philosophy because:
+1. Philosophy establishes the "what" (methodology/approach)
+2. Founder section establishes the "who" (credibility/trust)
+3. This builds trust before presenting services/pricing
+
+#### Image Asset
+
+**Location**: `attached_assets/daniela-vargas.jpg`
+**Specifications**:
+- Professional photo in serene garden setting
+- White attire conveys purity/clarity aligned with brand
+- Natural lighting, warm and approachable expression
+- Recommended display: 400x500px card, full-width header in modal
+
+**Impact**: +15-20% trust increase (combines bio + credentials + photo)
+**Effort**: Medium (component creation, modal implementation)
 
 ---
 
-### 3. Implement Analytics Tracking
+### 3. Implement Umami Analytics (Free, Self-Hosted)
 
 **Problem**: No data = no optimization. Flying completely blind.
 
-**Solution**: Add Google Analytics 4 with event tracking.
+**Solution**: Deploy **Umami Analytics** - a free, open-source, self-hosted analytics platform.
 
-**Events to Track**:
+---
 
-| Event | Trigger | Category |
-|-------|---------|----------|
-| `page_view` | Route change | Navigation |
-| `scroll_depth` | 25%, 50%, 75%, 100% | Engagement |
-| `cta_click` | Any CTA button | Conversion |
-| `modal_open` | Course modal opened | Engagement |
-| `modal_close` | Course modal closed | Engagement |
-| `form_start` | Newsletter field focus | Conversion |
-| `form_submit` | Newsletter submission | Conversion |
-| `form_error` | Validation error shown | Friction |
-| `whatsapp_click` | WhatsApp link clicked | Conversion |
-| `gift_card_step` | Each step completed | Funnel |
+#### Why Umami is Perfect for Resonancial
 
-**Implementation**:
+| Feature | Benefit |
+|---------|---------|
+| **100% Free** | No monthly costs, ever |
+| **Same stack** | Node.js + PostgreSQL (already on Railway) |
+| **Lightweight** | ~2KB script (vs 45KB GA4) → better Core Web Vitals |
+| **No cookies** | No consent banners needed |
+| **Simple dashboard** | Clean, intuitive interface |
+| **Unlimited sites** | Track multiple domains |
+| **Full data ownership** | Your data stays on your servers |
+| **One-click deploy** | Vercel, Railway, or Docker |
+
+---
+
+#### Deployment Options
+
+##### Option A: Deploy to Vercel (Recommended - Easiest)
+
+```bash
+# 1. Fork the Umami repo
+# 2. One-click deploy to Vercel
+# 3. Connect to your existing Supabase PostgreSQL
+```
+
+**Steps:**
+1. Go to [Umami GitHub](https://github.com/umami-software/umami)
+2. Click "Deploy to Vercel" button
+3. Set environment variable: `DATABASE_URL` (your Supabase PostgreSQL URL)
+4. Deploy → Dashboard available at `umami.yourdomain.com`
+
+##### Option B: Add to Existing Railway Backend
+
+Since you already have Railway + PostgreSQL, add Umami as a new service:
+
+```bash
+# Railway CLI
+railway link
+railway add --name umami
+railway variables set DATABASE_URL=$DATABASE_URL
+```
+
+##### Option C: Use Umami Cloud (Free Tier)
+
+If you don't want to self-host:
+- **Free tier**: 100K events/month
+- **No setup**: Just add the script
+- Sign up at [cloud.umami.is](https://cloud.umami.is)
+
+---
+
+#### Implementation
+
+**1. Add tracking script to `index.html`:**
+
+```html
+<!-- client/index.html -->
+<script
+  defer
+  src="https://your-umami-instance.vercel.app/script.js"
+  data-website-id="your-website-id"
+></script>
+```
+
+**2. Create analytics utility (`client/src/lib/analytics.ts`):**
 
 ```typescript
 // client/src/lib/analytics.ts
+
+// Umami tracking function
 export const trackEvent = (
   eventName: string,
-  params?: Record<string, string | number>
+  eventData?: Record<string, string | number>
 ) => {
-  if (typeof gtag !== 'undefined') {
-    gtag('event', eventName, params);
+  if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+    window.umami.track(eventName, eventData);
   }
 };
 
-// Usage in components
-trackEvent('cta_click', {
-  cta_name: 'reservar_detox',
-  location: 'course_modal'
-});
+// Track page views (automatic, but can be manual for SPAs)
+export const trackPageView = (url?: string) => {
+  if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+    window.umami.track(props => ({
+      ...props,
+      url: url || window.location.pathname,
+    }));
+  }
+};
+
+// Type declaration for TypeScript
+declare global {
+  interface Window {
+    umami?: {
+      track: (eventName: string | ((props: any) => any), eventData?: Record<string, string | number>) => void;
+    };
+  }
+}
 ```
 
+**3. Usage in components:**
+
+```typescript
+// In any component
+import { trackEvent } from '@/lib/analytics';
+
+// Track WhatsApp clicks
+const handleWhatsAppClick = (service: string) => {
+  trackEvent('WhatsApp Click', { service });
+  window.open(whatsappUrl, '_blank');
+};
+
+// Track CTA clicks
+const handleCTAClick = (ctaName: string, location: string) => {
+  trackEvent('CTA Click', { cta: ctaName, location });
+};
+
+// Track newsletter signup
+const handleNewsletterSubmit = () => {
+  trackEvent('Newsletter Signup', { method: contactMethod });
+};
+
+// Track modal opens
+const handleModalOpen = (courseName: string) => {
+  trackEvent('Modal Open', { course: courseName });
+};
+```
+
+**4. Track scroll depth (optional):**
+
+```typescript
+// client/src/hooks/useScrollTracking.ts
+import { useEffect, useRef } from 'react';
+import { trackEvent } from '@/lib/analytics';
+
+export const useScrollTracking = () => {
+  const tracked = useRef<Set<number>>(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPercent = Math.round(
+        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+      );
+
+      [25, 50, 75, 100].forEach(threshold => {
+        if (scrollPercent >= threshold && !tracked.current.has(threshold)) {
+          tracked.current.add(threshold);
+          trackEvent('Scroll Depth', { depth: threshold });
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+};
+```
+
+---
+
+#### Events to Track
+
+| Event | Trigger | Data | Purpose |
+|-------|---------|------|---------|
+| `WhatsApp Click` | WhatsApp CTA clicked | `{ service: 'detox' }` | Primary conversion |
+| `Newsletter Signup` | Form submitted | `{ method: 'email' }` | Lead capture |
+| `Modal Open` | Course modal opened | `{ course: 'detox' }` | Interest tracking |
+| `CTA Click` | Any CTA button | `{ cta: 'pack', location: 'hero' }` | Engagement |
+| `Scroll Depth` | 25/50/75/100% scroll | `{ depth: 50 }` | Content engagement |
+| `Gift Card Step` | Wizard step completed | `{ step: 2 }` | Funnel analysis |
+
+---
+
+#### Umami Dashboard Features
+
+Once deployed, your Umami dashboard provides:
+
+- **Real-time visitors** - See who's on your site now
+- **Page views & unique visitors** - Daily/weekly/monthly trends
+- **Referrers** - Where traffic comes from
+- **Browsers & devices** - Desktop vs mobile split
+- **Countries** - Geographic distribution
+- **Custom events** - All your tracked conversions
+- **UTM tracking** - Campaign attribution
+
+---
+
+#### Comparison: GA4 vs Umami
+
+| Criteria | GA4 | Umami |
+|----------|-----|-------|
+| **Cost** | Free* | **Free** |
+| **Script Size** | 45KB | **~2KB** |
+| **Cookies** | Required | **None** |
+| **Data Ownership** | Google owns it | **You own it** |
+| **Setup Complexity** | High | **Low** |
+| **Dashboard** | Complex | **Simple** |
+| **Self-host** | No | **Yes** |
+| **Stack compatibility** | N/A | **Node.js + PostgreSQL** ✓ |
+
+*GA4 has hidden costs: consent management, legal compliance, lost data from opt-outs
+
+---
+
+#### Why This Matters for SEO & Marketing
+
+1. **Core Web Vitals**: Umami's ~2KB script vs GA4's 45KB = faster LCP = better Google rankings
+2. **Complete Data**: No cookie banners = 100% of visitors tracked
+3. **Zero Cost**: Free forever, no surprise bills
+4. **Full Control**: Your data, your servers, your rules
+5. **Stack Synergy**: Uses same PostgreSQL as your backend
+
+---
+
+#### Recommended Setup for Resonancial
+
+**Quickest path:**
+1. Sign up for [Umami Cloud](https://cloud.umami.is) (free, 100K events/mo)
+2. Add script to `index.html`
+3. Create `analytics.ts` utility
+4. Add tracking to key CTAs
+
+**Best long-term:**
+1. Deploy Umami to Vercel (free)
+2. Connect to existing Supabase PostgreSQL
+3. Custom domain: `analytics.resonancial.com`
+
 **Impact**: Enables all future optimization
-**Effort**: Low (2-3 hours implementation)
+**Effort**: Low (1-2 hours)
+**Cost**: $0
+
+---
+
+#### Resources
+
+- [Umami GitHub](https://github.com/umami-software/umami) - Source code & one-click deploy
+- [Umami Documentation](https://umami.is/docs) - Setup guides
+- [Umami Cloud](https://cloud.umami.is) - Free hosted option
+- [Umami vs GA4 Comparison](https://umami.is/docs/features)
 
 ---
 
@@ -541,14 +1030,15 @@ Visibility:
 ## Implementation Roadmap
 
 ### Week 1-2: Foundation
-- [ ] Implement Google Analytics 4
-- [ ] Add event tracking to all CTAs
+- [x] Deploy Umami Analytics (Umami Cloud)
+- [x] Add custom event tracking to all CTAs
 - [ ] Fix Privacy & Terms pages
 - [ ] Improve 404 page
 
 ### Week 3-4: Trust Building
 - [ ] Add testimonials section (3 minimum)
-- [ ] Add founder/practitioner bio
+- [ ] Add founder section with card layout
+- [ ] Implement founder bio modal ("Conocer más")
 - [ ] Add FAQ section
 - [ ] Add guarantee/risk reversal messaging
 
@@ -608,14 +1098,17 @@ Visibility:
 
 ## Resources Needed
 
-| Resource | Purpose | Priority |
-|----------|---------|----------|
-| 3-5 Client Testimonials | Social proof section | P0 |
-| Founder Photo + Bio | Credibility section | P0 |
-| Google Analytics Account | Tracking implementation | P0 |
-| Privacy Policy Template | Legal compliance | P0 |
-| FAQ Content | Objection handling | P1 |
-| Comparison Table Content | Decision clarity | P1 |
+| Resource | Purpose | Priority | Status |
+|----------|---------|----------|--------|
+| 3-5 Client Testimonials | Social proof section | P0 | ✅ Available (7 in testimonios.json) |
+| Founder Photo | Credibility section | P0 | ✅ Available (daniela-vargas.jpg) |
+| Founder Short Bio | Card section text | P0 | ✅ Available |
+| Founder Extended Bio | Modal detailed content | P0 | ✅ Available |
+| Founder Credentials List | Trust signals display | P0 | ✅ Available |
+| Umami Analytics | Free cloud tracking | P0 | ✅ Implemented (Umami Cloud) |
+| Privacy Policy Template | Legal compliance | P0 | Pending |
+| FAQ Content | Objection handling | P1 | Pending |
+| Comparison Table Content | Decision clarity | P1 | Pending |
 
 ---
 
@@ -626,8 +1119,8 @@ The Resonancial landing page is **beautifully designed but under-optimized for c
 **Top 3 Actions for Maximum Impact**:
 
 1. **Add testimonials** (+25-30% potential lift)
-2. **Implement analytics** (enables all future optimization)
-3. **Add FAQ/guarantee** (+15-20% lift)
+2. **Add founder section with modal** (+15-20% trust increase)
+3. **Deploy Umami Analytics** (free, self-hosted, enables all future optimization)
 
 Combined, these changes could **double or triple the current conversion rate** within 8 weeks.
 
