@@ -27,9 +27,10 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Inicio", href: "/" },
-    { name: "Filosofía", href: "/#filosofia" },
+    { name: "Tu Guía", href: "/#guia" },
     { name: "Servicios", href: "/#servicios" },
-    { name: "Pack Completo", href: "/#pack" },
+    { name: "Testimonios", href: "/#testimonios" },
+    { name: "FAQ", href: "/#faq" },
     { name: "Tarjetas Regalo", href: "/tarjetas-regalo" },
   ];
 
@@ -97,7 +98,7 @@ export function Navbar() {
             </a>
           ))}
           <Button asChild className="rounded-full bg-primary text-black hover:bg-primary/90 font-medium px-6">
-            <a href="https://wa.me/34640919319" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59169703379" target="_blank" rel="noopener noreferrer">
               Contacto
             </a>
           </Button>
@@ -128,7 +129,7 @@ export function Navbar() {
             </a>
           ))}
            <Button asChild className="w-full rounded-full bg-primary text-black hover:bg-primary/90">
-            <a href="https://wa.me/34640919319" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59169703379" target="_blank" rel="noopener noreferrer">
               Contacto
             </a>
           </Button>

@@ -1,0 +1,71 @@
+{
+  "currency": {
+    "primary": "Bs",
+    "secondary": "USD",
+    "symbol": {
+      "Bs": "Bs",
+      "USD": "$"
+    }
+  },
+  "services": {
+    "detox": {
+      "id": "detox",
+      "name": "Detox Frecuencial",
+      "duration": 45,
+      "price": {
+        "Bs": 500,
+        "USD": 50
+      }
+    },
+    "reconfiguracion": {
+      "id": "reconfiguracion",
+      "name": "Reconfiguración Frecuencial",
+      "duration": 60,
+      "price": {
+        "Bs": 500,
+        "USD": 50
+      }
+    },
+    "mapa": {
+      "id": "mapa",
+      "name": "Mapa Resonancial",
+      "duration": 90,
+      "price": {
+        "Bs": 500,
+        "USD": 50
+      }
+    }
+  },
+  "bundles": {
+    "pack": {
+      "id": "pack",
+      "name": "Pack Completo",
+      "includes": ["detox", "reconfiguracion", "mapa", "almanaque"],
+      "price": {
+        "Bs": 1200,
+        "USD": 120
+      },
+      "savings": {
+        "Bs": 500,
+        "USD": 50
+      }
+    }
+  },
+  "products": {
+    "almanaque": {
+      "id": "almanaque",
+      "name": "Almanaque Ritual Resonancial 2026",
+      "type": "digital",
+      "price": {
+        "Bs": 200,
+        "USD": 20
+      }
+    }
+  },
+  "discount": {
+    "newsletter": {
+      "percentage": 10,
+      "expirationDays": 30
+    }
+  }
+}

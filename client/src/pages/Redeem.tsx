@@ -93,7 +93,7 @@ export default function Redeem() {
                </form>
                
                <div className="text-xs text-white/30 pt-4 border-t border-white/5">
-                 ¿Tienes problemas? <a href="https://wa.me/34640919319" className="text-primary hover:underline">Contáctanos</a>
+                 ¿Tienes problemas? <a href="https://wa.me/59169703379" className="text-primary hover:underline">Contáctanos</a>
                </div>
             </div>
           )}

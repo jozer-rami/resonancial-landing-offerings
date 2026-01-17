@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { GiftCardPreview } from "@/components/ui/gift-card-preview";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { trackGiftCardStep, trackGiftCardComplete, trackWhatsAppClick } from "@/lib/analytics";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 const services = [
   { id: "detox", name: "Detox Frecuencial", price: "500 Bs" },
@@ -25,18 +27,50 @@ export default function GiftCards() {
     message: "",
   });
 
+  // Track scroll depth
+  useScrollTracking();
+
   const selectedService = services.find(s => s.id === formData.service);
 
+  // Parse price for analytics (extract number from "500 Bs")
+  const getPrice = (priceStr: string): number => {
+    const match = priceStr.match(/(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  };
+
+  const handleServiceSelect = (serviceId: string) => {
+    const service = services.find(s => s.id === serviceId);
+    setFormData({ ...formData, service: serviceId });
+    if (service) {
+      trackGiftCardStep(1, 'select_service', getPrice(service.price));
+    }
+  };
+
+  // Track when user starts personalizing (step 2)
+  const [hasTrackedStep2, setHasTrackedStep2] = useState(false);
+  const handlePersonalizeStart = () => {
+    if (!hasTrackedStep2 && formData.service) {
+      trackGiftCardStep(2, 'personalize_start');
+      setHasTrackedStep2(true);
+    }
+  };
+
   const handlePurchase = () => {
+    if (!selectedService) return;
+
+    // Track completion
+    trackGiftCardComplete(getPrice(selectedService.price));
+    trackWhatsAppClick('gift_card_purchase', 'gift_card_page', getPrice(selectedService.price));
+
     // Generate WhatsApp Message
     const text = `Hola, quiero regalar una Gift Card de ${selectedService?.name} (${selectedService?.price}).
-    
+
 De: ${formData.fromName}
 Para: ${formData.toName}
 Mensaje: ${formData.message}`;
 
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/34640919319?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/59169703379?text=${encodedText}`, '_blank');
   };
 
   return (
@@ -73,10 +107,10 @@ Mensaje: ${formData.message}`;
                   {services.map((service) => (
                     <button
                       key={service.id}
-                      onClick={() => setFormData({ ...formData, service: service.id })}
+                      onClick={() => handleServiceSelect(service.id)}
                       className={`p-4 rounded-xl border text-left transition-all ${
-                        formData.service === service.id 
-                          ? "border-primary bg-primary/10" 
+                        formData.service === service.id
+                          ? "border-primary bg-primary/10"
                           : "border-white/10 hover:border-white/20 bg-black/20"
                       }`}
                     >
@@ -93,10 +127,11 @@ Mensaje: ${formData.message}`;
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="from">Tu Nombre</Label>
-                      <Input 
+                      <Input
                         id="from"
-                        placeholder="Ej. Ana" 
+                        placeholder="Ej. Ana"
                         value={formData.fromName}
+                        onFocus={handlePersonalizeStart}
                         onChange={(e) => setFormData({...formData, fromName: e.target.value})}
                         className="bg-black/20 border-white/10"
                       />
