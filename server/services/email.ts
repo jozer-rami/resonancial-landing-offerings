@@ -148,105 +148,165 @@ export function generateDiscountEmailHtml(
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
                 <tr>
                   <td align="center">
-                    <div style="background-color: rgba(169,105,53,0.08); border: 1px solid rgba(169,105,53,0.3); border-radius: 16px; padding: 28px 32px; text-align: center;">
-                      <p style="margin: 0 0 8px 0; font-size: 11px; color: ${colors.textMuted}; text-transform: uppercase; letter-spacing: 0.15em;">
-                        Tu código exclusivo
-                      </p>
-                      <p style="margin: 0 0 8px 0; font-size: 32px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: ${colors.primary}; letter-spacing: 0.1em;">
-                        ${code}
-                      </p>
-                      <p style="margin: 0; font-size: 16px; color: ${colors.text}; font-weight: 500;">
-                        10% de descuento
-                      </p>
-                      <p style="margin: 8px 0 0 0; font-size: 12px; color: ${colors.textSubtle};">
-                        Válido hasta el ${formattedDate}
-                      </p>
-                    </div>
+                    <table role="presentation" style="background-color: rgba(169,105,53,0.08); border: 1px solid rgba(169,105,53,0.3); border-radius: 16px; padding: 28px 32px; text-align: center; width: 100%;">
+                      <tr>
+                        <td align="center">
+                          <p style="margin: 0 0 8px 0; font-size: 11px; color: ${colors.textMuted}; text-transform: uppercase; letter-spacing: 0.15em;">
+                            Tu código exclusivo
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <p style="margin: 0 0 8px 0; font-size: 32px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: ${colors.primary}; letter-spacing: 0.1em;">
+                            ${code}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <p style="margin: 0; font-size: 18px; color: ${colors.text}; font-weight: 600;">
+                            10% DE DESCUENTO EXTRA
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <p style="margin: 8px 0 0 0; font-size: 12px; color: ${colors.textSubtle};">
+                            Válido hasta el ${formattedDate}
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
 
               <!-- Divider -->
-              <div style="height: 1px; background-color: ${colors.cardBorder}; margin: 0 0 32px 0;"></div>
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
+                <tr>
+                  <td style="height: 1px; background-color: ${colors.cardBorder};"></td>
+                </tr>
+              </table>
 
               <!-- PACK COMPLETO - Featured Upsell -->
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
                 <tr>
                   <td style="background-color: ${colors.featureBg}; border: 1px solid ${colors.featureBorder}; border-radius: 20px; padding: 32px;">
-
-                    <!-- Star badge -->
-                    <p style="margin: 0 0 16px 0; text-align: center;">
-                      <span style="display: inline-block; background-color: ${colors.primary}; color: #000000; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 20px;">
-                        &#11088; Oferta Estrella
-                      </span>
-                    </p>
-
-                    <h3 style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; font-weight: 400; text-align: center; color: ${colors.text};">
-                      Pack Completo
-                    </h3>
-                    <p style="margin: 0 0 24px 0; font-size: 14px; text-align: center; color: ${colors.primary}; font-style: italic;">
-                      La experiencia completa de transformación
-                    </p>
-
-                    <!-- What's included -->
-                    <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 24px 0;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <!-- Star badge -->
                       <tr>
-                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
-                          &#10003; Detox Frecuencial (45 min)
+                        <td align="center" style="padding: 0 0 16px 0;">
+                          <span style="display: inline-block; background-color: ${colors.primary}; color: #000000; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 20px;">
+                            ⭐ Oferta Estrella · 10% EXTRA
+                          </span>
                         </td>
-                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                          500 Bs
+                      </tr>
+                      <!-- Title -->
+                      <tr>
+                        <td align="center">
+                          <h3 style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; font-weight: 400; text-align: center; color: ${colors.text};">
+                            Pack Completo
+                          </h3>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
-                          &#10003; Reconfiguración Frecuencial (60 min)
-                        </td>
-                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                          500 Bs
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
-                          &#10003; Mapa Resonancial (90 min)
-                        </td>
-                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                          500 Bs
+                        <td align="center" style="padding: 0 0 24px 0;">
+                          <p style="margin: 0; font-size: 14px; text-align: center; color: ${colors.primary}; font-style: italic;">
+                            La experiencia completa de transformación
+                          </p>
                         </td>
                       </tr>
+                      <!-- What's included -->
                       <tr>
-                        <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; font-weight: 600;">
-                          &#127873; BONUS: Almanaque Ritual 2026
+                        <td>
+                          <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 24px 0;">
+                            <tr>
+                              <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                                ✓ Detox Frecuencial (45 min)
+                              </td>
+                              <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                                500 Bs
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                                ✓ Reconfiguración Frecuencial (60 min)
+                              </td>
+                              <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                                500 Bs
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                                ✓ Mapa Resonancial (90 min)
+                              </td>
+                              <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                                500 Bs
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; font-weight: 600;">
+                                🎁 BONUS: Almanaque Ritual 2026
+                              </td>
+                              <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; text-align: right;">
+                                200 Bs
+                              </td>
+                            </tr>
+                          </table>
                         </td>
-                        <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; text-align: right;">
-                          200 Bs
+                      </tr>
+                      <!-- Pricing -->
+                      <tr>
+                        <td style="border-top: 1px solid ${colors.cardBorder}; padding-top: 20px;">
+                          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                              <td align="center">
+                                <p style="margin: 0 0 4px 0; font-size: 13px; color: ${colors.textMuted};">
+                                  Valor total: <span style="text-decoration: line-through;">1.700 Bs</span>
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center">
+                                <p style="margin: 0 0 4px 0; font-size: 14px; color: ${colors.textMuted};">
+                                  Precio regular: <span style="text-decoration: line-through;">1.200 Bs</span>
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center">
+                                <p style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.primary}; font-weight: 400;">
+                                  1.080 Bs
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center">
+                                <p style="margin: 0 0 16px 0; font-size: 14px; color: ${colors.text}; font-weight: 600; background-color: rgba(169,105,53,0.2); padding: 6px 12px; border-radius: 4px; display: inline-block;">
+                                  CON TU 10% EXTRA
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center" style="padding: 0 0 20px 0;">
+                                <span style="display: inline-block; background-color: ${colors.savingsBg}; border: 1px solid ${colors.savingsBorder}; color: ${colors.primary}; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px;">
+                                  💫 Ahorras 620 Bs en total + Almanaque GRATIS
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center">
+                                <a href="${whatsappPackCompleto}"
+                                   style="display: inline-block; background-color: ${colors.primary}; color: #000000; text-decoration: none; padding: 16px 40px; border-radius: 50px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
+                                  Obtener Pack Completo
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
                         </td>
                       </tr>
                     </table>
-
-                    <!-- Pricing with 10% discount applied -->
-                    <div style="border-top: 1px solid ${colors.cardBorder}; padding-top: 20px; text-align: center;">
-                      <p style="margin: 0 0 4px 0; font-size: 13px; color: ${colors.textMuted};">
-                        Valor total: <span style="text-decoration: line-through;">1.700 Bs</span>
-                      </p>
-                      <p style="margin: 0 0 4px 0; font-size: 14px; color: ${colors.textMuted};">
-                        Precio regular: <span style="text-decoration: line-through;">1.200 Bs</span>
-                      </p>
-                      <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.primary}; font-weight: 400;">
-                        1.080 Bs <span style="font-size: 16px; color: ${colors.textMuted};">con tu código</span>
-                      </p>
-                      <p style="margin: 0 0 20px 0;">
-                        <span style="display: inline-block; background-color: ${colors.savingsBg}; border: 1px solid ${colors.savingsBorder}; color: ${colors.primary}; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px;">
-                          💫 Ahorras 620 Bs en total + Almanaque GRATIS
-                        </span>
-                      </p>
-
-                      <!-- CTA Button -->
-                      <a href="${whatsappPackCompleto}"
-                         style="display: inline-block; background-color: ${colors.primary}; color: #000000; text-decoration: none; padding: 16px 40px; border-radius: 50px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
-                        Obtener Pack Completo
-                      </a>
-                    </div>
                   </td>
                 </tr>
               </table>
@@ -270,80 +330,114 @@ export function generateDiscountEmailHtml(
                 <tr>
                   <!-- Individual Sessions Column -->
                   <td style="width: 48%; vertical-align: top; padding-right: 12px;">
-                    <div style="background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px; height: 100%;">
-                      <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text}; text-align: center;">
-                        Sesiones Individuales
-                      </h4>
-
-                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 16px 0;">
-                        <tr>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Detox Frecuencial</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Reconfiguración</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Mapa Resonancial</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
-                        </tr>
-                      </table>
-
-                      <p style="margin: 0 0 16px 0; font-size: 11px; text-align: center; color: ${colors.primary};">
-                        💫 Ahorras 50 Bs por sesión
-                      </p>
-
-                      <div style="text-align: center;">
-                        <a href="${whatsappSesion}"
-                           style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
-                          Reservar Sesión
-                        </a>
-                      </div>
-                    </div>
+                    <table role="presentation" style="width: 100%; background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px;">
+                      <tr>
+                        <td align="center" style="padding-bottom: 8px;">
+                          <span style="display: inline-block; background-color: rgba(169,105,53,0.2); color: ${colors.primary}; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 10px;">
+                            10% CON TU CÓDIGO
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text};">
+                            Sesiones Individuales
+                          </h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 16px 0;">
+                            <tr>
+                              <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Detox Frecuencial</td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Reconfiguración</td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Mapa Resonancial</td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" style="padding-bottom: 16px;">
+                          <p style="margin: 0; font-size: 11px; color: ${colors.primary};">
+                            💫 Ahorras 50 Bs por sesión
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <a href="${whatsappSesion}"
+                             style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Reservar Sesión
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
 
                   <!-- Almanaque Column -->
                   <td style="width: 48%; vertical-align: top; padding-left: 12px;">
-                    <div style="background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px; height: 100%;">
-                      <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text}; text-align: center;">
-                        Almanaque Ritual 2026
-                      </h4>
-
-                      <p style="margin: 0 0 12px 0; font-size: 12px; color: ${colors.textMuted}; line-height: 1.5;">
-                        &#10024; 10 Estaciones Energéticas<br>
-                        &#10024; Rituales para cada fase lunar<br>
-                        &#10024; Ritual de cumpleaños personalizado<br>
-                        &#10024; Portales energéticos 2026
-                      </p>
-
-                      <p style="margin: 0 0 16px 0; text-align: center;">
-                        <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: ${colors.text};">200 Bs</span>
-                        <span style="font-size: 12px; color: ${colors.textMuted};"> (20 USD)</span>
-                      </p>
-
-                      <p style="margin: 0 0 16px 0; font-size: 10px; text-align: center; color: ${colors.textSubtle};">
-                        Edición 2026 limitada
-                      </p>
-
-                      <div style="text-align: center;">
-                        <a href="${whatsappAlmanaque}"
-                           style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
-                          Obtener Almanaque
-                        </a>
-                      </div>
-                    </div>
+                    <table role="presentation" style="width: 100%; background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px;">
+                      <tr>
+                        <td align="center">
+                          <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text};">
+                            Almanaque Ritual 2026
+                          </h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p style="margin: 0 0 12px 0; font-size: 12px; color: ${colors.textMuted}; line-height: 1.5;">
+                            ✨ 10 Estaciones Energéticas<br>
+                            ✨ Rituales para cada fase lunar<br>
+                            ✨ Ritual de cumpleaños personalizado<br>
+                            ✨ Portales energéticos 2026
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" style="padding-bottom: 16px;">
+                          <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: ${colors.text};">200 Bs</span>
+                          <span style="font-size: 12px; color: ${colors.textMuted};"> (20 USD)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" style="padding-bottom: 16px;">
+                          <p style="margin: 0; font-size: 10px; color: ${colors.textSubtle};">
+                            Edición 2026 limitada
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <a href="${whatsappAlmanaque}"
+                             style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Obtener Almanaque
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
 
               <!-- Brand Quote -->
-              <div style="background-color: rgba(255,255,255,0.02); border-radius: 16px; padding: 24px; text-align: center; margin: 0 0 8px 0;">
-                <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-style: italic; color: ${colors.textMuted}; line-height: 1.6;">
-                  "No se manifiesta desde el deseo mental.<br>
-                  <span style="color: ${colors.primary};">Se manifiesta desde la frecuencia que habitas."</span>
-                </p>
-              </div>
+              <table role="presentation" style="width: 100%; background-color: rgba(255,255,255,0.02); border-radius: 16px; padding: 24px; margin: 0 0 8px 0;">
+                <tr>
+                  <td align="center">
+                    <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-style: italic; color: ${colors.textMuted}; line-height: 1.6;">
+                      "No se manifiesta desde el deseo mental.<br>
+                      <span style="color: ${colors.primary};">Se manifiesta desde la frecuencia que habitas."</span>
+                    </p>
+                  </td>
+                </tr>
+              </table>
 
             </td>
           </tr>
