@@ -1,7 +1,7 @@
-import React, { useState, memo, useEffect } from "react";
+import React, { useState, memo } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { CheckCircle2, X, Moon, Star, Users, XCircle } from "lucide-react";
-import { trackWhatsAppClick, trackModalOpen, trackModalClose, trackCTAClick } from "@/lib/analytics";
+import { trackWhatsAppClick, trackModalOpen, trackModalClose } from "@/lib/analytics";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
@@ -12,12 +12,13 @@ import { Founder, FounderModal } from "@/components/Founder";
 import { FAQ } from "@/components/FAQ";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ModalCloseButton } from "@/components/ui/modal-close";
-import logoSymbol from "@assets/logo_1767647555211.png";
-import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
-import detoxModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_1768149598199.jpeg";
-import reconfigModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(1)_1768149609721.jpeg";
-import mapaModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_(2)_1768149615012.jpeg";
-import almanaqueImg from "@assets/POST_ALMANAQUE_1768269403742.png";
+// Optimized WebP images (98%+ size reduction)
+const logoSymbol = "/images/optimized/logo-symbol.webp";
+const logo_resonancial_blanco = "/images/optimized/logo-white.webp";
+const detoxModalImg = "/images/optimized/detox-modal.webp";
+const reconfigModalImg = "/images/optimized/reconfig-modal.webp";
+const mapaModalImg = "/images/optimized/mapa-modal.webp";
+const almanaqueImg = "/images/optimized/almanaque.webp";
 
 // Roman numeral converter for station labels
 const toRomanNumeral = (num: number): string => {

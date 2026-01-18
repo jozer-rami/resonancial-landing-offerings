@@ -3,7 +3,9 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logoSymbol from "@assets/logo_1767647555211.png";
+
+// Optimized WebP logo (3KB vs 152KB original)
+const logoSymbol = "/images/optimized/logo-symbol.webp";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

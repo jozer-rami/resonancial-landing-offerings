@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Instagram, Mail, Phone } from "lucide-react";
-import logoSymbol from "@assets/logo_1767647555211.png";
+
+// Optimized WebP logo (3KB vs 152KB original)
+const logoSymbol = "/images/optimized/logo-symbol.webp";
 import { PrivacyModal, TermsModal } from "./LegalModals";
 
 export function Footer() {
