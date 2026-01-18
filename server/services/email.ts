@@ -116,7 +116,7 @@ export function generateDiscountEmailHtml(
                 <tr>
                   <td align="center">
                     <!-- Resonancial Logo -->
-                    <img src="https://terapiaresonancial.com/logo_resonancial_blanco.png"
+                    <img src="https://www.terapiaresonancial.com/logo_resonancial_blanco.png"
                          alt="Portal Resonancial"
                          width="120"
                          height="120"
