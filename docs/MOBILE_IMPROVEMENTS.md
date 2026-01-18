@@ -4,6 +4,76 @@ This document tracks mobile UX improvements implemented for the Resonancial land
 
 ---
 
+## 1. Testimonials Carousel Touch Scrolling
+
+**Status**: IMPLEMENTED (Embla Carousel)
+
+### Issue Summary
+
+**QA Finding**: The testimonials carousel on mobile devices cannot be navigated using touch/swipe gestures. Users must tap the navigation buttons (prev/next arrows or dot indicators) to change pages.
+
+**Expected Behavior**: Users should be able to swipe left/right to navigate between testimonial pages, providing a native mobile experience.
+
+**Affected Component**: [Testimonials.tsx](../client/src/components/Testimonials.tsx)
+
+---
+
+### Solution: Embla Carousel Integration
+
+The testimonials carousel was refactored to use **Embla Carousel**, which was already available in the project via the shadcn/ui carousel component.
+
+#### Key Changes Made
+
+1. **Replaced AnimatePresence/motion.div pagination with Embla Carousel**
+   - Native touch/swipe support out of the box
+   - Momentum scrolling for natural feel
+   - Automatic snap points based on slide width
+
+2. **Responsive slide sizing**
+   - Mobile: Full-width slides (1 testimonial visible)
+   - Desktop (md+): 33.333% width slides (3 testimonials visible)
+
+3. **Updated navigation to use Embla API**
+   - `scrollPrev()` / `scrollNext()` for button navigation
+   - `scrollTo(index)` for dot navigation
+   - Real-time `canScrollPrev` / `canScrollNext` state
+
+4. **Accessibility improvements**
+   - Added `role="region"` with `aria-roledescription="carrusel"`
+   - Each slide has `role="group"` with `aria-roledescription="diapositiva"`
+   - Respects `prefers-reduced-motion` via Embla's `duration` option
+
+#### Implementation
+
+```tsx
+// Embla Carousel setup with touch/swipe support
+const [emblaRef, emblaApi] = useEmblaCarousel({
+  align: "start",
+  skipSnaps: false,
+  dragFree: false,
+  containScroll: "trimSnaps",
+  duration: shouldReduceMotion ? 0 : 20,
+});
+
+// Carousel container with touch support
+<div
+  className="overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+  ref={emblaRef}
+  role="region"
+  aria-roledescription="carrusel"
+>
+  <div className="flex gap-4">
+    {otherTestimonials.map((testimonial) => (
+      <div className="flex-none w-full md:w-[calc(33.333%-11px)]">
+        <TestimonialCard ... />
+      </div>
+    ))}
+  </div>
+</div>
+```
+
+---
+
 ## 2. Modal Close Button Accessibility
 
 **Status**: IMPLEMENTED
@@ -87,26 +157,11 @@ import { SimpleModalCloseButton } from "@/components/ui/modal-close";
 
 | File | Changes |
 |------|---------|
+| [client/src/components/Testimonials.tsx](../client/src/components/Testimonials.tsx) | Embla Carousel integration |
 | [client/src/components/ui/modal-close.tsx](../client/src/components/ui/modal-close.tsx) | NEW - Reusable close button components |
 | [client/src/pages/Home.tsx](../client/src/pages/Home.tsx) | Updated CourseModal and AlmanaqueModal |
 | [client/src/components/Founder.tsx](../client/src/components/Founder.tsx) | Updated FounderModal |
 | [client/src/components/LegalModals.tsx](../client/src/components/LegalModals.tsx) | Updated PrivacyModal and TermsModal |
-
----
-
-### Implementation Checklist
-
-- [x] Create `ModalCloseButton` component with sticky mobile behavior
-- [x] Create `SimpleModalCloseButton` for text-only modals
-- [x] Update CourseModal to use new component
-- [x] Update AlmanaqueModal to use new component
-- [x] Update FounderModal to use new component
-- [x] Update PrivacyModal to use new component
-- [x] Update TermsModal to use new component
-- [x] TypeScript check passes
-- [x] Production build succeeds
-- [ ] Test on iOS Safari
-- [ ] Test on Android Chrome
 
 ---
 
@@ -122,6 +177,17 @@ import { SimpleModalCloseButton } from "@/components/ui/modal-close";
 
 ---
 
+## Testing Checklist
+
+- [ ] Test carousel swipe on iOS Safari
+- [ ] Test carousel swipe on Android Chrome
+- [ ] Test modal close on iOS Safari
+- [ ] Test modal close on Android Chrome
+- [ ] Verify button navigation still works
+- [ ] Verify "Ver más" expand buttons work
+
+---
+
 ## Future Mobile Improvements (Backlog)
 
 1. **Services Section**: Consider horizontal scroll on mobile for service cards
@@ -129,11 +195,15 @@ import { SimpleModalCloseButton } from "@/components/ui/modal-close";
 3. **Navigation**: Review hamburger menu touch targets
 4. **Forms**: Ensure all form inputs are properly sized for touch
 5. **Images**: Lazy loading for below-fold images
+6. **Touch Feedback**: Add haptic feedback consideration for CTAs
 
 ---
 
 ## References
 
+- [Embla Carousel React](https://www.embla-carousel.com/get-started/react/)
+- [Framer Motion Drag Gestures](https://www.framer.com/motion/gestures/#drag)
 - [Web Content Accessibility Guidelines (Touch Target Size)](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)
+- [Apple Human Interface Guidelines - Gestures](https://developer.apple.com/design/human-interface-guidelines/gestures)
 - [Apple Human Interface Guidelines - Modality](https://developer.apple.com/design/human-interface-guidelines/modality)
 - [Material Design - Dialogs](https://m3.material.io/components/dialogs/overview)
