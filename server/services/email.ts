@@ -53,10 +53,11 @@ function getResendConfig(): ResendConfig | null {
  * - Borders: rgba(255,255,255,0.1)
  *
  * Marketing optimizations (Jan 2026):
- * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,200 Bs)
+ * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,080 Bs with code)
  * - Almanaque Ritual as low-commitment entry product (200 Bs)
  * - Three-tier structure for different buyer personas
  * - Brand quote for emotional connection
+ * - Show discounted prices with visible savings to emphasize 10% discount value
  */
 export function generateDiscountEmailHtml(
   code: string,
@@ -223,17 +224,20 @@ export function generateDiscountEmailHtml(
                       </tr>
                     </table>
 
-                    <!-- Pricing -->
+                    <!-- Pricing with 10% discount applied -->
                     <div style="border-top: 1px solid ${colors.cardBorder}; padding-top: 20px; text-align: center;">
                       <p style="margin: 0 0 4px 0; font-size: 13px; color: ${colors.textMuted};">
                         Valor total: <span style="text-decoration: line-through;">1.700 Bs</span>
                       </p>
-                      <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.text}; font-weight: 400;">
-                        1.200 Bs <span style="font-size: 16px; color: ${colors.textMuted};">(120 USD)</span>
+                      <p style="margin: 0 0 4px 0; font-size: 14px; color: ${colors.textMuted};">
+                        Precio regular: <span style="text-decoration: line-through;">1.200 Bs</span>
+                      </p>
+                      <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.primary}; font-weight: 400;">
+                        1.080 Bs <span style="font-size: 16px; color: ${colors.textMuted};">con tu código</span>
                       </p>
                       <p style="margin: 0 0 20px 0;">
                         <span style="display: inline-block; background-color: ${colors.savingsBg}; border: 1px solid ${colors.savingsBorder}; color: ${colors.primary}; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px;">
-                          Ahorras 500 Bs + Almanaque GRATIS
+                          💫 Ahorras 620 Bs en total + Almanaque GRATIS
                         </span>
                       </p>
 
@@ -274,20 +278,20 @@ export function generateDiscountEmailHtml(
                       <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 16px 0;">
                         <tr>
                           <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Detox Frecuencial</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
                         </tr>
                         <tr>
                           <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Reconfiguración</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
                         </tr>
                         <tr>
                           <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Mapa Resonancial</td>
-                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
                         </tr>
                       </table>
 
                       <p style="margin: 0 0 16px 0; font-size: 11px; text-align: center; color: ${colors.primary};">
-                        Tu código aplica &#10003;
+                        💫 Ahorras 50 Bs por sesión
                       </p>
 
                       <div style="text-align: center;">
@@ -394,25 +398,17 @@ export function generateDiscountEmailText(
 PORTAL RESONANCIAL
 Terapia Frecuencial
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 Bienvenido/a a nuestra comunidad
 
 Gracias por dar el primer paso hacia tu transformación frecuencial.
 Tu código exclusivo está listo para activar tu nuevo ciclo.
 
-┌─────────────────────────────────┐
-│                                 │
-│   TU CÓDIGO EXCLUSIVO           │
-│   ${code}                       │
-│   10% de descuento              │
-│   Válido hasta el ${formattedDate}
-│                                 │
-└─────────────────────────────────┘
+TU CÓDIGO EXCLUSIVO
+${code}
+10% de descuento extra
+Válido hasta el ${formattedDate}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-⭐ OFERTA ESTRELLA: PACK COMPLETO
+⭐ PACK COMPLETO
 
 La experiencia completa de transformación:
 
@@ -422,29 +418,24 @@ La experiencia completa de transformación:
 🎁 BONUS: Almanaque Ritual 2026 ....... 200 Bs
 
 Valor total: 1.700 Bs
-TU PRECIO: 1.200 Bs (120 USD)
+Precio regular: 1.200 Bs
+CON TU CÓDIGO: 1.080 Bs (108 USD)
 
-💫 Ahorras 500 Bs + Almanaque GRATIS
+💫 Ahorras 620 Bs en total + Almanaque GRATIS
 
 Reservar Pack Completo:
 https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20Pack%20Completo%20con%20mi%20código%20${code}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESIONES INDIVIDUALES
 
-ELIGE TU CAMINO
+• Detox Frecuencial ........... 500 Bs → 450 Bs con tu código
+• Reconfiguración Frecuencial . 500 Bs → 450 Bs con tu código
+• Mapa Resonancial ............ 500 Bs → 450 Bs con tu código
 
-─────────────────────────────────
-
-SESIONES INDIVIDUALES (tu código aplica)
-
-• Detox Frecuencial ........... 500 Bs (50 USD)
-• Reconfiguración Frecuencial . 500 Bs (50 USD)
-• Mapa Resonancial ............ 500 Bs (50 USD)
+💫 Ahorras 50 Bs por sesión
 
 Reservar Sesión:
 https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20${code}
-
-─────────────────────────────────
 
 ALMANAQUE RITUAL 2026
 
@@ -458,12 +449,8 @@ ALMANAQUE RITUAL 2026
 Obtener Almanaque:
 https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 "No se manifiesta desde el deseo mental.
 Se manifiesta desde la frecuencia que habitas."
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Namaste,
 El equipo de Portal Resonancial

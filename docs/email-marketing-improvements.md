@@ -388,11 +388,12 @@ The updated email template should follow these specifications:
 
 ## Decision Required
 
-| Decision | Options | Recommendation |
-|----------|---------|----------------|
-| **Discount applicability** | Apply to Pack Completo? | Yes, 10% on 1,200 Bs = 1,080 Bs final |
-| **Almanaque discount** | Include in 10% code? | No, keep at 200 Bs (already low margin) |
-| **Default CTA priority** | Which button primary? | Pack Completo (highest AOV) |
+| Decision | Options | Recommendation | Status |
+|----------|---------|----------------|--------|
+| **Discount applicability** | Apply to Pack Completo? | Yes, 10% on 1,200 Bs = 1,080 Bs final | ✅ Implemented |
+| **Almanaque discount** | Include in 10% code? | No, keep at 200 Bs (already low margin) | ✅ Implemented |
+| **Default CTA priority** | Which button primary? | Pack Completo (highest AOV) | ✅ Implemented |
+| **Show discounted prices** | Display final price with discount? | Yes, show strikethrough + final price | ✅ Implemented (Jan 2026) |
 
 ---
 
@@ -501,40 +502,47 @@ https://terapiaresonancial.com
 
 ## Proposed Message Structure
 
-### Primary Message (Optimized)
+### Primary Message (Optimized - Jan 2026 Update)
+
+**Key Principle:** Show prices WITH the 10% discount applied, so users see exactly what they'll pay and how much they're saving.
 
 ```
 ✨ *PORTAL RESONANCIAL* ✨
 Terapia Frecuencial
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-
 ¡Bienvenido/a a la comunidad! 🙏
 
 Tu código exclusivo:
 *[CODE]*
-_10% de descuento_
+_10% de descuento extra_
 ⏰ Válido hasta: [FECHA]
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-
-⭐ *OFERTA ESPECIAL: PACK COMPLETO*
-
+⭐ *PACK COMPLETO*
 Las 3 sesiones + Almanaque GRATIS
-~1.700 Bs~ → *1.200 Bs* (120 USD)
-💫 Ahorras 500 Bs
+~1.200 Bs~ → *1.080 Bs* con tu código
+💫 Ahorras 620 Bs en total
 
-━━━━━━━━━━━━━━━━━━━━━━━━
+*SESIÓN INDIVIDUAL*
+~500 Bs~ → *450 Bs* con tu código
+💫 Ahorras 50 Bs
 
-¿Cómo quieres comenzar tu transformación?
+*ALMANAQUE RITUAL 2026*
+200 Bs (tu guía de transformación)
 
 Responde con:
 *1* → Pack Completo (máximo ahorro)
-*2* → Sesión individual (500 Bs)
-*3* → Almanaque Ritual 2026 (200 Bs)
+*2* → Sesión individual
+*3* → Almanaque Ritual
 
-O escríbenos cualquier duda 💬
+🌐 terapiaresonancial.com
 ```
+
+**Changes from previous version:**
+- Removed decorative separator lines (`━━━━`) for cleaner mobile appearance
+- Show discounted prices with strikethrough (e.g., `~1.200 Bs~ → *1.080 Bs*`)
+- Updated savings to reflect 10% discount applied (620 Bs total for Pack, 50 Bs per session)
+- Replaced "O escríbenos cualquier duda 💬" with website link
+- Added "con tu código" to emphasize the discount is applied
 
 ### Message Breakdown
 
@@ -765,13 +773,16 @@ Para personalizarlo necesito:
 
 ## Implementation Checklist
 
-### Immediate Fixes (Critical)
+### Immediate Fixes (Critical) - ✅ COMPLETED Jan 2026
 
-- [ ] Fix currency from EUR to Bs
-- [ ] Add Pack Completo with pricing
-- [ ] Add Almanaque option
-- [ ] Add numbered reply options
-- [ ] Update `generateDiscountMessage()` in `server/services/whatsapp.ts`
+- [x] Fix currency from EUR to Bs
+- [x] Add Pack Completo with pricing
+- [x] Add Almanaque option
+- [x] Add numbered reply options
+- [x] Update `generateDiscountMessage()` in `server/services/whatsapp.ts`
+- [x] Show discounted prices (with 10% applied) instead of regular prices
+- [x] Remove decorative separator lines for cleaner appearance
+- [x] Replace generic CTA with website link
 
 ### Phase 2 Enhancements
 
@@ -791,7 +802,7 @@ Para personalizarlo necesito:
 
 ## Technical Implementation Notes
 
-### Updated Message Generator
+### Updated Message Generator (Jan 2026 - Discounted Prices)
 
 ```typescript
 export function generateDiscountMessage(
@@ -807,35 +818,38 @@ export function generateDiscountMessage(
   return `✨ *PORTAL RESONANCIAL* ✨
 Terapia Frecuencial
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-
 ¡Bienvenido/a a la comunidad! 🙏
 
 Tu código exclusivo:
 *${code}*
-_10% de descuento_
+_10% de descuento extra_
 ⏰ Válido hasta: ${formattedDate}
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-
-⭐ *OFERTA ESPECIAL: PACK COMPLETO*
-
+⭐ *PACK COMPLETO*
 Las 3 sesiones + Almanaque GRATIS
-~1.700 Bs~ → *1.200 Bs* (120 USD)
-💫 Ahorras 500 Bs
+~1.200 Bs~ → *1.080 Bs* con tu código
+💫 Ahorras 620 Bs en total
 
-━━━━━━━━━━━━━━━━━━━━━━━━
+*SESIÓN INDIVIDUAL*
+~500 Bs~ → *450 Bs* con tu código
+💫 Ahorras 50 Bs
 
-¿Cómo quieres comenzar tu transformación?
+*ALMANAQUE RITUAL 2026*
+200 Bs (tu guía de transformación)
 
 Responde con:
 *1* → Pack Completo (máximo ahorro)
-*2* → Sesión individual (500 Bs)
-*3* → Almanaque Ritual 2026 (200 Bs)
+*2* → Sesión individual
+*3* → Almanaque Ritual
 
-O escríbenos cualquier duda 💬`;
+🌐 terapiaresonancial.com`;
 }
 ```
+
+**Pricing Strategy:**
+- Pack Completo: 1,200 Bs × 0.9 = **1,080 Bs** (saves 620 Bs from 1,700 Bs value)
+- Individual Session: 500 Bs × 0.9 = **450 Bs** (saves 50 Bs per session)
+- Almanaque: 200 Bs (no discount - low margin entry product)
 
 ### Character Count Validation
 
