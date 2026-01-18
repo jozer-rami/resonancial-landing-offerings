@@ -57,6 +57,24 @@ export const config = {
   // Set API_ONLY=true when running backend separately (Railway/Render)
   // Frontend is served by Vercel in this case
   apiOnly: process.env.API_ONLY === 'true',
+
+  // Logging configuration
+  logging: {
+    // Log level: error, warn, info, debug, trace
+    // Default: 'info' in production, 'debug' in development
+    level: (process.env.LOG_LEVEL || (process.env.NODE_ENV === 'production' ? 'info' : 'debug')) as
+      | 'error'
+      | 'warn'
+      | 'info'
+      | 'debug'
+      | 'trace',
+    // Output format: 'json' for production log aggregation, 'pretty' for development
+    format: (process.env.LOG_FORMAT || (process.env.NODE_ENV === 'production' ? 'json' : 'pretty')) as
+      | 'json'
+      | 'pretty',
+    // Log sensitive data (emails, phones, tokens) - DANGEROUS in production!
+    sensitiveData: process.env.LOG_SENSITIVE_DATA === 'true',
+  },
 } as const;
 
 /**

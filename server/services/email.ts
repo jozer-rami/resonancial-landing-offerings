@@ -7,6 +7,9 @@
 
 import { Resend } from "resend";
 import { config } from "../config";
+import { loggers } from "../lib/logger";
+
+const logger = loggers.email;
 
 interface ResendConfig {
   apiKey: string;
@@ -220,20 +223,37 @@ export async function sendEmail(
   // If Resend is not configured, log to console in development
   if (!resendConfig) {
     if (config.isDevelopment) {
-      console.log("\n📧 [Email Mock] Email would be sent to:", to);
-      console.log("Subject:", subject);
-      console.log("---\n");
+      logger.debug("Mock email (Resend not configured)", {
+        to,
+        subject,
+        mode: "development",
+      });
       return {
         success: true,
         messageId: `mock-email-${Date.now()}`,
       };
     }
 
+    logger.error("Resend not configured", {
+      to,
+      subject,
+      error: "Missing RESEND_API_KEY environment variable",
+    });
     return {
       success: false,
       error: "Email service not configured (missing RESEND_API_KEY)",
     };
   }
+
+  const startTime = Date.now();
+
+  logger.debug("Sending email via Resend API", {
+    to,
+    subject,
+    from: resendConfig.fromEmail,
+    htmlLength: html.length,
+    hasText: !!text,
+  });
 
   try {
     const resend = new Resend(resendConfig.apiKey);
@@ -246,23 +266,48 @@ export async function sendEmail(
       text: text || undefined,
     });
 
+    const duration = Date.now() - startTime;
+
     if (response.error) {
-      console.error("[Email] Resend API error:", response.error);
+      logger.error("Resend API error response", {
+        to,
+        subject,
+        error: response.error.message,
+        errorName: response.error.name,
+        duration: `${duration}ms`,
+      });
       return {
         success: false,
         error: response.error.message,
       };
     }
 
-    console.log(`[Email] Email sent successfully via Resend:`, response.data);
+    const messageId = response.data?.id || `resend-${Date.now()}`;
+    logger.info("Email sent successfully", {
+      to,
+      subject,
+      messageId,
+      duration: `${duration}ms`,
+    });
 
     return {
       success: true,
-      messageId: response.data?.id || `resend-${Date.now()}`,
+      messageId,
     };
   } catch (error) {
+    const duration = Date.now() - startTime;
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error("[Email] Failed to send email:", errorMessage);
+
+    logger.errorWithData(
+      "Failed to send email - network or API error",
+      {
+        to,
+        subject,
+        duration: `${duration}ms`,
+        errorType: error instanceof Error ? error.constructor.name : "Unknown",
+      },
+      error instanceof Error ? error : new Error(errorMessage)
+    );
 
     return {
       success: false,
@@ -279,6 +324,12 @@ export async function sendDiscountCodeViaEmail(
   discountCode: string,
   expiresAt: Date
 ): Promise<SendEmailResult> {
+  logger.debug("Preparing discount code email", {
+    email,
+    discountCode,
+    expiresAt: expiresAt.toISOString(),
+  });
+
   const subject = "Tu código de descuento del 10% - Portal Resonancial ✨";
   const html = generateDiscountEmailHtml(discountCode, expiresAt);
   const text = generateDiscountEmailText(discountCode, expiresAt);
