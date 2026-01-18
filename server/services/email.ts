@@ -51,6 +51,12 @@ function getResendConfig(): ResendConfig | null {
  * - Typography: Serif headings (Georgia fallback), sans-serif body
  * - Border radius: 16px for cards, 24px for buttons
  * - Borders: rgba(255,255,255,0.1)
+ *
+ * Marketing optimizations (Jan 2026):
+ * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,200 Bs)
+ * - Almanaque Ritual as low-commitment entry product (200 Bs)
+ * - Three-tier structure for different buyer personas
+ * - Brand quote for emotional connection
  */
 export function generateDiscountEmailHtml(
   code: string,
@@ -72,7 +78,16 @@ export function generateDiscountEmailHtml(
     text: "#ebe7e0",
     textMuted: "rgba(255,255,255,0.6)",
     textSubtle: "rgba(255,255,255,0.4)",
+    featureBg: "rgba(169,105,53,0.05)",
+    featureBorder: "rgba(169,105,53,0.15)",
+    savingsBg: "rgba(169,105,53,0.1)",
+    savingsBorder: "rgba(169,105,53,0.2)",
   };
+
+  // WhatsApp links with discount code
+  const whatsappPackCompleto = `https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20Pack%20Completo%20con%20mi%20código%20${code}`;
+  const whatsappSesion = `https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20${code}`;
+  const whatsappAlmanaque = `https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026`;
 
   return `
 <!DOCTYPE html>
@@ -91,7 +106,7 @@ export function generateDiscountEmailHtml(
   <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: ${colors.background};">
     <tr>
       <td align="center" style="padding: 48px 20px;">
-        <table role="presentation" style="width: 100%; max-width: 560px; border-collapse: collapse;">
+        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;">
 
           <!-- Logo/Header -->
           <tr>
@@ -125,7 +140,7 @@ export function generateDiscountEmailHtml(
               </h2>
 
               <p style="margin: 0 0 32px 0; font-size: 15px; line-height: 1.7; text-align: center; color: ${colors.textMuted}; font-weight: 300;">
-                Gracias por unirte. Aquí está tu código de descuento exclusivo para tu primera sesión de sanación frecuencial.
+                Gracias por dar el primer paso hacia tu transformación frecuencial. Tu código exclusivo está listo para activar tu nuevo ciclo.
               </p>
 
               <!-- Discount Code Box -->
@@ -134,7 +149,7 @@ export function generateDiscountEmailHtml(
                   <td align="center">
                     <div style="background-color: rgba(169,105,53,0.08); border: 1px solid rgba(169,105,53,0.3); border-radius: 16px; padding: 28px 32px; text-align: center;">
                       <p style="margin: 0 0 8px 0; font-size: 11px; color: ${colors.textMuted}; text-transform: uppercase; letter-spacing: 0.15em;">
-                        Tu código de descuento
+                        Tu código exclusivo
                       </p>
                       <p style="margin: 0 0 8px 0; font-size: 32px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: ${colors.primary}; letter-spacing: 0.1em;">
                         ${code}
@@ -142,68 +157,189 @@ export function generateDiscountEmailHtml(
                       <p style="margin: 0; font-size: 16px; color: ${colors.text}; font-weight: 500;">
                         10% de descuento
                       </p>
+                      <p style="margin: 8px 0 0 0; font-size: 12px; color: ${colors.textSubtle};">
+                        Válido hasta el ${formattedDate}
+                      </p>
                     </div>
                   </td>
                 </tr>
               </table>
 
-              <!-- Expiration -->
-              <p style="margin: 0 0 32px 0; font-size: 13px; text-align: center; color: ${colors.textSubtle};">
-                Válido hasta el ${formattedDate}
-              </p>
-
               <!-- Divider -->
-              <div style="height: 1px; background-color: ${colors.cardBorder}; margin: 0 0 28px 0;"></div>
+              <div style="height: 1px; background-color: ${colors.cardBorder}; margin: 0 0 32px 0;"></div>
 
-              <!-- Services Section -->
-              <p style="margin: 0 0 16px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: ${colors.textMuted}; text-align: center;">
-                Aplica en cualquiera de nuestros servicios
-              </p>
-
+              <!-- PACK COMPLETO - Featured Upsell -->
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
                 <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                  <td style="background-color: ${colors.featureBg}; border: 1px solid ${colors.featureBorder}; border-radius: 20px; padding: 32px;">
+
+                    <!-- Star badge -->
+                    <p style="margin: 0 0 16px 0; text-align: center;">
+                      <span style="display: inline-block; background-color: ${colors.primary}; color: #000000; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 20px;">
+                        &#11088; Oferta Estrella
+                      </span>
+                    </p>
+
+                    <h3 style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; font-weight: 400; text-align: center; color: ${colors.text};">
+                      Pack Completo
+                    </h3>
+                    <p style="margin: 0 0 24px 0; font-size: 14px; text-align: center; color: ${colors.primary}; font-style: italic;">
+                      La experiencia completa de transformación
+                    </p>
+
+                    <!-- What's included -->
+                    <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 24px 0;">
                       <tr>
-                        <td style="color: ${colors.text}; font-size: 14px; font-weight: 400;">Detox Frecuencial</td>
-                        <td style="color: ${colors.textMuted}; font-size: 13px; text-align: right;">45 min</td>
+                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                          &#10003; Detox Frecuencial (45 min)
+                        </td>
+                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                          500 Bs
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                          &#10003; Reconfiguración Frecuencial (60 min)
+                        </td>
+                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                          500 Bs
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: ${colors.text}; font-size: 13px;">
+                          &#10003; Mapa Resonancial (90 min)
+                        </td>
+                        <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
+                          500 Bs
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; font-weight: 600;">
+                          &#127873; BONUS: Almanaque Ritual 2026
+                        </td>
+                        <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; text-align: right;">
+                          200 Bs
+                        </td>
                       </tr>
                     </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                      <tr>
-                        <td style="color: ${colors.text}; font-size: 14px; font-weight: 400;">Reconfiguración Frecuencial</td>
-                        <td style="color: ${colors.textMuted}; font-size: 13px; text-align: right;">60 min</td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0;">
-                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                      <tr>
-                        <td style="color: ${colors.text}; font-size: 14px; font-weight: 400;">Mapa Resonancial</td>
-                        <td style="color: ${colors.textMuted}; font-size: 13px; text-align: right;">90 min</td>
-                      </tr>
-                    </table>
+
+                    <!-- Pricing -->
+                    <div style="border-top: 1px solid ${colors.cardBorder}; padding-top: 20px; text-align: center;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; color: ${colors.textMuted};">
+                        Valor total: <span style="text-decoration: line-through;">1.700 Bs</span>
+                      </p>
+                      <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.text}; font-weight: 400;">
+                        1.200 Bs <span style="font-size: 16px; color: ${colors.textMuted};">(120 USD)</span>
+                      </p>
+                      <p style="margin: 0 0 20px 0;">
+                        <span style="display: inline-block; background-color: ${colors.savingsBg}; border: 1px solid ${colors.savingsBorder}; color: ${colors.primary}; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px;">
+                          Ahorras 500 Bs + Almanaque GRATIS
+                        </span>
+                      </p>
+
+                      <!-- CTA Button -->
+                      <a href="${whatsappPackCompleto}"
+                         style="display: inline-block; background-color: ${colors.primary}; color: #000000; text-decoration: none; padding: 16px 40px; border-radius: 50px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
+                        Obtener Pack Completo
+                      </a>
+                    </div>
                   </td>
                 </tr>
               </table>
 
-              <!-- CTA Button -->
-              <table role="presentation" style="width: 100%; border-collapse: collapse;">
+              <!-- Divider with "O" -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
                 <tr>
-                  <td align="center">
-                    <a href="https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento"
-                       style="display: inline-block; background-color: ${colors.primary}; color: #000000; text-decoration: none; padding: 16px 48px; border-radius: 50px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
-                      Reservar mi sesión
-                    </a>
+                  <td style="width: 45%; height: 1px; background-color: ${colors.cardBorder};"></td>
+                  <td style="width: 10%; text-align: center; color: ${colors.textMuted}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">o</td>
+                  <td style="width: 45%; height: 1px; background-color: ${colors.cardBorder};"></td>
+                </tr>
+              </table>
+
+              <!-- Alternative Options Header -->
+              <p style="margin: 0 0 20px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: ${colors.textMuted}; text-align: center;">
+                Elige tu camino
+              </p>
+
+              <!-- Two Column Layout: Sessions | Almanaque -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 32px 0;">
+                <tr>
+                  <!-- Individual Sessions Column -->
+                  <td style="width: 48%; vertical-align: top; padding-right: 12px;">
+                    <div style="background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px; height: 100%;">
+                      <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text}; text-align: center;">
+                        Sesiones Individuales
+                      </h4>
+
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 16px 0;">
+                        <tr>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Detox Frecuencial</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Reconfiguración</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Mapa Resonancial</td>
+                          <td style="padding: 6px 0; font-size: 12px; color: ${colors.text}; text-align: right;">500 Bs</td>
+                        </tr>
+                      </table>
+
+                      <p style="margin: 0 0 16px 0; font-size: 11px; text-align: center; color: ${colors.primary};">
+                        Tu código aplica &#10003;
+                      </p>
+
+                      <div style="text-align: center;">
+                        <a href="${whatsappSesion}"
+                           style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                          Reservar Sesión
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Almanaque Column -->
+                  <td style="width: 48%; vertical-align: top; padding-left: 12px;">
+                    <div style="background-color: rgba(255,255,255,0.02); border: 1px solid ${colors.cardBorder}; border-radius: 16px; padding: 24px; height: 100%;">
+                      <h4 style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 400; color: ${colors.text}; text-align: center;">
+                        Almanaque Ritual 2026
+                      </h4>
+
+                      <p style="margin: 0 0 12px 0; font-size: 12px; color: ${colors.textMuted}; line-height: 1.5;">
+                        &#10024; 10 Estaciones Energéticas<br>
+                        &#10024; Rituales para cada fase lunar<br>
+                        &#10024; Ritual de cumpleaños personalizado<br>
+                        &#10024; Portales energéticos 2026
+                      </p>
+
+                      <p style="margin: 0 0 16px 0; text-align: center;">
+                        <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: ${colors.text};">200 Bs</span>
+                        <span style="font-size: 12px; color: ${colors.textMuted};"> (20 USD)</span>
+                      </p>
+
+                      <p style="margin: 0 0 16px 0; font-size: 10px; text-align: center; color: ${colors.textSubtle};">
+                        Edición 2026 limitada
+                      </p>
+
+                      <div style="text-align: center;">
+                        <a href="${whatsappAlmanaque}"
+                           style="display: inline-block; border: 1px solid rgba(169,105,53,0.3); color: ${colors.primary}; text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                          Obtener Almanaque
+                        </a>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </table>
+
+              <!-- Brand Quote -->
+              <div style="background-color: rgba(255,255,255,0.02); border-radius: 16px; padding: 24px; text-align: center; margin: 0 0 8px 0;">
+                <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-style: italic; color: ${colors.textMuted}; line-height: 1.6;">
+                  "No se manifiesta desde el deseo mental.<br>
+                  <span style="color: ${colors.primary};">Se manifiesta desde la frecuencia que habitas."</span>
+                </p>
+              </div>
 
             </td>
           </tr>
@@ -262,30 +398,70 @@ Terapia Frecuencial
 
 Bienvenido/a a nuestra comunidad
 
-Gracias por unirte. Aquí está tu código de descuento exclusivo para tu primera sesión de sanación frecuencial.
+Gracias por dar el primer paso hacia tu transformación frecuencial.
+Tu código exclusivo está listo para activar tu nuevo ciclo.
 
 ┌─────────────────────────────────┐
 │                                 │
-│   TU CÓDIGO DE DESCUENTO        │
-│   ${code}             │
+│   TU CÓDIGO EXCLUSIVO           │
+│   ${code}                       │
 │   10% de descuento              │
+│   Válido hasta el ${formattedDate}
 │                                 │
 └─────────────────────────────────┘
 
-Válido hasta el ${formattedDate}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⭐ OFERTA ESTRELLA: PACK COMPLETO
+
+La experiencia completa de transformación:
+
+✓ Detox Frecuencial (45 min) .......... 500 Bs
+✓ Reconfiguración Frecuencial (60 min)  500 Bs
+✓ Mapa Resonancial (90 min) ........... 500 Bs
+🎁 BONUS: Almanaque Ritual 2026 ....... 200 Bs
+
+Valor total: 1.700 Bs
+TU PRECIO: 1.200 Bs (120 USD)
+
+💫 Ahorras 500 Bs + Almanaque GRATIS
+
+Reservar Pack Completo:
+https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20Pack%20Completo%20con%20mi%20código%20${code}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-APLICA EN CUALQUIERA DE NUESTROS SERVICIOS:
+ELIGE TU CAMINO
 
-• Detox Frecuencial ............. 45 min
-• Reconfiguración Frecuencial ... 60 min
-• Mapa Resonancial .............. 90 min
+─────────────────────────────────
+
+SESIONES INDIVIDUALES (tu código aplica)
+
+• Detox Frecuencial ........... 500 Bs (50 USD)
+• Reconfiguración Frecuencial . 500 Bs (50 USD)
+• Mapa Resonancial ............ 500 Bs (50 USD)
+
+Reservar Sesión:
+https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20${code}
+
+─────────────────────────────────
+
+ALMANAQUE RITUAL 2026
+
+✨ 10 Estaciones Energéticas
+✨ Rituales para cada fase lunar
+✨ Ritual de cumpleaños personalizado
+✨ Portales energéticos 2026
+
+200 Bs (20 USD) · Edición 2026 limitada
+
+Obtener Almanaque:
+https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-¿Listo/a para reservar?
-Escríbenos por WhatsApp: https://wa.me/59169703379
+"No se manifiesta desde el deseo mental.
+Se manifiesta desde la frecuencia que habitas."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -421,7 +597,7 @@ export async function sendDiscountCodeViaEmail(
     expiresAt: expiresAt.toISOString(),
   });
 
-  const subject = "Tu código de descuento del 10% - Portal Resonancial ✨";
+  const subject = "Tu portal al 2026 está listo (+ 10% descuento) ✨";
   const html = generateDiscountEmailHtml(discountCode, expiresAt);
   const text = generateDiscountEmailText(discountCode, expiresAt);
 

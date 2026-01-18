@@ -55,6 +55,13 @@ export function validatePhoneNumber(phone: string): boolean {
 
 /**
  * Generate discount code WhatsApp message
+ *
+ * Marketing optimizations (Jan 2026):
+ * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,200 Bs)
+ * - Almanaque Ritual as entry product (200 Bs)
+ * - Numbered reply options for easy response (1, 2, 3)
+ * - Correct currency (Bs, not EUR)
+ * - Conversational tone for WhatsApp medium
  */
 export function generateDiscountMessage(
   code: string,
@@ -66,25 +73,36 @@ export function generateDiscountMessage(
     year: "numeric",
   });
 
-  return `✨ *Portal Resonancial* ✨
+  return `✨ *PORTAL RESONANCIAL* ✨
+Terapia Frecuencial
 
-¡Gracias por unirte a nuestra comunidad!
+━━━━━━━━━━━━━━━━━━━━━━━━
 
-🎁 Tu código de descuento:
+¡Bienvenido/a a la comunidad! 🙏
+
+Tu código exclusivo:
 *${code}*
-_10% en tu primera sesión_
-
+_10% de descuento_
 ⏰ Válido hasta: ${formattedDate}
 
-Nuestros servicios:
-• Detox Frecuencial (45 min) - €55 → €49.50
-• Reconfiguración Frecuencial (60 min) - €70 → €63
-• Mapa Resonancial (90 min) - €95 → €85.50
+━━━━━━━━━━━━━━━━━━━━━━━━
 
-Reserva ahora:
-https://terapiaresonancial.com
+⭐ *OFERTA ESPECIAL: PACK COMPLETO*
 
-💫 Namaste`;
+Las 3 sesiones + Almanaque GRATIS
+~1.700 Bs~ → *1.200 Bs* (120 USD)
+💫 Ahorras 500 Bs
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+¿Cómo quieres comenzar tu transformación?
+
+Responde con:
+*1* → Pack Completo (máximo ahorro)
+*2* → Sesión individual (500 Bs)
+*3* → Almanaque Ritual 2026 (200 Bs)
+
+O escríbenos cualquier duda 💬`;
 }
 
 /**
