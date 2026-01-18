@@ -70,13 +70,13 @@ export function Footer() {
           <div className="flex gap-6">
             <button
               onClick={() => setPrivacyModalOpen(true)}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:text-white focus-visible:underline focus-visible:outline-none rounded"
             >
               Privacidad
             </button>
             <button
               onClick={() => setTermsModalOpen(true)}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:text-white focus-visible:underline focus-visible:outline-none rounded"
             >
               Términos
             </button>

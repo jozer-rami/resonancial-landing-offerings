@@ -222,7 +222,7 @@ const CarouselNav = memo(({
   <div className="flex items-center justify-center gap-4 mt-6">
     <button
       onClick={onPrev}
-      className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+      className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 focus-visible:outline-none"
       disabled={!canScrollPrev}
       aria-label="Anterior"
     >
@@ -234,7 +234,7 @@ const CarouselNav = memo(({
         <button
           key={i}
           onClick={() => onDotClick(i)}
-          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+          className={`w-2 h-2 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-950 focus-visible:outline-none ${
             i === currentIndex
               ? "bg-primary w-5"
               : "bg-white/20 hover:bg-white/40"
@@ -246,7 +246,7 @@ const CarouselNav = memo(({
 
     <button
       onClick={onNext}
-      className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+      className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 focus-visible:outline-none"
       disabled={!canScrollNext}
       aria-label="Siguiente"
     >
@@ -337,7 +337,7 @@ export function Testimonials() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden"
+      className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden scroll-mt-20"
     >
       {/* Background Gradient - matching Pack Completo */}
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -351,7 +351,7 @@ export function Testimonials() {
               <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">
                 Testimonios
               </span>
-              <h2 className="text-4xl md:text-5xl font-heading mb-4">
+              <h2 className="text-4xl md:text-5xl font-heading mb-4 text-balance">
                 Lo que dicen quienes ya <br className="hidden md:block" />
                 <span className="text-primary italic">cruzaron el portal</span>
               </h2>

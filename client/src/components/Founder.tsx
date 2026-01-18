@@ -172,7 +172,7 @@ export const Founder = memo(({ onOpenModal }: FounderProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="py-16 md:py-24 bg-zinc-900/20 relative overflow-hidden"
+      className="py-16 md:py-24 bg-zinc-900/20 relative overflow-hidden scroll-mt-20"
     >
       {/* Background Gradient */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -189,7 +189,7 @@ export const Founder = memo(({ onOpenModal }: FounderProps) => {
           <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">
             Conoce a tu guía
           </span>
-          <h2 className="text-4xl md:text-5xl font-heading">
+          <h2 className="text-4xl md:text-5xl font-heading text-balance">
             Quien te acompaña en <br className="hidden md:block" />
             <span className="text-primary italic">tu transformación</span>
           </h2>

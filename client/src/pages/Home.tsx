@@ -42,6 +42,7 @@ const VideoBackground = memo(({ videoKey, className = "" }: { videoKey: keyof ty
       loop
       muted
       playsInline
+      aria-hidden="true"
       className={className}
     >
       <source src={video.webm} type="video/webm" />
@@ -121,7 +122,7 @@ const SectionFadeIn = memo(({ children, className = "", id }: { children: React.
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
+      className={`${className} scroll-mt-20`}
       style={{ willChange: shouldReduceMotion ? "auto" : "transform, opacity" }}
     >
       {children}
@@ -515,10 +516,20 @@ export default function Home() {
   };
 
   return (
-    <div id="main-content" className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20 selection:text-white">
+      {/* Skip link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-black focus:px-4 focus:py-2 focus:rounded-full focus:outline-none focus:font-medium"
+      >
+        Saltar al contenido
+      </a>
       <Navbar />
       {/* --- HERO SECTION --- */}
+      <main id="main-content">
       <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        {/* Visually hidden h1 for accessibility */}
+        <h1 className="sr-only">Portal Resonancial - Terapia de Alineación Energética</h1>
         {/* Parallax Background */}
         <motion.div
           style={{ y: yHero }}
@@ -526,10 +537,12 @@ export default function Home() {
         >
           <img
             src="https://editorialverdadparavivir.my.canva.site/portal-resonancial-2026/_assets/media/1e4636f01fb53f80b0d9d66fc6885150.jpg"
-            alt="Portal Resonancial Background"
+            alt=""
+            aria-hidden="true"
             width={1920}
             height={1080}
             fetchPriority="high"
+            decoding="async"
             className="w-full h-[120%] object-cover object-center"
           />
         </motion.div>
@@ -611,7 +624,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
-              <h2 className="text-5xl md:text-6xl font-heading leading-tight mb-8">
+              <h2 className="text-5xl md:text-6xl font-heading leading-tight mb-8 text-balance">
                 El 2026 no se planea. <br/>
                 <span className="text-primary italic">Se sintoniza.</span>
               </h2>
@@ -638,7 +651,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-7xl">
           <FadeIn className="text-center mb-10 max-w-2xl mx-auto">
             <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">las tres activaciones para cruzar el 2026</span>
-            <h2 className="text-4xl md:text-5xl font-heading mb-6">Portal Resonancial</h2>
+            <h2 className="text-4xl md:text-5xl font-heading mb-6 text-balance">Portal Resonancial</h2>
             <p className="text-muted-foreground font-light">
               Explora nuestras sesiones diseñadas para limpiar, reconfigurar y proyectar tu energía hacia el nuevo ciclo.
             </p>
@@ -738,7 +751,7 @@ export default function Home() {
                       <span className="text-white text-2xl font-heading">1.200 Bs</span>
                     </div>
                     <div className="flex items-center justify-end">
-                      <span className="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium border border-primary/20">
+                      <span className="text-primary/80 text-sm italic">
                         Ahorras 500 Bs
                       </span>
                     </div>
@@ -790,7 +803,7 @@ export default function Home() {
             <div className="order-1 lg:order-2 text-center lg:text-left">
               <FadeIn>
                 <span className="text-primary text-xs tracking-[0.3em] uppercase font-bold mb-4 block">Edición 2026</span>
-                <h2 className="text-4xl md:text-5xl font-heading mb-4 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-heading mb-4 leading-tight text-balance">
                   Almanaque Ritual<br/>
                   <span className="text-primary">Resonancial 2026™️</span>
                 </h2>
@@ -853,6 +866,7 @@ export default function Home() {
       {/* --- FAQ SECTION --- */}
       <FAQ />
       <Newsletter />
+      </main>
       <Footer />
       <CourseModal 
         course={selectedCourse ? courseDetails[selectedCourse] : null}
