@@ -1,6 +1,7 @@
-import { useState, memo, useCallback } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState, memo, useCallback, useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Quote, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 // Country flag mapping
 const countryFlags: Record<string, string> = {
@@ -200,37 +201,41 @@ const TestimonialCard = memo(({ testimonial, isExpanded, onToggle }: {
 });
 TestimonialCard.displayName = "TestimonialCard";
 
-// Carousel Navigation
+// Carousel Navigation with Embla integration
 const CarouselNav = memo(({
-  currentPage,
-  totalPages,
+  currentIndex,
+  totalSlides,
   onPrev,
   onNext,
-  onDotClick
+  onDotClick,
+  canScrollPrev,
+  canScrollNext
 }: {
-  currentPage: number;
-  totalPages: number;
+  currentIndex: number;
+  totalSlides: number;
   onPrev: () => void;
   onNext: () => void;
   onDotClick: (index: number) => void;
+  canScrollPrev: boolean;
+  canScrollNext: boolean;
 }) => (
   <div className="flex items-center justify-center gap-4 mt-6">
     <button
       onClick={onPrev}
       className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-      disabled={currentPage === 0}
+      disabled={!canScrollPrev}
       aria-label="Anterior"
     >
       <ChevronLeft className="w-4 h-4" />
     </button>
 
     <div className="flex items-center gap-2">
-      {Array.from({ length: totalPages }).map((_, i) => (
+      {Array.from({ length: totalSlides }).map((_, i) => (
         <button
           key={i}
           onClick={() => onDotClick(i)}
           className={`w-2 h-2 rounded-full transition-all duration-300 ${
-            i === currentPage
+            i === currentIndex
               ? "bg-primary w-5"
               : "bg-white/20 hover:bg-white/40"
           }`}
@@ -242,7 +247,7 @@ const CarouselNav = memo(({
     <button
       onClick={onNext}
       className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-      disabled={currentPage === totalPages - 1}
+      disabled={!canScrollNext}
       aria-label="Siguiente"
     >
       <ChevronRight className="w-4 h-4" />
@@ -254,28 +259,62 @@ CarouselNav.displayName = "CarouselNav";
 // Main Testimonials Component
 export function Testimonials() {
   const shouldReduceMotion = useReducedMotion();
-  const [currentPage, setCurrentPage] = useState(0);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const itemsPerPage = 3;
-  const totalPages = Math.ceil(otherTestimonials.length / itemsPerPage);
+  // Embla Carousel setup with touch/swipe support
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: "trimSnaps",
+    // Respect reduced motion preference
+    duration: shouldReduceMotion ? 0 : 20,
+  });
 
-  const getCurrentPageItems = useCallback(() => {
-    const start = currentPage * itemsPerPage;
-    return otherTestimonials.slice(start, start + itemsPerPage);
-  }, [currentPage]);
+  // Update scroll state when carousel changes
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
 
-  const handlePrev = useCallback(() => {
-    setCurrentPage(p => Math.max(0, p - 1));
-  }, []);
+  const onInit = useCallback(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, [emblaApi]);
 
-  const handleNext = useCallback(() => {
-    setCurrentPage(p => Math.min(totalPages - 1, p + 1));
-  }, [totalPages]);
+  useEffect(() => {
+    if (!emblaApi) return;
 
-  const handleDotClick = useCallback((index: number) => {
-    setCurrentPage(index);
-  }, []);
+    onInit();
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onInit);
+    emblaApi.on("reInit", onSelect);
+
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onInit);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onInit, onSelect]);
+
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback((index: number) => {
+    emblaApi?.scrollTo(index);
+  }, [emblaApi]);
 
   const toggleCardExpansion = useCallback((id: string) => {
     setExpandedCards(prev => {
@@ -349,37 +388,42 @@ export function Testimonials() {
               </div>
             </div>
 
-            {/* Testimonial Cards Grid/Carousel */}
-            <div className="relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentPage}
-                  initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={shouldReduceMotion ? {} : { opacity: 0, x: -20 }}
-                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3 }}
-                  className="grid md:grid-cols-3 gap-4"
-                >
-                  {getCurrentPageItems().map((testimonial) => (
+            {/* Embla Carousel - Touch/Swipe enabled */}
+            <div
+              className="overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+              ref={emblaRef}
+              role="region"
+              aria-roledescription="carrusel"
+              aria-label="Testimonios de clientes"
+            >
+              <div className="flex gap-4">
+                {otherTestimonials.map((testimonial) => (
+                  <div
+                    key={testimonial.id}
+                    className="flex-none w-full md:w-[calc(33.333%-11px)]"
+                    role="group"
+                    aria-roledescription="diapositiva"
+                  >
                     <TestimonialCard
-                      key={testimonial.id}
                       testimonial={testimonial}
                       isExpanded={expandedCards.has(testimonial.id)}
                       onToggle={() => toggleCardExpansion(testimonial.id)}
                     />
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Carousel Navigation */}
-            {totalPages > 1 && (
+            {scrollSnaps.length > 1 && (
               <CarouselNav
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPrev={handlePrev}
-                onNext={handleNext}
-                onDotClick={handleDotClick}
+                currentIndex={selectedIndex}
+                totalSlides={scrollSnaps.length}
+                onPrev={scrollPrev}
+                onNext={scrollNext}
+                onDotClick={scrollTo}
+                canScrollPrev={canScrollPrev}
+                canScrollNext={canScrollNext}
               />
             )}
 
