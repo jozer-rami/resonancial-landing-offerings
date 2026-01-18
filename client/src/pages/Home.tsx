@@ -10,7 +10,8 @@ import { Newsletter } from "@/components/Newsletter";
 import { Testimonials } from "@/components/Testimonials";
 import { Founder, FounderModal } from "@/components/Founder";
 import { FAQ } from "@/components/FAQ";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ModalCloseButton } from "@/components/ui/modal-close";
 import logoSymbol from "@assets/logo_1767647555211.png";
 import logo_resonancial_blanco from "@assets/logo_resonancial_blanco.png";
 import detoxModalImg from "@assets/WhatsApp_Image_2026-01-11_at_12.37.51_1768149598199.jpeg";
@@ -141,9 +142,7 @@ const CourseModal = memo(({ course, open, onClose }: { course: typeof courseDeta
             <img src={course.image} alt={course.title} width={768} height={256} loading="lazy" className="w-full h-full object-cover" />
           </div>
           
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
-            <X className="w-5 h-5" />
-          </DialogClose>
+          <ModalCloseButton />
 
           <div className="p-8 md:p-12 -mt-12 relative z-20">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">{course.subtitle}</span>
@@ -232,9 +231,7 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
             <img src={almanaqueImg} alt="Almanaque Ritual Resonancial 2026" width={768} height={320} loading="lazy" className="w-full h-full object-cover object-top" />
           </div>
 
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
-            <X className="w-5 h-5" />
-          </DialogClose>
+          <ModalCloseButton />
 
           <div className="p-8 md:p-12 -mt-12 relative z-20">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">Objeto Ritual Anual</span>

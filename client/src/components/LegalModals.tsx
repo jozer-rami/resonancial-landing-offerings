@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { X } from "lucide-react";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { SimpleModalCloseButton } from "@/components/ui/modal-close";
 
 // Privacy Policy Modal
 export const PrivacyModal = memo(({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -8,9 +8,7 @@ export const PrivacyModal = memo(({ open, onClose }: { open: boolean; onClose: (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="privacy-modal-description">
         <div className="relative">
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
-            <X className="w-5 h-5" />
-          </DialogClose>
+          <SimpleModalCloseButton />
 
           <div className="p-8 md:p-12">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">Legal</span>
@@ -168,9 +166,7 @@ export const TermsModal = memo(({ open, onClose }: { open: boolean; onClose: () 
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-950 border-white/10 p-0" aria-describedby="terms-modal-description">
         <div className="relative">
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
-            <X className="w-5 h-5" />
-          </DialogClose>
+          <SimpleModalCloseButton />
 
           <div className="p-8 md:p-12">
             <span className="text-xs uppercase tracking-[0.3em] text-primary mb-3 block">Legal</span>
