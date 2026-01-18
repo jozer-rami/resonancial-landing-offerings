@@ -11,7 +11,6 @@ import {
 import { config } from "./config";
 import {
   createDiscountCode,
-  getDiscountCodeBySubscriberId,
   validateDiscountCode,
   redeemDiscountCode,
   updateDeliveryStatus,
@@ -22,34 +21,70 @@ import { sendDiscountCodeViaEmail } from "./services/email";
 // Initialize database connection with error handling
 let pool: pkg.Pool | null = null;
 let db: ReturnType<typeof drizzle> | null = null;
+let initializationPromise: Promise<ReturnType<typeof drizzle>> | null = null;
 
-function getDatabase() {
+/**
+ * Initialize database connection eagerly at startup.
+ * This prevents race conditions from lazy initialization during concurrent requests.
+ */
+export async function initializeDatabase(): Promise<void> {
   if (!config.database.url) {
     throw new Error("DATABASE_URL environment variable is not set");
   }
 
-  if (!pool || !db) {
-    console.log(`Initializing database connection (pool size: ${config.database.poolSize})...`);
-    pool = new Pool({
-      connectionString: config.database.url,
-      // Pool size configurable via DB_POOL_SIZE env var
-      // - Serverless (Vercel): Use DB_POOL_SIZE=1
-      // - Persistent (Railway/Render): Use DB_POOL_SIZE=10 (default)
-      max: config.database.poolSize,
-      idleTimeoutMillis: config.database.idleTimeoutMillis,
-      connectionTimeoutMillis: config.database.connectionTimeoutMillis,
-    });
-
-    // Handle pool errors
-    pool.on("error", (err) => {
-      console.error("Unexpected database pool error:", err);
-    });
-
-    db = drizzle(pool, { schema });
-    console.log("Database connection initialized");
+  if (db) {
+    return; // Already initialized
   }
 
-  return db;
+  console.log(`Initializing database connection (pool size: ${config.database.poolSize})...`);
+
+  pool = new Pool({
+    connectionString: config.database.url,
+    // Pool size configurable via DB_POOL_SIZE env var
+    // - Serverless (Vercel): Use DB_POOL_SIZE=1
+    // - Persistent (Railway/Render): Use DB_POOL_SIZE=10 (default)
+    max: config.database.poolSize,
+    idleTimeoutMillis: config.database.idleTimeoutMillis,
+    connectionTimeoutMillis: config.database.connectionTimeoutMillis,
+  });
+
+  // Handle pool errors
+  pool.on("error", (err) => {
+    console.error("Unexpected database pool error:", err);
+  });
+
+  // Test the connection
+  try {
+    const client = await pool.connect();
+    client.release();
+    console.log("Database connection verified");
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+    throw error;
+  }
+
+  db = drizzle(pool, { schema });
+  console.log("Database connection initialized");
+}
+
+/**
+ * Get database instance. Uses singleton pattern with async initialization guard
+ * to prevent race conditions during concurrent requests.
+ */
+export async function getDatabase(): Promise<ReturnType<typeof drizzle>> {
+  if (db) {
+    return db;
+  }
+
+  // Use a shared promise to prevent multiple concurrent initializations
+  if (!initializationPromise) {
+    initializationPromise = (async () => {
+      await initializeDatabase();
+      return db!;
+    })();
+  }
+
+  return initializationPromise;
 }
 
 export interface SubscriptionResult {
@@ -70,7 +105,7 @@ export interface IStorage {
 export class DbStorage implements IStorage {
   async subscribeToNewsletter(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
     try {
-      const database = getDatabase();
+      const database = await getDatabase();
       const [newSubscriber] = await database
         .insert(schema.newsletterSubscribers)
         .values(subscriber)
@@ -89,7 +124,7 @@ export class DbStorage implements IStorage {
 
   async getSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
     try {
-      const database = getDatabase();
+      const database = await getDatabase();
       const [subscriber] = await database
         .select()
         .from(schema.newsletterSubscribers)
@@ -103,7 +138,7 @@ export class DbStorage implements IStorage {
 
   async getSubscriberById(id: string): Promise<NewsletterSubscriber | undefined> {
     try {
-      const database = getDatabase();
+      const database = await getDatabase();
       const [subscriber] = await database
         .select()
         .from(schema.newsletterSubscribers)

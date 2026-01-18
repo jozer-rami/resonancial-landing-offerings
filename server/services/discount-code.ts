@@ -5,45 +5,15 @@
  */
 
 import { eq, and, isNull, gt } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/node-postgres";
-import pkg from "pg";
-const { Pool } = pkg;
 import * as schema from "@shared/schema";
 import { type DiscountCode, type InsertDiscountCode } from "@shared/schema";
-import { config } from "../config";
+import { getDatabase } from "../storage";
 
 // Characters used for code generation (excluding ambiguous characters like 0/O, 1/I)
 const CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const CODE_PREFIX = "DISC";
 const SEGMENT_LENGTH = 4;
 const EXPIRATION_DAYS = 30;
-
-// Database connection (lazy initialization)
-let pool: pkg.Pool | null = null;
-let db: ReturnType<typeof drizzle> | null = null;
-
-function getDatabase() {
-  if (!config.database.url) {
-    throw new Error("DATABASE_URL environment variable is not set");
-  }
-
-  if (!pool || !db) {
-    pool = new Pool({
-      connectionString: config.database.url,
-      max: config.database.poolSize,
-      idleTimeoutMillis: config.database.idleTimeoutMillis,
-      connectionTimeoutMillis: config.database.connectionTimeoutMillis,
-    });
-
-    pool.on("error", (err) => {
-      console.error("Unexpected database pool error:", err);
-    });
-
-    db = drizzle(pool, { schema });
-  }
-
-  return db;
-}
 
 /**
  * Generate a random alphanumeric segment
@@ -116,7 +86,7 @@ export async function createDiscountCode(
   subscriberId: string,
   deliveryChannel: "email" | "whatsapp"
 ): Promise<DiscountCode> {
-  const database = getDatabase();
+  const database = await getDatabase();
 
   // Generate unique code (retry if collision)
   let code: string;
@@ -169,7 +139,7 @@ export async function createDiscountCode(
  * Get discount code by code string
  */
 export async function getDiscountCodeByCode(code: string): Promise<DiscountCode | null> {
-  const database = getDatabase();
+  const database = await getDatabase();
 
   const [discountCode] = await database
     .select()
@@ -184,7 +154,7 @@ export async function getDiscountCodeByCode(code: string): Promise<DiscountCode 
  * Get discount code for a subscriber
  */
 export async function getDiscountCodeBySubscriberId(subscriberId: string): Promise<DiscountCode | null> {
-  const database = getDatabase();
+  const database = await getDatabase();
 
   const [discountCode] = await database
     .select()
@@ -240,7 +210,7 @@ export async function redeemDiscountCode(
     return { success: false, error: validation.error };
   }
 
-  const database = getDatabase();
+  const database = await getDatabase();
 
   await database
     .update(schema.discountCodes)
@@ -261,7 +231,7 @@ export async function updateDeliveryStatus(
   status: "pending" | "sent" | "failed",
   deliveredAt?: Date
 ): Promise<void> {
-  const database = getDatabase();
+  const database = await getDatabase();
 
   await database
     .update(schema.discountCodes)
@@ -276,7 +246,7 @@ export async function updateDeliveryStatus(
  * Get all active (non-redeemed, non-expired) discount codes
  */
 export async function getActiveDiscountCodes(): Promise<DiscountCode[]> {
-  const database = getDatabase();
+  const database = await getDatabase();
 
   const codes = await database
     .select()

@@ -4,6 +4,7 @@ import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 import { config, validateConfig } from "./config";
+import { initializeDatabase } from "./storage";
 
 // Handle uncaught errors to prevent silent crashes
 process.on("uncaughtException", (err) => {
@@ -111,6 +112,10 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize database connection at startup (before accepting requests)
+  // This prevents race conditions from lazy initialization during concurrent requests
+  await initializeDatabase();
+
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
