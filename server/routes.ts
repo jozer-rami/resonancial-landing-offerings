@@ -81,6 +81,7 @@ export async function registerRoutes(
         const existingCode = await getDiscountCodeBySubscriberId(existingSubscriber.id);
         return res.status(200).json({
           message: "Already subscribed",
+          isExisting: true,
           subscriber: existingSubscriber,
           discountCode: existingCode ? {
             code: existingCode.code,

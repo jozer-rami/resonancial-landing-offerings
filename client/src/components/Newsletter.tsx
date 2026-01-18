@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Loader2, CheckCircle2, MessageCircle, Phone } from "lucide-react";
+import { Mail, Loader2, CheckCircle2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,12 +11,14 @@ import { trackNewsletterStart, trackNewsletterSubmit, trackNewsletterError, trac
 type ContactPreference = "whatsapp" | "email";
 
 interface SubscriptionResult {
+  message?: string;
   discountCode?: {
     code: string;
     value: string;
     expiresAt: string;
-    deliveryChannel: string;
-    deliveryStatus: string;
+    deliveryChannel?: string;
+    deliveryStatus?: string;
+    redeemed?: boolean;
   };
 }
 
@@ -137,58 +139,139 @@ export function Newsletter() {
                 <Mail className="w-6 h-6" />
               </div>
 
-              {status === "success" && result?.discountCode ? (
+              {status === "success" && result ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="space-y-6 py-4"
                 >
-                  <div className="flex items-center justify-center gap-2 text-primary text-xl font-heading">
-                    <CheckCircle2 className="w-6 h-6" />
-                    <h3>¡Gracias por unirte!</h3>
-                  </div>
+                  {/* Case 1: Existing subscriber with redeemed code OR no code */}
+                  {result.message === "Already subscribed" && (!result.discountCode || result.discountCode.redeemed) ? (
+                    <>
+                      <div className="flex items-center justify-center gap-2 text-primary text-xl font-heading">
+                        <CheckCircle2 className="w-6 h-6" />
+                        <h3>Ya eres parte de nuestra comunidad</h3>
+                      </div>
+                      <p className="text-muted-foreground font-light max-w-md mx-auto">
+                        {result.discountCode?.redeemed
+                          ? "Tu código de descuento ya fue utilizado. ¡Gracias por confiar en nosotros!"
+                          : "Este email ya está registrado en nuestra comunidad."}
+                      </p>
+                      <p className="text-white/60 text-sm">
+                        ¿Deseas información sobre nuevas promociones?
+                      </p>
+                      <Button
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        onClick={() => {
+                          trackWhatsAppClick('new_promotions', 'newsletter_existing_redeemed');
+                          window.open("https://wa.me/59169703379?text=Hola,%20me%20gustaría%20conocer%20las%20nuevas%20promociones", "_blank");
+                        }}
+                      >
+                        Contactar por WhatsApp
+                      </Button>
+                    </>
+                  ) : result.message === "Already subscribed" && result.discountCode ? (
+                    /* Case 2: Existing subscriber with valid code */
+                    <>
+                      <div className="flex items-center justify-center gap-2 text-blue-400 text-xl font-heading">
+                        <Mail className="w-6 h-6" />
+                        <h3>Ya tienes un código de descuento</h3>
+                      </div>
+                      <p className="text-muted-foreground font-light max-w-md mx-auto">
+                        Este email ya está registrado en nuestra comunidad. Aquí está tu código existente:
+                      </p>
+                      <div className="bg-black/30 border border-primary/30 rounded-xl p-6 max-w-sm mx-auto">
+                        <p className="text-white/60 text-sm mb-2">Tu código de descuento:</p>
+                        <p className="text-2xl font-mono font-bold text-primary tracking-wider">
+                          {result.discountCode.code}
+                        </p>
+                        <p className="text-white/60 text-sm mt-3">
+                          {result.discountCode.value} de descuento
+                        </p>
+                        <p className="text-white/40 text-xs mt-1">
+                          Válido hasta: {formatExpirationDate(result.discountCode.expiresAt)}
+                        </p>
+                      </div>
+                      <Button
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        onClick={() => {
+                          trackWhatsAppClick('discount_reservation', 'newsletter_existing_valid');
+                          window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank");
+                        }}
+                      >
+                        Reservar ahora con descuento
+                      </Button>
+                    </>
+                  ) : result.discountCode ? (
+                    /* Case 3: New subscriber with discount code */
+                    <>
+                      <div className="flex items-center justify-center gap-2 text-primary text-xl font-heading">
+                        <CheckCircle2 className="w-6 h-6" />
+                        <h3>¡Gracias por unirte!</h3>
+                      </div>
 
-                  <p className="text-muted-foreground font-light max-w-md mx-auto">
-                    Tu código de descuento ha sido enviado a:
-                  </p>
+                      <p className="text-muted-foreground font-light max-w-md mx-auto">
+                        Tu código de descuento ha sido enviado a:
+                      </p>
 
-                  <div className="flex items-center justify-center gap-2 text-white">
-                    {result.discountCode.deliveryChannel === "whatsapp" ? (
-                      <>
-                        <MessageCircle className="w-5 h-5 text-green-400" />
-                        <span>+{countryCode} {phone}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="w-5 h-5 text-primary" />
-                        <span>{email}</span>
-                      </>
-                    )}
-                  </div>
+                      <div className="flex items-center justify-center gap-2 text-white">
+                        {result.discountCode.deliveryChannel === "whatsapp" ? (
+                          <>
+                            <MessageCircle className="w-5 h-5 text-green-400" />
+                            <span>+{countryCode} {phone}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Mail className="w-5 h-5 text-primary" />
+                            <span>{email}</span>
+                          </>
+                        )}
+                      </div>
 
-                  {/* Discount Code Display */}
-                  <div className="bg-black/30 border border-primary/30 rounded-xl p-6 max-w-sm mx-auto">
-                    <p className="text-white/60 text-sm mb-2">Tu código de descuento:</p>
-                    <p className="text-2xl font-mono font-bold text-primary tracking-wider">
-                      {result.discountCode.code}
-                    </p>
-                    <p className="text-white/60 text-sm mt-3">
-                      {result.discountCode.value} de descuento
-                    </p>
-                    <p className="text-white/40 text-xs mt-1">
-                      Válido hasta: {formatExpirationDate(result.discountCode.expiresAt)}
-                    </p>
-                  </div>
+                      <div className="bg-black/30 border border-primary/30 rounded-xl p-6 max-w-sm mx-auto">
+                        <p className="text-white/60 text-sm mb-2">Tu código de descuento:</p>
+                        <p className="text-2xl font-mono font-bold text-primary tracking-wider">
+                          {result.discountCode.code}
+                        </p>
+                        <p className="text-white/60 text-sm mt-3">
+                          {result.discountCode.value} de descuento
+                        </p>
+                        <p className="text-white/40 text-xs mt-1">
+                          Válido hasta: {formatExpirationDate(result.discountCode.expiresAt)}
+                        </p>
+                      </div>
 
-                  <Button
-                    className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
-                    onClick={() => {
-                      trackWhatsAppClick('discount_reservation', 'newsletter_success');
-                      window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank");
-                    }}
-                  >
-                    Reservar ahora con descuento
-                  </Button>
+                      <Button
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        onClick={() => {
+                          trackWhatsAppClick('discount_reservation', 'newsletter_success');
+                          window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank");
+                        }}
+                      >
+                        Reservar ahora con descuento
+                      </Button>
+                    </>
+                  ) : (
+                    /* Case 4: Fallback - subscription successful but no code (edge case) */
+                    <>
+                      <div className="flex items-center justify-center gap-2 text-primary text-xl font-heading">
+                        <CheckCircle2 className="w-6 h-6" />
+                        <h3>¡Gracias por unirte!</h3>
+                      </div>
+                      <p className="text-muted-foreground font-light max-w-md mx-auto">
+                        Te has suscrito exitosamente a nuestra comunidad.
+                      </p>
+                      <Button
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        onClick={() => {
+                          trackWhatsAppClick('contact', 'newsletter_success_no_code');
+                          window.open("https://wa.me/59169703379?text=Hola,%20me%20gustaría%20más%20información", "_blank");
+                        }}
+                      >
+                        Contactar por WhatsApp
+                      </Button>
+                    </>
+                  )}
                 </motion.div>
               ) : (
                 <>
