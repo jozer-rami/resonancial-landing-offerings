@@ -30,9 +30,7 @@ Created reusable close button components that provide different experiences for 
 #### ModalCloseButton (for modals with hero images)
 
 - **Desktop**: Absolute positioned top-right close button (unchanged behavior)
-- **Mobile**:
-  - Sticky close button at top that follows scroll
-  - Bottom close bar with "Cerrar" button for thumb-friendly access
+- **Mobile**: Sticky close button at top that follows scroll
 
 #### SimpleModalCloseButton (for text-only modals like Legal)
 
@@ -46,13 +44,11 @@ Created reusable close button components that provide different experiences for 
 #### Desktop Behavior (md+ breakpoint)
 - Close button remains `absolute top-4 right-4`
 - Same visual design as before (frosted glass effect)
-- No bottom bar
 
 #### Mobile Behavior (< md breakpoint)
 - Top close button becomes `sticky` and follows scroll
-- Enhanced visibility with darker background and shadow
-- Bottom bar appears with full-width "Cerrar" button
-- Gradient background on bottom bar for content fade
+- Enhanced visibility with darker background (`bg-black/70`) and shadow
+- Button stays visible as user scrolls through modal content
 
 ---
 
@@ -118,13 +114,11 @@ import { SimpleModalCloseButton } from "@/components/ui/modal-close";
 
 1. **Sticky vs Fixed**: Used `sticky` positioning instead of `fixed` so the button stays within the modal scroll context and doesn't overlap page content outside the modal.
 
-2. **Bottom bar with gradient**: Added a gradient fade from transparent to zinc-950 so the bottom bar blends smoothly with modal content.
+2. **Two components**: Created separate components for image-header modals and text modals with slightly different styling (darker background for text modals for better visibility).
 
-3. **Two components**: Created separate components for image-header modals (with bottom bar) and text modals (simpler, no bottom bar) to avoid unnecessary UI elements.
+3. **Preserved desktop experience**: Desktop users see the same familiar top-right close button without changes.
 
-4. **Thumb-friendly**: Bottom close bar is full-width and positioned in the thumb zone for easy one-handed mobile use.
-
-5. **Preserved desktop experience**: Desktop users see the same familiar top-right close button without changes.
+4. **Clean mobile UX**: Sticky X button follows scroll without additional UI elements, keeping the modal content clean.
 
 ---
 
