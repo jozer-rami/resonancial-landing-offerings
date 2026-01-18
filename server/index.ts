@@ -5,18 +5,31 @@ import { serveStatic } from "./static";
 import { createServer } from "http";
 import { config, validateConfig } from "./config";
 import { initializeDatabase } from "./storage";
+import { loggers } from "./lib/logger";
+import { requestContextMiddleware } from "./middleware/request-context";
+
+const logger = loggers.server;
 
 // Handle uncaught errors to prevent silent crashes
 process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
+  logger.error("Uncaught Exception", err);
 });
 
 process.on("unhandledRejection", (reason, promise) => {
-  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  logger.error("Unhandled Rejection", {
+    reason: reason instanceof Error ? reason.message : String(reason),
+    promise: String(promise),
+  });
 });
 
 // Validate configuration at startup
 validateConfig();
+
+logger.info("Server starting", {
+  environment: config.nodeEnv,
+  logLevel: config.logging.level,
+  logFormat: config.logging.format,
+});
 
 const app = express();
 const httpServer = createServer(app);
@@ -49,7 +62,7 @@ app.use(
       }
 
       // Reject other origins
-      console.warn(`CORS blocked origin: ${origin}`);
+      logger.warn("CORS blocked origin", { origin });
       callback(new Error(`Origin ${origin} not allowed by CORS`));
     },
     credentials: true,
@@ -74,42 +87,8 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
-
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
-
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
-
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
-      log(logLine);
-    }
-  });
-
-  next();
-});
+// Add request context (ID and timing) to all requests
+app.use(requestContextMiddleware);
 
 (async () => {
   // Initialize database connection at startup (before accepting requests)
@@ -118,19 +97,26 @@ app.use((req, res, next) => {
 
   await registerRoutes(httpServer, app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    log(`Error: ${message} (${status})`);
-    console.error(err);
+    const reqLogger = logger.withRequestId(req.requestId);
+    reqLogger.error("Request error", {
+      status,
+      message,
+      path: req.path,
+      method: req.method,
+      stack: err.stack,
+    });
+
     res.status(status).json({ message });
   });
 
   // Setup static file serving or Vite dev server
   // Skip if API_ONLY mode (frontend served by Vercel)
   if (config.apiOnly) {
-    log("Running in API-only mode (frontend served separately)");
+    logger.info("Running in API-only mode (frontend served separately)");
   } else if (config.isProduction) {
     serveStatic(app);
   } else {
@@ -145,7 +131,11 @@ app.use((req, res, next) => {
       host: "0.0.0.0",
     },
     () => {
-      log(`Server running on port ${config.port} (${config.nodeEnv})`);
+      logger.info("Server started", {
+        port: config.port,
+        environment: config.nodeEnv,
+        apiOnly: config.apiOnly,
+      });
     },
   );
 })();

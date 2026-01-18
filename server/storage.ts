@@ -17,6 +17,9 @@ import {
 } from "./services/discount-code";
 import { sendDiscountCodeViaWhatsApp } from "./services/whatsapp";
 import { sendDiscountCodeViaEmail } from "./services/email";
+import { loggers } from "./lib/logger";
+
+const logger = loggers.storage;
 
 // Initialize database connection with error handling
 let pool: pkg.Pool | null = null;
@@ -36,7 +39,11 @@ export async function initializeDatabase(): Promise<void> {
     return; // Already initialized
   }
 
-  console.log(`Initializing database connection (pool size: ${config.database.poolSize})...`);
+  logger.info("Initializing database connection", {
+    poolSize: config.database.poolSize,
+    idleTimeout: config.database.idleTimeoutMillis,
+    connectionTimeout: config.database.connectionTimeoutMillis,
+  });
 
   pool = new Pool({
     connectionString: config.database.url,
@@ -50,21 +57,23 @@ export async function initializeDatabase(): Promise<void> {
 
   // Handle pool errors
   pool.on("error", (err) => {
-    console.error("Unexpected database pool error:", err);
+    logger.error("Unexpected database pool error", err);
   });
 
   // Test the connection
+  const startTime = Date.now();
   try {
     const client = await pool.connect();
     client.release();
-    console.log("Database connection verified");
+    const duration = Date.now() - startTime;
+    logger.info("Database connection verified", { duration: `${duration}ms` });
   } catch (error) {
-    console.error("Failed to connect to database:", error);
+    logger.error("Failed to connect to database", error instanceof Error ? error : new Error(String(error)));
     throw error;
   }
 
   db = drizzle(pool, { schema });
-  console.log("Database connection initialized");
+  logger.info("Database connection initialized");
 }
 
 /**
@@ -104,48 +113,89 @@ export interface IStorage {
 
 export class DbStorage implements IStorage {
   async subscribeToNewsletter(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
+    const startTime = Date.now();
     try {
       const database = await getDatabase();
       const [newSubscriber] = await database
         .insert(schema.newsletterSubscribers)
         .values(subscriber)
         .returning();
-      
+
       if (!newSubscriber) {
         throw new Error("Failed to create newsletter subscriber");
       }
-      
+
+      const duration = Date.now() - startTime;
+      logger.debug("Subscriber created", {
+        subscriberId: newSubscriber.id,
+        email: subscriber.email,
+        duration: `${duration}ms`,
+      });
+
       return newSubscriber;
     } catch (error) {
-      console.error("Error subscribing to newsletter:", error);
+      const duration = Date.now() - startTime;
+      logger.errorWithData(
+        "Error subscribing to newsletter",
+        { email: subscriber.email, duration: `${duration}ms` },
+        error instanceof Error ? error : new Error(String(error))
+      );
       throw error;
     }
   }
 
   async getSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
+    const startTime = Date.now();
     try {
       const database = await getDatabase();
       const [subscriber] = await database
         .select()
         .from(schema.newsletterSubscribers)
         .where(eq(schema.newsletterSubscribers.email, email));
+
+      const duration = Date.now() - startTime;
+      logger.debug("Subscriber lookup by email", {
+        email,
+        found: !!subscriber,
+        duration: `${duration}ms`,
+      });
+
       return subscriber;
     } catch (error) {
-      console.error("Error getting subscriber by email:", error);
+      const duration = Date.now() - startTime;
+      logger.errorWithData(
+        "Error getting subscriber by email",
+        { email, duration: `${duration}ms` },
+        error instanceof Error ? error : new Error(String(error))
+      );
       throw error;
     }
   }
 
   async getSubscriberById(id: string): Promise<NewsletterSubscriber | undefined> {
+    const startTime = Date.now();
     try {
       const database = await getDatabase();
       const [subscriber] = await database
         .select()
         .from(schema.newsletterSubscribers)
         .where(eq(schema.newsletterSubscribers.id, id));
+
+      const duration = Date.now() - startTime;
+      logger.debug("Subscriber lookup by ID", {
+        subscriberId: id,
+        found: !!subscriber,
+        duration: `${duration}ms`,
+      });
+
       return subscriber;
     } catch (error) {
-      console.error("Error getting subscriber by id:", error);
+      const duration = Date.now() - startTime;
+      logger.errorWithData(
+        "Error getting subscriber by ID",
+        { subscriberId: id, duration: `${duration}ms` },
+        error instanceof Error ? error : new Error(String(error))
+      );
       throw error;
     }
   }
@@ -154,6 +204,11 @@ export class DbStorage implements IStorage {
    * Subscribe to newsletter and generate + deliver discount code
    */
   async subscribeWithDiscountCode(subscriber: InsertNewsletterSubscriber): Promise<SubscriptionResult> {
+    logger.debug("Starting subscription with discount code flow", {
+      email: subscriber.email,
+      contactPreference: subscriber.contactPreference,
+    });
+
     // Create subscriber
     const newSubscriber = await this.subscribeToNewsletter(subscriber);
 
@@ -163,10 +218,22 @@ export class DbStorage implements IStorage {
       subscriber.contactPreference || "whatsapp"
     );
 
+    logger.debug("Discount code created", {
+      subscriberId: newSubscriber.id,
+      discountCode: discountCode.code,
+      expiresAt: discountCode.expiresAt.toISOString(),
+    });
+
     let deliveryStatus: "sent" | "failed" = "failed";
 
     // Send via preferred channel
     if (subscriber.contactPreference === "whatsapp" && subscriber.phone && subscriber.phoneCountryCode) {
+      logger.info("Attempting WhatsApp delivery", {
+        subscriberId: newSubscriber.id,
+        phone: subscriber.phone,
+        countryCode: subscriber.phoneCountryCode,
+      });
+
       const result = await sendDiscountCodeViaWhatsApp(
         subscriber.phone,
         subscriber.phoneCountryCode,
@@ -177,25 +244,46 @@ export class DbStorage implements IStorage {
       if (result.success) {
         deliveryStatus = "sent";
         await updateDeliveryStatus(discountCode.id, "sent");
+        logger.info("WhatsApp delivery successful", {
+          subscriberId: newSubscriber.id,
+          messageId: result.messageId,
+        });
       } else {
-        console.error("Failed to send WhatsApp:", result.error);
+        logger.warn("WhatsApp delivery failed, attempting email fallback", {
+          subscriberId: newSubscriber.id,
+          error: result.error,
+          email: subscriber.email,
+        });
+
         // Auto-fallback to email
-        console.log("[Fallback] Attempting email delivery for:", subscriber.email);
         const emailResult = await sendDiscountCodeViaEmail(
           subscriber.email,
           discountCode.code,
           discountCode.expiresAt
         );
+
         if (emailResult.success) {
           deliveryStatus = "sent";
           await updateDeliveryStatus(discountCode.id, "sent");
-          console.log("[Fallback] Email sent successfully");
+          logger.info("Email fallback delivery successful", {
+            subscriberId: newSubscriber.id,
+            messageId: emailResult.messageId,
+          });
         } else {
-          console.error("Failed to send email fallback:", emailResult.error);
+          logger.error("Email fallback also failed", {
+            subscriberId: newSubscriber.id,
+            whatsappError: result.error,
+            emailError: emailResult.error,
+          });
           await updateDeliveryStatus(discountCode.id, "failed");
         }
       }
     } else if (subscriber.contactPreference === "email") {
+      logger.info("Attempting email delivery", {
+        subscriberId: newSubscriber.id,
+        email: subscriber.email,
+      });
+
       // Send discount code via email using Resend
       const emailResult = await sendDiscountCodeViaEmail(
         subscriber.email,
@@ -206,12 +294,32 @@ export class DbStorage implements IStorage {
       if (emailResult.success) {
         deliveryStatus = "sent";
         await updateDeliveryStatus(discountCode.id, "sent");
-        console.log("[Email] Discount code sent to:", subscriber.email);
+        logger.info("Email delivery successful", {
+          subscriberId: newSubscriber.id,
+          messageId: emailResult.messageId,
+        });
       } else {
-        console.error("Failed to send email:", emailResult.error);
+        logger.error("Email delivery failed", {
+          subscriberId: newSubscriber.id,
+          email: subscriber.email,
+          error: emailResult.error,
+        });
         await updateDeliveryStatus(discountCode.id, "failed");
       }
+    } else {
+      logger.warn("No valid delivery channel configured", {
+        subscriberId: newSubscriber.id,
+        contactPreference: subscriber.contactPreference,
+        hasPhone: !!subscriber.phone,
+      });
     }
+
+    logger.info("Subscription flow completed", {
+      subscriberId: newSubscriber.id,
+      discountCode: discountCode.code,
+      deliveryStatus,
+      channel: subscriber.contactPreference,
+    });
 
     return {
       subscriber: newSubscriber,

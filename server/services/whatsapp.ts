@@ -6,6 +6,9 @@
  */
 
 import { config } from "../config";
+import { loggers } from "../lib/logger";
+
+const logger = loggers.whatsapp;
 
 interface WaSenderConfig {
   apiKey: string;
@@ -96,26 +99,39 @@ export async function sendWhatsAppMessage(
   // If WaSender is not configured, log to console in development
   if (!wasenderConfig) {
     if (config.isDevelopment) {
-      console.log("\n📱 [WhatsApp Mock] Message would be sent to:", to);
-      console.log("Message:", message);
-      console.log("---\n");
+      logger.debug("Mock message (WaSender not configured)", {
+        to,
+        messageLength: message.length,
+        mode: "development",
+      });
       return {
         success: true,
         messageId: `mock-${Date.now()}`,
       };
     }
 
+    logger.error("WaSender not configured", {
+      to,
+      error: "Missing WASENDER_API_KEY environment variable",
+    });
     return {
       success: false,
       error: "WhatsApp service not configured (missing WASENDER_API_KEY)",
     };
   }
 
-  try {
-    // WaSender API expects 'to' in E.164 format with + prefix
-    const phoneWithPrefix = to.startsWith("+") ? to : `+${to}`;
+  const startTime = Date.now();
+  const phoneWithPrefix = to.startsWith("+") ? to : `+${to}`;
+  const apiUrl = "https://www.wasenderapi.com/api/send-message";
 
-    const response = await fetch("https://www.wasenderapi.com/api/send-message", {
+  logger.debug("Sending message via WaSender API", {
+    to,
+    messageLength: message.length,
+    apiUrl,
+  });
+
+  try {
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${wasenderConfig.apiKey}`,
@@ -127,26 +143,48 @@ export async function sendWhatsAppMessage(
       }),
     });
 
+    const duration = Date.now() - startTime;
     const data = await response.json();
 
     if (!response.ok) {
       const errorMessage = data.message || data.error || `HTTP ${response.status}`;
-      console.error("[WhatsApp] WaSender API error:", errorMessage);
+      logger.error("WaSender API error response", {
+        to,
+        statusCode: response.status,
+        error: errorMessage,
+        duration: `${duration}ms`,
+        responseBody: data,
+      });
       return {
         success: false,
         error: errorMessage,
       };
     }
 
-    console.log(`[WhatsApp] Message sent successfully via WaSender:`, data);
+    const messageId = data.messageId || data.id || `wasender-${Date.now()}`;
+    logger.info("Message sent successfully", {
+      to,
+      messageId,
+      duration: `${duration}ms`,
+    });
 
     return {
       success: true,
-      messageId: data.messageId || data.id || `wasender-${Date.now()}`,
+      messageId,
     };
   } catch (error) {
+    const duration = Date.now() - startTime;
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error("[WhatsApp] Failed to send message:", errorMessage);
+
+    logger.errorWithData(
+      "Failed to send message - network or parsing error",
+      {
+        to,
+        duration: `${duration}ms`,
+        errorType: error instanceof Error ? error.constructor.name : "Unknown",
+      },
+      error instanceof Error ? error : new Error(errorMessage)
+    );
 
     return {
       success: false,
@@ -166,7 +204,18 @@ export async function sendDiscountCodeViaWhatsApp(
 ): Promise<SendMessageResult> {
   const formattedPhone = formatPhoneForWhatsApp(phone, countryCode);
 
+  logger.debug("Preparing discount code message", {
+    phone: formattedPhone,
+    countryCode,
+    discountCode,
+    expiresAt: expiresAt.toISOString(),
+  });
+
   if (!validatePhoneNumber(formattedPhone)) {
+    logger.warn("Invalid phone number format", {
+      phone: formattedPhone,
+      countryCode,
+    });
     return {
       success: false,
       error: "Invalid phone number format",
