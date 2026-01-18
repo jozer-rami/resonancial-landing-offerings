@@ -115,10 +115,12 @@ export function generateDiscountEmailHtml(
               <table role="presentation" style="border-collapse: collapse;">
                 <tr>
                   <td align="center">
-                    <!-- Circular logo container -->
-                    <div style="width: 64px; height: 64px; background-color: rgba(169,105,53,0.15); border-radius: 50%; margin: 0 auto 20px auto; line-height: 64px; text-align: center;">
-                      <span style="font-size: 28px; line-height: 64px;">&#10024;</span>
-                    </div>
+                    <!-- Resonancial Logo -->
+                    <img src="https://terapiaresonancial.com/logo_resonancial_blanco.png"
+                         alt="Portal Resonancial"
+                         width="120"
+                         height="120"
+                         style="display: block; margin: 0 auto 20px auto; width: 120px; height: auto;" />
                     <h1 style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 400; color: ${colors.text}; letter-spacing: 0.05em;">
                       Portal Resonancial
                     </h1>
