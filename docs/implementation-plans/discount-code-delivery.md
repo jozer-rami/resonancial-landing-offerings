@@ -332,36 +332,97 @@ function generateDiscountCode(): string {
 
 **Subject:** Tu código de descuento del 10% - Portal Resonancial ✨
 
-```html
-Hola,
+### Design System (Brand Consistency)
 
-¡Gracias por unirte a la comunidad de Portal Resonancial!
+The email template follows the landing page design system for visual consistency:
 
-Aquí está tu código de descuento exclusivo:
+| Element | Value | Usage |
+|---------|-------|-------|
+| **Primary Color** | `#a96935` | CTA buttons, discount code text, accent elements |
+| **Background** | `#0d0d0d` | Email body background (deep black) |
+| **Card Background** | `#141414` | Main content card (charcoal) |
+| **Text Color** | `#ebe7e0` | Primary text (warm off-white) |
+| **Muted Text** | `rgba(255,255,255,0.6)` | Secondary text, descriptions |
+| **Subtle Text** | `rgba(255,255,255,0.4)` | Footer, legal text |
+| **Border Color** | `rgba(255,255,255,0.1)` | Card borders, dividers |
+| **Primary Border** | `rgba(169,105,53,0.3)` | Discount code box border |
 
-╔═══════════════════════════════════════╗
-║                                       ║
-║        DISC-X8Y9-Z2W3                ║
-║        10% de descuento              ║
-║                                       ║
-╚═══════════════════════════════════════╝
+### Typography
 
-Válido hasta: 15 de febrero de 2026
+| Element | Font | Size | Weight |
+|---------|------|------|--------|
+| **Brand Name** | Georgia (serif) | 28px | 400 (regular) |
+| **Headings** | Georgia (serif) | 26px | 400 (regular) |
+| **Body Text** | Montserrat/Arial (sans-serif) | 15px | 300 (light) |
+| **Discount Code** | Courier New (monospace) | 32px | bold |
+| **Labels** | Sans-serif | 11px | uppercase, letter-spacing: 0.15em |
+| **CTA Button** | Sans-serif | 13px | 600, uppercase |
 
-Usa este código en tu primera sesión de:
-• Detox Frecuencial (45 min) - €55 → €49.50
-• Reconfiguración Frecuencial (60 min) - €70 → €63
-• Mapa Resonancial (90 min) - €95 → €85.50
+### Visual Elements
 
-[Reservar mi sesión ahora]
+- **Border Radius**: 24px for main card, 16px for discount box, 50px for CTA button
+- **Spacing**: 48px outer padding, 40px card padding, 32px between sections
+- **Logo**: Circular container (64px) with sparkle icon and `rgba(169,105,53,0.15)` background
 
-Con amor y luz,
-El equipo de Portal Resonancial
+### Email Structure
 
----
-¿No solicitaste este código? Ignora este mensaje.
-Para dejar de recibir emails: [Cancelar suscripción]
 ```
+┌──────────────────────────────────────────────────────────────┐
+│  [Background: #0d0d0d]                                       │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  ○ ✨ (circular logo container)                        │  │
+│  │  PORTAL RESONANCIAL                                    │  │
+│  │  Terapia Frecuencial                                   │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  [Card: #141414, border: rgba(255,255,255,0.1)]       │  │
+│  │                                                        │  │
+│  │  Bienvenido/a a nuestra comunidad                     │  │
+│  │  Gracias por unirte...                                │  │
+│  │                                                        │  │
+│  │  ┌──────────────────────────────────────────────────┐ │  │
+│  │  │  [Discount Box: primary tint border]             │ │  │
+│  │  │  TU CÓDIGO DE DESCUENTO                          │ │  │
+│  │  │  DISC-X8Y9-Z2W3                                  │ │  │
+│  │  │  10% de descuento                                │ │  │
+│  │  └──────────────────────────────────────────────────┘ │  │
+│  │                                                        │  │
+│  │  Válido hasta el 15 de febrero, 2026                  │  │
+│  │                                                        │  │
+│  │  ──────────────────────────────────────────────────── │  │
+│  │                                                        │  │
+│  │  APLICA EN CUALQUIERA DE NUESTROS SERVICIOS           │  │
+│  │  • Detox Frecuencial ................... 45 min       │  │
+│  │  • Reconfiguración Frecuencial ......... 60 min       │  │
+│  │  • Mapa Resonancial .................... 90 min       │  │
+│  │                                                        │  │
+│  │  [ RESERVAR MI SESIÓN ] (CTA: #a96935)                │  │
+│  │                                                        │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                                                              │
+│  Namaste,                                                    │
+│  El equipo de Portal Resonancial                             │
+│  terapiaresonancial.com                                      │
+│                                                              │
+│  (legal footer in subtle text)                               │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### Implementation
+
+The email template is implemented in `server/services/email.ts`:
+- `generateDiscountEmailHtml()` - HTML template with inline styles
+- `generateDiscountEmailText()` - Plain text fallback version
+
+**Key Features:**
+- MSO (Outlook) compatibility fallback styles
+- Mobile-responsive design (max-width: 560px)
+- Inline CSS for email client compatibility
+- WhatsApp deep link CTA for direct booking
+- Brand-consistent color palette and typography
 
 ---
 
