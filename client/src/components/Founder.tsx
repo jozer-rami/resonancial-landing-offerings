@@ -1,8 +1,9 @@
 import { memo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { X, CheckCircle2, GraduationCap, Sparkles, Quote } from "lucide-react";
+import { CheckCircle2, GraduationCap, Sparkles, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ModalCloseButton } from "@/components/ui/modal-close";
 import founderImage from "@assets/daniela-vargas.jpg";
 
 // Founder data
@@ -78,9 +79,7 @@ export const FounderModal = memo(({ open, onClose }: { open: boolean; onClose: (
             />
           </div>
 
-          <DialogClose className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors" aria-label="Cerrar modal">
-            <X className="w-5 h-5" />
-          </DialogClose>
+          <ModalCloseButton />
 
           <div className="p-8 md:p-12 -mt-12 relative z-20">
             {/* Name & Title */}
