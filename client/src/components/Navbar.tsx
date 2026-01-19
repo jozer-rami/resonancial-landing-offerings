@@ -3,7 +3,9 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logoSymbol from "@assets/logo_1767647555211.png";
+
+// Optimized WebP logo (3KB vs 152KB original)
+const logoSymbol = "/images/optimized/logo-symbol.webp";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -106,7 +108,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-white p-2 rounded-lg focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isMobileMenuOpen}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Instagram, Mail, Phone } from "lucide-react";
-import logoSymbol from "@assets/logo_1767647555211.png";
+
+// Optimized WebP logo (3KB vs 152KB original)
+const logoSymbol = "/images/optimized/logo-symbol.webp";
 import { PrivacyModal, TermsModal } from "./LegalModals";
 
 export function Footer() {
@@ -70,13 +72,13 @@ export function Footer() {
           <div className="flex gap-6">
             <button
               onClick={() => setPrivacyModalOpen(true)}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:text-white focus-visible:underline focus-visible:outline-none rounded"
             >
               Privacidad
             </button>
             <button
               onClick={() => setTermsModalOpen(true)}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:text-white focus-visible:underline focus-visible:outline-none rounded"
             >
               Términos
             </button>

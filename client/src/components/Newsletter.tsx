@@ -121,7 +121,7 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-10 md:py-12 bg-background relative border-t border-white/5">
+    <section className="py-12 md:py-16 bg-background relative border-t border-white/5">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -161,7 +161,7 @@ export function Newsletter() {
                         ¿Deseas información sobre nuevas promociones?
                       </p>
                       <Button
-                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide"
                         onClick={() => {
                           trackWhatsAppClick('new_promotions', 'newsletter_existing_redeemed');
                           window.open("https://wa.me/59169703379?text=Hola,%20me%20gustaría%20conocer%20las%20nuevas%20promociones", "_blank");
@@ -180,7 +180,7 @@ export function Newsletter() {
                       <p className="text-muted-foreground font-light max-w-md mx-auto">
                         Este email ya está registrado en nuestra comunidad. Aquí está tu código existente:
                       </p>
-                      <div className="bg-black/30 border border-primary/30 rounded-xl p-6 max-w-sm mx-auto">
+                      <div className="bg-black/30 border border-primary/30 rounded-full p-6 max-w-sm mx-auto">
                         <p className="text-white/60 text-sm mb-2">Tu código de descuento:</p>
                         <p className="text-2xl font-mono font-bold text-primary tracking-wider">
                           {result.discountCode.code}
@@ -193,7 +193,7 @@ export function Newsletter() {
                         </p>
                       </div>
                       <Button
-                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide"
                         onClick={() => {
                           trackWhatsAppClick('discount_reservation', 'newsletter_existing_valid');
                           window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank");
@@ -228,7 +228,7 @@ export function Newsletter() {
                         )}
                       </div>
 
-                      <div className="bg-black/30 border border-primary/30 rounded-xl p-6 max-w-sm mx-auto">
+                      <div className="bg-black/30 border border-primary/30 rounded-full p-6 max-w-sm mx-auto">
                         <p className="text-white/60 text-sm mb-2">Tu código de descuento:</p>
                         <p className="text-2xl font-mono font-bold text-primary tracking-wider">
                           {result.discountCode.code}
@@ -242,7 +242,7 @@ export function Newsletter() {
                       </div>
 
                       <Button
-                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide"
                         onClick={() => {
                           trackWhatsAppClick('discount_reservation', 'newsletter_success');
                           window.open("https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20de%20descuento", "_blank");
@@ -262,7 +262,7 @@ export function Newsletter() {
                         Te has suscrito exitosamente a nuestra comunidad.
                       </p>
                       <Button
-                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                        className="bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide"
                         onClick={() => {
                           trackWhatsAppClick('contact', 'newsletter_success_no_code');
                           window.open("https://wa.me/59169703379?text=Hola,%20me%20gustaría%20más%20información", "_blank");
@@ -297,7 +297,7 @@ export function Newsletter() {
                           if (status === "error") setStatus("idle");
                         }}
                         className={cn(
-                          "bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 rounded-xl focus-visible:ring-primary/50",
+                          "bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 rounded-full focus-visible:ring-primary/50",
                           status === "error" && errorMessage.includes("correo") && "border-red-500/50"
                         )}
                       />
@@ -311,7 +311,7 @@ export function Newsletter() {
                           type="button"
                           onClick={() => setContactPreference("whatsapp")}
                           className={cn(
-                            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border transition-all",
+                            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full border transition-all",
                             contactPreference === "whatsapp"
                               ? "bg-green-500/20 border-green-500/50 text-green-400"
                               : "bg-black/20 border-white/10 text-white/60 hover:border-white/30"
@@ -324,7 +324,7 @@ export function Newsletter() {
                           type="button"
                           onClick={() => setContactPreference("email")}
                           className={cn(
-                            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border transition-all",
+                            "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full border transition-all",
                             contactPreference === "email"
                               ? "bg-primary/20 border-primary/50 text-primary"
                               : "bg-black/20 border-white/10 text-white/60 hover:border-white/30"
@@ -350,7 +350,7 @@ export function Newsletter() {
                             id="country-code"
                             value={countryCode}
                             onChange={(e) => setCountryCode(e.target.value)}
-                            className="bg-black/20 border border-white/10 text-white h-12 rounded-xl px-3 focus:ring-primary/50 focus:border-primary/50"
+                            className="bg-black/20 border border-white/10 text-white h-12 rounded-full px-3 focus:ring-primary/50 focus:border-primary/50"
                           >
                             {countryCodes.map((cc) => (
                               <option key={cc.code} value={cc.code} className="bg-zinc-900">
@@ -371,7 +371,7 @@ export function Newsletter() {
                               if (status === "error") setStatus("idle");
                             }}
                             className={cn(
-                              "flex-1 bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 rounded-xl focus-visible:ring-primary/50",
+                              "flex-1 bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 rounded-full focus-visible:ring-primary/50",
                               status === "error" && errorMessage.includes("teléfono") && "border-red-500/50"
                             )}
                           />
@@ -401,10 +401,13 @@ export function Newsletter() {
                     <Button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-xl font-medium tracking-wide"
+                      className="w-full bg-primary text-black hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide"
                     >
                       {status === "loading" ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                          Enviando…
+                        </>
                       ) : (
                         "Obtener mi descuento"
                       )}

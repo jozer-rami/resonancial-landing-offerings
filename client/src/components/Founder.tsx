@@ -4,7 +4,10 @@ import { CheckCircle2, GraduationCap, Sparkles, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ModalCloseButton } from "@/components/ui/modal-close";
-import founderImage from "@assets/daniela-vargas.jpg";
+import { OptimizedImage } from "@/components/ui/optimized-image";
+
+// Use optimized WebP image (72KB vs 6MB original)
+const founderImageWebP = "/images/optimized/daniela-vargas.webp";
 
 // Founder data
 const founderData = {
@@ -69,12 +72,11 @@ export const FounderModal = memo(({ open, onClose }: { open: boolean; onClose: (
           {/* Header Image */}
           <div className="h-64 md:h-80 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 z-10" />
-            <img
-              src={founderImage}
+            <OptimizedImage
+              src={founderImageWebP}
               alt={founderData.nombre}
-              width={768}
-              height={320}
-              loading="lazy"
+              width={800}
+              height={1200}
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -172,7 +174,7 @@ export const Founder = memo(({ onOpenModal }: FounderProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="py-16 md:py-24 bg-zinc-900/20 relative overflow-hidden"
+      className="py-16 md:py-24 bg-zinc-900/20 relative overflow-hidden scroll-mt-20"
     >
       {/* Background Gradient */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -189,7 +191,7 @@ export const Founder = memo(({ onOpenModal }: FounderProps) => {
           <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">
             Conoce a tu guía
           </span>
-          <h2 className="text-4xl md:text-5xl font-heading">
+          <h2 className="text-4xl md:text-5xl font-heading text-balance">
             Quien te acompaña en <br className="hidden md:block" />
             <span className="text-primary italic">tu transformación</span>
           </h2>
@@ -208,12 +210,11 @@ export const Founder = memo(({ onOpenModal }: FounderProps) => {
             <div className="lg:col-span-2 relative">
               <div className="aspect-[4/5] lg:aspect-auto lg:h-full relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-zinc-900/80 via-transparent to-transparent z-10" />
-                <img
-                  src={founderImage}
+                <OptimizedImage
+                  src={founderImageWebP}
                   alt={founderData.nombre}
-                  width={500}
-                  height={625}
-                  loading="lazy"
+                  width={800}
+                  height={1200}
                   className="w-full h-full object-cover object-top"
                 />
               </div>

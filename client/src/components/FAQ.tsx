@@ -97,7 +97,7 @@ export function FAQ() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden"
+      className="py-12 md:py-16 bg-zinc-950 relative overflow-hidden scroll-mt-20"
     >
       {/* Background Gradient */}
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -114,7 +114,7 @@ export function FAQ() {
               <span className="text-primary text-sm tracking-[0.3em] uppercase font-bold mb-4 block">
                 Preguntas Frecuentes
               </span>
-              <h2 className="text-4xl md:text-5xl font-heading mb-4">
+              <h2 className="text-4xl md:text-5xl font-heading mb-4 text-balance">
                 Resolvemos tus <span className="text-primary italic">dudas</span>
               </h2>
               <p className="text-muted-foreground font-light max-w-xl mx-auto">
