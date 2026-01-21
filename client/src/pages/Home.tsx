@@ -26,7 +26,7 @@ const toRomanNumeral = (num: number): string => {
   return romanNumerals[num - 1] || String(num);
 };
 
-// Video assets (converted from GIFs - 92% size reduction)
+// Video assets (high quality VP9/H.264 encoding)
 const videoAssets = {
   detox: { webm: "/videos/detox.webm", mp4: "/videos/detox.mp4" },
   reconfiguracion: { webm: "/videos/reconfiguracion.webm", mp4: "/videos/reconfiguracion.mp4" },
@@ -35,7 +35,11 @@ const videoAssets = {
 };
 
 // Optimized video component for course cards
-const VideoBackground = memo(({ videoKey, className = "" }: { videoKey: keyof typeof videoAssets, className?: string }) => {
+const VideoBackground = memo(({ videoKey, className = "", preload = "metadata" }: {
+  videoKey: keyof typeof videoAssets;
+  className?: string;
+  preload?: "none" | "metadata" | "auto";
+}) => {
   const video = videoAssets[videoKey];
   return (
     <video
@@ -43,6 +47,7 @@ const VideoBackground = memo(({ videoKey, className = "" }: { videoKey: keyof ty
       loop
       muted
       playsInline
+      preload={preload}
       aria-hidden="true"
       className={className}
     >
@@ -708,6 +713,7 @@ export default function Home() {
               <div className="relative min-h-[400px] lg:h-full">
                 <VideoBackground
                   videoKey="heroAnimation"
+                  preload="auto"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute top-6 left-6">
