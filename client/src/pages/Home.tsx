@@ -200,15 +200,15 @@ const CourseModal = memo(({ course, open, onClose }: { course: typeof courseDeta
               
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5">
                 <div className="flex flex-col">
-                  <span className="text-3xl font-heading text-white">500 Bs</span>
-                  <span className="text-lg font-heading text-muted-foreground">50 USD</span>
+                  <span className="text-3xl font-heading text-white">369 Bs</span>
+                  <span className="text-lg font-heading text-muted-foreground">36.9 USD</span>
                 </div>
                 <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-primary/20 hover:bg-primary hover:text-black rounded-full px-10 py-6 text-xs uppercase tracking-widest transition-all">
                   <a
                     href={course.whatsapp}
                     target="_blank"
                     rel="noreferrer"
-                    onClick={() => trackWhatsAppClick(course.title.toLowerCase().replace(/\s+/g, '_'), 'course_modal', 50)}
+                    onClick={() => trackWhatsAppClick(course.title.toLowerCase().replace(/\s+/g, '_'), 'course_modal', 36.9)}
                   >
                     Reservar Ahora
                   </a>
@@ -399,8 +399,8 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
                 <div className="flex flex-col text-center sm:text-left">
                   <span className="text-xs text-muted-foreground mb-1">Formato Digital · Personalización incluida</span>
                   <div className="flex items-baseline gap-2 justify-center sm:justify-start">
-                    <span className="text-3xl font-heading text-white">200 Bs</span>
-                    <span className="text-lg font-heading text-muted-foreground">20 USD</span>
+                    <span className="text-3xl font-heading text-white">444 Bs</span>
+                    <span className="text-lg font-heading text-muted-foreground">44.4 USD</span>
                   </div>
                 </div>
                 <Button asChild size="lg" className="w-full sm:w-auto bg-primary text-black hover:bg-primary/90 rounded-full px-10 py-6 text-xs uppercase tracking-widest font-bold transition-all">
@@ -408,7 +408,7 @@ const AlmanaqueModal = memo(({ open, onClose }: { open: boolean, onClose: () => 
                     href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%20Personalizado%202026"
                     target="_blank"
                     rel="noreferrer"
-                    onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_modal', 20)}
+                    onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_modal', 44.4)}
                   >
                     Quiero Mi Almanaque
                   </a>
@@ -454,7 +454,7 @@ const CourseCard = memo(({ title, subtitle, description, price, videoKey, course
           <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
             <div className="flex flex-col">
               <span className="text-xl font-heading text-white">{price}</span>
-              <span className="text-sm font-heading text-muted-foreground">50 USD</span>
+              <span className="text-sm font-heading text-muted-foreground">36.9 USD</span>
             </div>
             <Button 
               variant="outline" 
@@ -663,7 +663,7 @@ export default function Home() {
               title="Detox Frecuencial"
               subtitle="Liberación"
               description="Liberación de resistencias y limpieza energética. Experiencia para soltar bloqueos y cargas que impiden elevar tu frecuencia. Ideal si sientes fatiga vibracional."
-              price="500 Bs"
+              price="369 Bs"
               videoKey="detox"
               courseKey="detox"
               onOpenModal={handleOpenModal}
@@ -674,7 +674,7 @@ export default function Home() {
               title="Reconfiguración"
               subtitle="Estabilidad"
               description="Ajuste profundo de tu vibración base. Activación diseñada para reordenar tu sistema y entrenarlo a sostener nuevas frecuencias de coherencia."
-              price="500 Bs"
+              price="369 Bs"
               videoKey="reconfiguracion"
               courseKey="reconfiguracion"
               onOpenModal={handleOpenModal}
@@ -685,7 +685,7 @@ export default function Home() {
               title="Mapa Resonancial"
               subtitle="Visión Encarnada"
               description="Activación de la visión encarnada del 2026. Alineación profunda donde mente, cuerpo y espíritu resuenan con la realidad que deseas habitar."
-              price="500 Bs"
+              price="369 Bs"
               videoKey="mapa"
               courseKey="mapa"
               onOpenModal={handleOpenModal}
@@ -727,10 +727,10 @@ export default function Home() {
 
                   <ul className="space-y-4 mb-8">
                     {[
-                      { name: "Detox Frecuencial (Sesión 1:1)", price: "500 Bs" },
-                      { name: "Reconfiguración de Frecuencia (Sesión 1:1)", price: "500 Bs" },
-                      { name: "Mapa Resonancial (Sesión 1:1)", price: "500 Bs" },
-                      { name: "BONUS: Almanaque Ritual Resonancial", price: "200 Bs", isBonus: true }
+                      { name: "Detox Frecuencial (Sesión 1:1)", price: "369 Bs" },
+                      { name: "Reconfiguración de Frecuencia (Sesión 1:1)", price: "369 Bs" },
+                      { name: "Mapa Resonancial (Sesión 1:1)", price: "369 Bs" },
+                      { name: "BONUS: Almanaque Ritual Resonancial", price: "444 Bs", isBonus: true }
                     ].map((item, i) => (
                       <li key={i} className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
@@ -745,15 +745,15 @@ export default function Home() {
                   <div className="border-t border-white/10 pt-6 mb-6 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-zinc-500 text-sm">Valor total individual:</span>
-                      <span className="text-zinc-500 text-lg font-heading line-through">1.700 Bs</span>
+                      <span className="text-zinc-500 text-lg font-heading line-through">1.551 Bs</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-white text-base font-medium">Precio Pack Completo:</span>
-                      <span className="text-white text-2xl font-heading">1.200 Bs</span>
+                      <span className="text-white text-2xl font-heading">999 Bs</span>
                     </div>
                     <div className="flex items-center justify-end">
                       <span className="text-primary/80 text-sm italic">
-                        Ahorras 500 Bs
+                        Ahorras 551 Bs
                       </span>
                     </div>
                   </div>
@@ -770,7 +770,7 @@ export default function Home() {
                   >
                     <a
                       href="https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20pack%20completo%20PORTAL%20RESONANCIAL"
-                      onClick={() => trackWhatsAppClick('pack_completo', 'pack_section', 120)}
+                      onClick={() => trackWhatsAppClick('pack_completo', 'pack_section', 99.9)}
                     >
                       Obtener Pack Completo
                     </a>
@@ -844,7 +844,7 @@ export default function Home() {
                   >
                     <a
                       href="https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026"
-                      onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_section', 20)}
+                      onClick={() => trackWhatsAppClick('almanaque_ritual', 'almanaque_section', 44.4)}
                     >
                       Quiero Mi Almanaque
                     </a>

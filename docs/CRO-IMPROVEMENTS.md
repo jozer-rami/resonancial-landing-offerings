@@ -774,8 +774,8 @@ A. Pack Completo - Add urgency:
 │  ─────────────────────────────────      │
 │  [Progress bar: 85% filled]             │
 │                                         │
-│  Precio Pack: 1,200 Bs                  │
-│  (Valor real: 1,700 Bs)                 │
+│  Precio Pack: 999 Bs                    │
+│  (Valor real: 1,551 Bs)                 │
 └─────────────────────────────────────────┘
 
 B. Newsletter - Add urgency:
@@ -809,7 +809,7 @@ C. Almanaque - Add scarcity:
 │ Enfoque      │ Liberación │ Estabilidad │   Visión    │
 │ Ideal si...  │ Te sientes │ Quieres     │ Buscas      │
 │              │ estancado  │ integrar    │ claridad    │
-│ Precio       │  500 Bs    │   500 Bs    │   500 Bs    │
+│ Precio       │  369 Bs    │   369 Bs    │   369 Bs    │
 ├──────────────┼────────────┼─────────────┼─────────────┤
 │ Recomendado  │     1      │      2      │      3      │
 │ (secuencia)  │  primero   │   después   │    final    │

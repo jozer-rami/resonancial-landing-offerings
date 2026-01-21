@@ -29,8 +29,8 @@ This document proposes strategic improvements to the newsletter welcome email to
 
 | Gap | Business Impact | Opportunity |
 |-----|-----------------|-------------|
-| **No Pack Completo mention** | Missing 1,200 Bs ($120 USD) bundle upsell | 29% discount + BONUS creates strong value |
-| **No Almanaque mention** | Missing 200 Bs ($20 USD) entry product | Low-commitment purchase, high engagement |
+| **No Pack Completo mention** | Missing 999 Bs ($99.9 USD) bundle upsell | 36% discount + BONUS creates strong value |
+| **No Almanaque mention** | Missing 444 Bs ($44.4 USD) entry product | Low-commitment purchase, high engagement |
 | **No pricing transparency** | Users must research prices separately | Price anchoring drives faster decisions |
 | **Single purchase path** | Only WhatsApp CTA | Should guide different buyer personas |
 | **No social proof** | Missing testimonials/trust elements | Reduces conversion anxiety |
@@ -39,20 +39,20 @@ This document proposes strategic improvements to the newsletter welcome email to
 
 ## Product Catalog for Email Inclusion
 
-### Tier 1: Individual Sessions (500 Bs / $50 USD each)
+### Tier 1: Individual Sessions (369 Bs / $36.9 USD each)
 | Service | Duration | Key Benefit |
 |---------|----------|-------------|
 | Detox Frecuencial | 45 min | Liberation - clear energy blocks |
 | Reconfiguración Frecuencial | 60 min | Stability - integrate new frequencies |
 | Mapa Resonancial | 90 min | Vision - create 2026 roadmap |
 
-### Tier 2: Pack Completo (1,200 Bs / $120 USD)
+### Tier 2: Pack Completo (999 Bs / $99.9 USD)
 - All 3 sessions included
-- **BONUS:** Almanaque Ritual (200 Bs value FREE)
-- **Total Value:** 1,700 Bs → **Save 500 Bs (29%)**
+- **BONUS:** Almanaque Ritual (444 Bs value FREE)
+- **Total Value:** 1,551 Bs → **Save 551 Bs (36%)**
 - **Best for:** Committed transformation seekers
 
-### Tier 3: Almanaque Ritual (200 Bs / $20 USD)
+### Tier 3: Almanaque Ritual (444 Bs / $44.4 USD)
 - Digital ritual calendar for 2026
 - 10 Estaciones Energéticas
 - Personalized birthday ritual
@@ -79,8 +79,8 @@ Email → See Value Tiers → Choose Path → WhatsApp (warm lead)
 
 | Trigger | Implementation |
 |---------|----------------|
-| **Price Anchoring** | Show Pack Completo first (1,700 Bs value), then reveal 1,200 Bs price |
-| **Loss Aversion** | "Ahorras 500 Bs" + FREE Almanaque (don't miss out) |
+| **Price Anchoring** | Show Pack Completo first (1,551 Bs value), then reveal 999 Bs price |
+| **Loss Aversion** | "Ahorras 551 Bs" + FREE Almanaque (don't miss out) |
 | **Decoy Effect** | Three tiers make Pack Completo feel like best value |
 | **Low-Commitment Entry** | Almanaque as first purchase reduces risk perception |
 | **Social Proof** | Brief testimonial snippet or subscriber count |
@@ -116,13 +116,13 @@ Email → See Value Tiers → Choose Path → WhatsApp (warm lead)
 │  │  PACK COMPLETO                                             │  │
 │  │  Las 3 sesiones + Almanaque Ritual GRATIS                  │  │
 │  │                                                            │  │
-│  │  ✓ Detox Frecuencial (500 Bs)                              │  │
-│  │  ✓ Reconfiguración (500 Bs)                                │  │
-│  │  ✓ Mapa Resonancial (500 Bs)                               │  │
-│  │  ✓ BONUS: Almanaque 2026 (200 Bs)                          │  │
+│  │  ✓ Detox Frecuencial (369 Bs)                              │  │
+│  │  ✓ Reconfiguración (369 Bs)                                │  │
+│  │  ✓ Mapa Resonancial (369 Bs)                               │  │
+│  │  ✓ BONUS: Almanaque 2026 (444 Bs)                          │  │
 │  │                                                            │  │
-│  │  Valor: 1.700 Bs   →   1.200 Bs                            │  │
-│  │                        (Ahorras 500 Bs)                    │  │
+│  │  Valor: 1.551 Bs   →   999 Bs                              │  │
+│  │                        (Ahorras 551 Bs)                    │  │
 │  │                                                            │  │
 │  │  [ OBTENER PACK COMPLETO ]                                 │  │
 │  └────────────────────────────────────────────────────────────┘  │
@@ -138,8 +138,8 @@ Email → See Value Tiers → Choose Path → WhatsApp (warm lead)
 │  │  Reconfig (60 min)  │  │  Rituales personalizados        │   │
 │  │  Mapa (90 min)      │  │  Guía para todo el año          │   │
 │  │                     │  │                                 │   │
-│  │  500 Bs / sesión    │  │  200 Bs                         │   │
-│  │  (50 USD)           │  │  (20 USD)                       │   │
+│  │  369 Bs / sesión    │  │  444 Bs                         │   │
+│  │  (36.9 USD)         │  │  (44.4 USD)                     │   │
 │  │                     │  │                                 │   │
 │  │  Tu código aplica   │  │  Edición 2026 limitada          │   │
 │  │  ─────────────────  │  │  ─────────────────              │   │
@@ -189,17 +189,17 @@ PACK COMPLETO
 La experiencia completa de transformación
 
 Incluye:
-✓ Detox Frecuencial (45 min) .............. 500 Bs
-✓ Reconfiguración Frecuencial (60 min) .... 500 Bs
-✓ Mapa Resonancial (90 min) ............... 500 Bs
-✓ BONUS: Almanaque Ritual 2026 ............ 200 Bs
+✓ Detox Frecuencial (45 min) .............. 369 Bs
+✓ Reconfiguración Frecuencial (60 min) .... 369 Bs
+✓ Mapa Resonancial (90 min) ............... 369 Bs
+✓ BONUS: Almanaque Ritual 2026 ............ 444 Bs
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Valor total: 1.700 Bs
-Tu precio especial: 1.200 Bs (120 USD)
+Valor total: 1.551 Bs
+Tu precio especial: 999 Bs (99.9 USD)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💫 Ahorras 500 Bs + Almanaque GRATIS
+💫 Ahorras 551 Bs + Almanaque GRATIS
 
 [ OBTENER PACK COMPLETO → ]
 ```
@@ -222,13 +222,13 @@ Present two columns for different buyer personas:
 SESIONES INDIVIDUALES
 Comienza tu transformación paso a paso
 
-• Detox Frecuencial — 45 min — 500 Bs
+• Detox Frecuencial — 45 min — 369 Bs
   Liberación de cargas energéticas
 
-• Reconfiguración — 60 min — 500 Bs
+• Reconfiguración — 60 min — 369 Bs
   Ajuste de tu vibración base
 
-• Mapa Resonancial — 90 min — 500 Bs
+• Mapa Resonancial — 90 min — 369 Bs
   Visión encarnada del 2026
 
 Tu código aplica en cualquier sesión
@@ -247,7 +247,7 @@ Tu guía frecuencial para todo el año
 ✨ Ritual de cumpleaños personalizado
 ✨ Portales energéticos 2026
 
-200 Bs (20 USD) · Formato digital
+444 Bs (44.4 USD) · Formato digital
 Edición anual limitada
 
 [ OBTENER MI ALMANAQUE → ]
@@ -309,19 +309,19 @@ Add a powerful brand statement to create emotional resonance:
 | Click-Through Rate | ~3% | ~8% | +166% (multiple CTAs) |
 | Pack Completo Inquiries | 0 | 15% of clicks | New revenue stream |
 | Almanaque Purchases | 0 | 10% of clicks | Entry-level conversion |
-| Average Order Value | 500 Bs | 680 Bs | +36% (mix shift to Pack) |
+| Average Order Value | 369 Bs | 520 Bs | +41% (mix shift to Pack) |
 
 ### Revenue Impact (Monthly, 100 subscribers)
 
 **Current State:**
 - Conversion rate: 15% = 15 sessions
-- Revenue: 15 × 500 Bs = 7,500 Bs
+- Revenue: 15 × 369 Bs = 5,535 Bs
 
 **Projected State:**
-- Pack Completo: 5 purchases × 1,200 Bs = 6,000 Bs
-- Individual Sessions: 10 × 500 Bs = 5,000 Bs
-- Almanaque: 8 × 200 Bs = 1,600 Bs
-- **Total: 12,600 Bs (+68%)**
+- Pack Completo: 5 purchases × 999 Bs = 4,995 Bs
+- Individual Sessions: 10 × 369 Bs = 3,690 Bs
+- Almanaque: 8 × 444 Bs = 3,552 Bs
+- **Total: 12,237 Bs (+121%)**
 
 ---
 
@@ -353,7 +353,7 @@ Add a powerful brand statement to create emotional resonance:
 | Option | Psychology |
 |--------|------------|
 | "Tu portal al 2026 está listo (+ 10% descuento)" | Curiosity + benefit |
-| "[CÓDIGO DENTRO] Ahorra hasta 500 Bs en tu transformación" | Value emphasis |
+| "[CÓDIGO DENTRO] Ahorra hasta 551 Bs en tu transformación" | Value emphasis |
 | "3 pasos para sintonizar tu 2026 🌟" | Educational approach |
 | "Tu código exclusivo + regalo especial 🎁" | Gift framing |
 
@@ -390,8 +390,8 @@ The updated email template should follow these specifications:
 
 | Decision | Options | Recommendation | Status |
 |----------|---------|----------------|--------|
-| **Discount applicability** | Apply to Pack Completo? | Yes, 10% on 1,200 Bs = 1,080 Bs final | ✅ Implemented |
-| **Almanaque discount** | Include in 10% code? | No, keep at 200 Bs (already low margin) | ✅ Implemented |
+| **Discount applicability** | Apply to Pack Completo? | Yes, 10% on 999 Bs = 899 Bs final | ✅ Implemented |
+| **Almanaque discount** | Include in 10% code? | No, keep at 444 Bs (already low margin) | ✅ Implemented |
 | **Default CTA priority** | Which button primary? | Pack Completo (highest AOV) | ✅ Implemented |
 | **Show discounted prices** | Display final price with discount? | Yes, show strikethrough + final price | ✅ Implemented (Jan 2026) |
 
@@ -519,15 +519,15 @@ _10% de descuento extra_
 
 ⭐ *PACK COMPLETO*
 Las 3 sesiones + Almanaque GRATIS
-~1.200 Bs~ → *1.080 Bs* con tu código
-💫 Ahorras 620 Bs en total
+~999 Bs~ → *899 Bs* con tu código
+💫 Ahorras 652 Bs en total
 
 *SESIÓN INDIVIDUAL*
-~500 Bs~ → *450 Bs* con tu código
-💫 Ahorras 50 Bs
+~369 Bs~ → *332 Bs* con tu código
+💫 Ahorras 37 Bs
 
 *ALMANAQUE RITUAL 2026*
-200 Bs (tu guía de transformación)
+444 Bs (tu guía de transformación)
 
 Responde con:
 *1* → Pack Completo (máximo ahorro)
@@ -539,8 +539,8 @@ Responde con:
 
 **Changes from previous version:**
 - Removed decorative separator lines (`━━━━`) for cleaner mobile appearance
-- Show discounted prices with strikethrough (e.g., `~1.200 Bs~ → *1.080 Bs*`)
-- Updated savings to reflect 10% discount applied (620 Bs total for Pack, 50 Bs per session)
+- Show discounted prices with strikethrough (e.g., `~999 Bs~ → *899 Bs*`)
+- Updated savings to reflect 10% discount applied (652 Bs total for Pack, 37 Bs per session)
 - Replaced "O escríbenos cualquier duda 💬" with website link
 - Added "con tu código" to emphasize the discount is applied
 
@@ -571,16 +571,16 @@ Responde con:
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
 💎 MEJOR OPCIÓN:
-*Pack Completo* — 1.200 Bs
-(Ahorras 500 Bs + Almanaque gratis)
+*Pack Completo* — 999 Bs
+(Ahorras 551 Bs + Almanaque gratis)
 
 Responde *PACK* para reservar
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
 O elige:
-• Sesión individual: 500 Bs
-• Almanaque 2026: 200 Bs
+• Sesión individual: 369 Bs
+• Almanaque 2026: 444 Bs
 
 ¿Tienes dudas? Escríbenos 💬
 ```
@@ -604,13 +604,13 @@ Tu código exclusivo:
 
 1️⃣ *Pack Completo* — La experiencia transformadora
    3 sesiones + Almanaque GRATIS
-   1.200 Bs (ahorras 500 Bs)
+   999 Bs (ahorras 551 Bs)
 
 2️⃣ *Sesión individual* — Un primer paso
-   500 Bs con tu descuento
+   369 Bs con tu descuento
 
 3️⃣ *Almanaque 2026* — Tu guía diaria
-   200 Bs (edición limitada)
+   444 Bs (edición limitada)
 
 Responde con el número o cuéntame qué necesitas ✨
 ```
@@ -625,13 +625,13 @@ Responde con el número o cuéntame qué necesitas ✨
 
 ━━━━━━━━━
 
-⭐ Pack Completo: 1.200 Bs
+⭐ Pack Completo: 999 Bs
 (3 sesiones + Almanaque gratis)
 
 Responde:
 1 = Pack Completo
-2 = Sesión (500 Bs)
-3 = Almanaque (200 Bs)
+2 = Sesión (369 Bs)
+3 = Almanaque (444 Bs)
 
 💬 ¿Dudas? Escríbenos
 ```
@@ -651,8 +651,8 @@ El Pack Completo incluye:
 ✓ Mapa Resonancial (90 min)
 ✓ Almanaque Ritual 2026 GRATIS
 
-Total: *1.200 Bs* (120 USD)
-Con tu código [CODE]: *1.080 Bs*
+Total: *999 Bs* (99.9 USD)
+Con tu código [CODE]: *899 Bs*
 
 ¿Cómo prefieres pagar?
 A) Transferencia bancaria
@@ -671,15 +671,15 @@ Y dime qué horarios te funcionan mejor para agendar tus 3 sesiones 📅
 
 1️⃣ *Detox Frecuencial* (45 min)
    Liberación de cargas energéticas
-   500 Bs → *450 Bs* con tu código
+   369 Bs → *332 Bs* con tu código
 
 2️⃣ *Reconfiguración* (60 min)
    Ajuste de tu vibración base
-   500 Bs → *450 Bs* con tu código
+   369 Bs → *332 Bs* con tu código
 
 3️⃣ *Mapa Resonancial* (90 min)
    Visión encarnada del 2026
-   500 Bs → *450 Bs* con tu código
+   369 Bs → *332 Bs* con tu código
 
 Responde con el número o cuéntame más sobre lo que buscas ✨
 ```
@@ -696,7 +696,7 @@ El *Almanaque Ritual Resonancial 2026* incluye:
 ✨ Ritual de cumpleaños personalizado
 ✨ Portales energéticos del año
 
-Precio: *200 Bs* (20 USD)
+Precio: *444 Bs* (44.4 USD)
 Formato: Digital (PDF interactivo)
 
 Para personalizarlo necesito:
@@ -761,13 +761,13 @@ Para personalizarlo necesito:
 **Current State:**
 - Response rate: 10% = 10 conversations
 - Booking rate: 50% of conversations = 5 sessions
-- Revenue: 5 × 500 Bs = 2,500 Bs
+- Revenue: 5 × 369 Bs = 1,845 Bs
 
 **Projected State:**
 - Response rate: 35% = 35 conversations
 - Booking rate: 50% of conversations = 17-18 bookings
-- Mix: 4 Pack Completo (1,200 Bs) + 10 Sessions (500 Bs) + 4 Almanaque (200 Bs)
-- Revenue: 4,800 + 5,000 + 800 = **10,600 Bs (+324%)**
+- Mix: 4 Pack Completo (999 Bs) + 10 Sessions (369 Bs) + 4 Almanaque (444 Bs)
+- Revenue: 3,996 + 3,690 + 1,776 = **9,462 Bs (+413%)**
 
 ---
 
@@ -827,15 +827,15 @@ _10% de descuento extra_
 
 ⭐ *PACK COMPLETO*
 Las 3 sesiones + Almanaque GRATIS
-~1.200 Bs~ → *1.080 Bs* con tu código
-💫 Ahorras 620 Bs en total
+~999 Bs~ → *899 Bs* con tu código
+💫 Ahorras 652 Bs en total
 
 *SESIÓN INDIVIDUAL*
-~500 Bs~ → *450 Bs* con tu código
-💫 Ahorras 50 Bs
+~369 Bs~ → *332 Bs* con tu código
+💫 Ahorras 37 Bs
 
 *ALMANAQUE RITUAL 2026*
-200 Bs (tu guía de transformación)
+444 Bs (tu guía de transformación)
 
 Responde con:
 *1* → Pack Completo (máximo ahorro)

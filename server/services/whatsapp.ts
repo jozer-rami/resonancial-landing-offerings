@@ -57,8 +57,8 @@ export function validatePhoneNumber(phone: string): boolean {
  * Generate discount code WhatsApp message
  *
  * Marketing optimizations (Jan 2026):
- * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,080 Bs with code)
- * - Almanaque Ritual as entry product (200 Bs)
+ * - Pack Completo upsell with price anchoring (1,551 Bs value -> 899.1 Bs with code)
+ * - Almanaque Ritual as entry product (444 Bs)
  * - Numbered reply options for easy response (1, 2, 3)
  * - Correct currency (Bs, not EUR)
  * - Conversational tone for WhatsApp medium
@@ -87,15 +87,15 @@ _10% de descuento extra_
 
 ⭐ *PACK COMPLETO*
 Las 3 sesiones + Almanaque GRATIS
-~1.200 Bs~ → *1.080 Bs* con tu código
-💫 Ahorras 620 Bs en total
+~999 Bs~ → *899 Bs* con tu código
+💫 Ahorras 652 Bs en total
 
 *SESIÓN INDIVIDUAL*
-~500 Bs~ → *450 Bs* con tu código
-💫 Ahorras 50 Bs
+~369 Bs~ → *332 Bs* con tu código
+💫 Ahorras 37 Bs
 
 *ALMANAQUE RITUAL 2026*
-200 Bs (tu guía de transformación)
+444 Bs (tu guía de transformación)
 
 Responde con:
 *1* → Pack Completo (máximo ahorro)

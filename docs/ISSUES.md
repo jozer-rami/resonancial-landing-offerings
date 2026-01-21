@@ -59,11 +59,11 @@ This document catalogs all identified issues requiring attention, organized by p
 
 | Item | Price (Bs) | Price (USD) | Files |
 |------|-----------|-------------|-------|
-| Detox Frecuencial | 500 | 50 | Home.tsx (x2), GiftCards.tsx |
-| Reconfiguración | 500 | 50 | Home.tsx (x2), GiftCards.tsx |
-| Mapa Resonancial | 500 | 50 | Home.tsx (x2), GiftCards.tsx |
-| Pack Completo | 1,200 | 120 | Home.tsx, GiftCards.tsx |
-| Almanaque Ritual | 200 | 20 | Home.tsx (x2) |
+| Detox Frecuencial | 369 | 36.9 | Home.tsx (x2), GiftCards.tsx |
+| Reconfiguración | 369 | 36.9 | Home.tsx (x2), GiftCards.tsx |
+| Mapa Resonancial | 369 | 36.9 | Home.tsx (x2), GiftCards.tsx |
+| Pack Completo | 999 | 99.9 | Home.tsx, GiftCards.tsx |
+| Almanaque Ritual | 444 | 44.4 | Home.tsx (x2) |
 
 **Fix Applied**: Created `client/src/config/pricing.json` with all pricing data centralized.
 

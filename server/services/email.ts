@@ -53,8 +53,8 @@ function getResendConfig(): ResendConfig | null {
  * - Borders: rgba(255,255,255,0.1)
  *
  * Marketing optimizations (Jan 2026):
- * - Pack Completo upsell with price anchoring (1,700 Bs value -> 1,080 Bs with code)
- * - Almanaque Ritual as low-commitment entry product (200 Bs)
+ * - Pack Completo upsell with price anchoring (1,551 Bs value -> 899 Bs with code)
+ * - Almanaque Ritual as low-commitment entry product (444 Bs)
  * - Three-tier structure for different buyer personas
  * - Brand quote for emotional connection
  * - Show discounted prices with visible savings to emphasize 10% discount value
@@ -228,7 +228,7 @@ export function generateDiscountEmailHtml(
                                 ✓ Detox Frecuencial (45 min)
                               </td>
                               <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                                500 Bs
+                                369 Bs
                               </td>
                             </tr>
                             <tr>
@@ -236,7 +236,7 @@ export function generateDiscountEmailHtml(
                                 ✓ Reconfiguración Frecuencial (60 min)
                               </td>
                               <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                                500 Bs
+                                369 Bs
                               </td>
                             </tr>
                             <tr>
@@ -244,7 +244,7 @@ export function generateDiscountEmailHtml(
                                 ✓ Mapa Resonancial (90 min)
                               </td>
                               <td style="padding: 8px 0; color: ${colors.textMuted}; font-size: 13px; text-align: right;">
-                                500 Bs
+                                369 Bs
                               </td>
                             </tr>
                             <tr>
@@ -252,7 +252,7 @@ export function generateDiscountEmailHtml(
                                 🎁 BONUS: Almanaque Ritual 2026
                               </td>
                               <td style="padding: 8px 0; color: ${colors.primary}; font-size: 13px; text-align: right;">
-                                200 Bs
+                                444 Bs
                               </td>
                             </tr>
                           </table>
@@ -265,21 +265,21 @@ export function generateDiscountEmailHtml(
                             <tr>
                               <td align="center">
                                 <p style="margin: 0 0 4px 0; font-size: 13px; color: ${colors.textMuted};">
-                                  Valor total: <span style="text-decoration: line-through;">1.700 Bs</span>
+                                  Valor total: <span style="text-decoration: line-through;">1.551 Bs</span>
                                 </p>
                               </td>
                             </tr>
                             <tr>
                               <td align="center">
                                 <p style="margin: 0 0 4px 0; font-size: 14px; color: ${colors.textMuted};">
-                                  Precio regular: <span style="text-decoration: line-through;">1.200 Bs</span>
+                                  Precio regular: <span style="text-decoration: line-through;">999 Bs</span>
                                 </p>
                               </td>
                             </tr>
                             <tr>
                               <td align="center">
                                 <p style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; color: ${colors.primary}; font-weight: 400;">
-                                  1.080 Bs
+                                  899 Bs
                                 </p>
                               </td>
                             </tr>
@@ -293,7 +293,7 @@ export function generateDiscountEmailHtml(
                             <tr>
                               <td align="center" style="padding: 0 0 20px 0;">
                                 <span style="display: inline-block; background-color: ${colors.savingsBg}; border: 1px solid ${colors.savingsBorder}; color: ${colors.primary}; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 20px;">
-                                  💫 Ahorras 620 Bs en total + Almanaque GRATIS
+                                  💫 Ahorras 652 Bs en total + Almanaque GRATIS
                                 </span>
                               </td>
                             </tr>
@@ -352,15 +352,15 @@ export function generateDiscountEmailHtml(
                           <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 0 0 16px 0;">
                             <tr>
                               <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Detox Frecuencial</td>
-                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">369</span> <strong style="color: ${colors.primary};">332 Bs</strong></td>
                             </tr>
                             <tr>
                               <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Reconfiguración</td>
-                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">369</span> <strong style="color: ${colors.primary};">332 Bs</strong></td>
                             </tr>
                             <tr>
                               <td style="padding: 6px 0; font-size: 12px; color: ${colors.textMuted};">Mapa Resonancial</td>
-                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">500</span> <strong style="color: ${colors.primary};">450 Bs</strong></td>
+                              <td style="padding: 6px 0; font-size: 12px; text-align: right;"><span style="text-decoration: line-through; color: ${colors.textSubtle};">369</span> <strong style="color: ${colors.primary};">332 Bs</strong></td>
                             </tr>
                           </table>
                         </td>
@@ -368,7 +368,7 @@ export function generateDiscountEmailHtml(
                       <tr>
                         <td align="center" style="padding-bottom: 16px;">
                           <p style="margin: 0; font-size: 11px; color: ${colors.primary};">
-                            💫 Ahorras 50 Bs por sesión
+                            💫 Ahorras 37 Bs por sesión
                           </p>
                         </td>
                       </tr>
@@ -405,8 +405,8 @@ export function generateDiscountEmailHtml(
                       </tr>
                       <tr>
                         <td align="center" style="padding-bottom: 16px;">
-                          <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: ${colors.text};">200 Bs</span>
-                          <span style="font-size: 12px; color: ${colors.textMuted};"> (20 USD)</span>
+                          <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: ${colors.text};">444 Bs</span>
+                          <span style="font-size: 12px; color: ${colors.textMuted};"> (44.4 USD)</span>
                         </td>
                       </tr>
                       <tr>
@@ -508,27 +508,27 @@ Válido hasta el ${formattedDate}
 
 La experiencia completa de transformación:
 
-✓ Detox Frecuencial (45 min) .......... 500 Bs
-✓ Reconfiguración Frecuencial (60 min)  500 Bs
-✓ Mapa Resonancial (90 min) ........... 500 Bs
-🎁 BONUS: Almanaque Ritual 2026 ....... 200 Bs
+✓ Detox Frecuencial (45 min) .......... 369 Bs
+✓ Reconfiguración Frecuencial (60 min)  369 Bs
+✓ Mapa Resonancial (90 min) ........... 369 Bs
+🎁 BONUS: Almanaque Ritual 2026 ....... 444 Bs
 
-Valor total: 1.700 Bs
-Precio regular: 1.200 Bs
-CON TU CÓDIGO: 1.080 Bs (108 USD)
+Valor total: 1.551 Bs
+Precio regular: 999 Bs
+CON TU CÓDIGO: 899 Bs (89.9 USD)
 
-💫 Ahorras 620 Bs en total + Almanaque GRATIS
+💫 Ahorras 652 Bs en total + Almanaque GRATIS
 
 Reservar Pack Completo:
 https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20el%20Pack%20Completo%20con%20mi%20código%20${code}
 
 SESIONES INDIVIDUALES
 
-• Detox Frecuencial ........... 500 Bs → 450 Bs con tu código
-• Reconfiguración Frecuencial . 500 Bs → 450 Bs con tu código
-• Mapa Resonancial ............ 500 Bs → 450 Bs con tu código
+• Detox Frecuencial ........... 369 Bs → 332 Bs con tu código
+• Reconfiguración Frecuencial . 369 Bs → 332 Bs con tu código
+• Mapa Resonancial ............ 369 Bs → 332 Bs con tu código
 
-💫 Ahorras 50 Bs por sesión
+💫 Ahorras 37 Bs por sesión
 
 Reservar Sesión:
 https://wa.me/59169703379?text=Hola,%20quiero%20reservar%20una%20sesión%20con%20mi%20código%20${code}
@@ -540,7 +540,7 @@ ALMANAQUE RITUAL 2026
 ✨ Ritual de cumpleaños personalizado
 ✨ Portales energéticos 2026
 
-200 Bs (20 USD) · Edición 2026 limitada
+444 Bs (44.4 USD) · Edición 2026 limitada
 
 Obtener Almanaque:
 https://wa.me/59169703379?text=Hola,%20quiero%20mi%20Almanaque%20Ritual%20Resonancial%202026

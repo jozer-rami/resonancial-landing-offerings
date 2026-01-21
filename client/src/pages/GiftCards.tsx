@@ -13,10 +13,10 @@ import { trackGiftCardStep, trackGiftCardComplete, trackWhatsAppClick } from "@/
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 const services = [
-  { id: "detox", name: "Detox Frecuencial", price: "500 Bs" },
-  { id: "reconfiguracion", name: "Reconfiguración", price: "500 Bs" },
-  { id: "mapa", name: "Mapa Resonancial", price: "500 Bs" },
-  { id: "pack", name: "Pack Completo", price: "1200 Bs" }, // Assuming a price for pack
+  { id: "detox", name: "Detox Frecuencial", price: "369 Bs" },
+  { id: "reconfiguracion", name: "Reconfiguración", price: "369 Bs" },
+  { id: "mapa", name: "Mapa Resonancial", price: "369 Bs" },
+  { id: "pack", name: "Pack Completo", price: "999 Bs" },
 ];
 
 export default function GiftCards() {
